@@ -23,7 +23,7 @@ export interface AlbumObj {
 export enum AlbumRestrictionReason {
   MARKET = "market",
   PRODUCT = "product",
-  EXPLICIT = "explicit"
+  EXPLICIT = "explicit",
 }
 
 export interface AlbumRestrictionObj {
