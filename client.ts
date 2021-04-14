@@ -60,6 +60,7 @@ export class Client {
         })
     }
 
+    // deno-lint-ignore no-explicit-any
     private async fetch(url: string, req: RequestSettings): Promise<any> {
         const response = await fetch(url, req);
         const json = await response.json();

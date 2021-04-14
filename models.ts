@@ -112,7 +112,7 @@ export interface CursorObj {
 export interface CursorPagingObj {
   cursors: CursorObj;
   href: string;
-  items: Array<Object>;
+  items: Array<Record<string, unknown>>;
   limit: number;
   next: string;
   total: number;
@@ -207,7 +207,7 @@ export interface LinkedTrackObj {
 
 export interface PagingObj {
   href: string;
-  items: Array<Object>;
+  items: Array<Record<string, unknown>>;
   limit: number;
   next: string;
   offset: number;
