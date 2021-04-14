@@ -21,6 +21,8 @@ jobs:
 
       - name: Setup Deno
         uses: denolib/setup-deno@c7d7968ad4a59c159a777f79adddad6872ee8d96
+        env:
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
         with:
           deno-version: ${{ matrix.deno }}
 
