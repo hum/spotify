@@ -7,6 +7,7 @@ import {
 } from "../types.ts";
 import { Caller } from "../handlers/caller.ts";
 import { endpoints } from "../endpoints.ts";
+import { Album } from "./models.ts";
 
 export class Artist implements ArtistObj {
   externalUrls: ExternalUrlObj;
@@ -48,7 +49,7 @@ export class Artist implements ArtistObj {
     market?: string,
     limit?: number,
     offset?: number,
-  ): Promise<Array<AlbumObj>> {
+  ): Promise<Array<Album>> {
     const data = await this.#caller.fetch(
       endpoints.GET_ARTISTS_ALBUMS(
         this.id,
@@ -63,6 +64,10 @@ export class Artist implements ArtistObj {
     result = result.filter((value, _x, _y) => {
       return value.album_type == "album";
     });
-    return result;
+    const albums: Array<Album> = [];
+    for (const album of result) {
+      albums.push(new Album(album, this.#caller));
+    }
+    return albums;
   }
 }
