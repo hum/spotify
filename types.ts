@@ -1,10 +1,12 @@
+// deno-lint-ignore-file camelcase
+
 export interface AlbumObj {
-  albumType: string;
+  album_type: string;
   artists: Array<ArtistObj>;
-  availableMarkets: Array<string>;
+  available_markets: Array<string>;
   copyrights: Array<CopyrightObj>;
-  externalIds: ExternalIdObj;
-  externalUrls: ExternalUrlObj;
+  external_ids: ExternalIdObj;
+  external_urls: ExternalUrlObj;
   genres: Array<string>;
   href: string;
   id: string;
@@ -12,8 +14,8 @@ export interface AlbumObj {
   label: string;
   name: string;
   popularity: number;
-  releaseDate: string;
-  releaseDatePrecision: string;
+  release_date: string;
+  release_date_precision: string;
   restrictions: AlbumRestrictionObj;
   tracks: Array<SimplifiedTrackObj>;
   type: string;
@@ -362,17 +364,17 @@ export interface ShowObj {
 }
 
 export interface SimplifiedAlbumObj {
-  albumGroup: string;
-  albumType: string;
+  album_group: string;
+  album_type: string;
   artists: Array<SimplifiedArtistObj>;
-  availableMarkets: Array<string>;
+  available_markets: Array<string>;
   externalUrl: ExternalUrlObj;
   href: string;
   id: string;
   images: Array<ImageObj>;
   name: string;
-  releaseDate: string;
-  releaseDatePrecision: string;
+  release_date: string;
+  release_date_precision: string;
   restrictions: AlbumRestrictionObj;
   type: string;
   uri: string;
@@ -388,7 +390,7 @@ export interface SimplifiedArtistObj {
 }
 
 export interface SimplifiedEpisodeObj {
-  AudioPreviewUrl: string;
+  audio_preview_url: string;
   description: string;
   durationMs: number;
   explicit: boolean;
