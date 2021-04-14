@@ -23,17 +23,19 @@ export class Client {
     if (name.length == 0) {
       throw new Error("Parameter 'name' needs to be specified.");
     }
-    const result = await this.fetch(endpoints.SEARCH(name, SearchType.Artist, "US"));
+    const result = await this.fetch(
+      endpoints.SEARCH(name, SearchType.Artist, "US"),
+    );
     return result["artists"]["items"][0] as ArtistObj;
   }
 
   // deno-lint-ignore no-explicit-any
   private async fetch(url: string): Promise<any> {
     const response = await fetch(url, {
-        method: "GET",
-        headers: {
-            "Authorization": this.#conf.accessToken,
-        },
+      method: "GET",
+      headers: {
+        "Authorization": this.#conf.accessToken,
+      },
     });
     const json = await response.json();
 
