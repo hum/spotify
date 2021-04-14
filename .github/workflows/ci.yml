@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        deno: ["v1.x", "nightly"]
+        os: [macOS-latest, windows-latest, ubuntu-latest]
+      
+    steps:
+      - name: Setup repo
+        uses: actions/checkout@v2
+
+      - name: Setup Deno
+        uses: denolib/setup-deno@c7d7968ad4a59c159a777f79adddad6872ee8d96
+        env:
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
+        with:
+          deno-version: ${{ matrix.deno }}
+
+      - name: Cache Client
+        run: deno cache --unstable client.ts
+        
+      - name: Lint
+        run: deno lint --unstable
