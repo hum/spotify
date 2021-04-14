@@ -85,9 +85,12 @@ const GET_ARTISTS_ALBUMS = (
   if (includeGroups) {
     params.include_groups = includeGroups.join(",");
   }
-  if (market) {
-    params.market = market;
+
+  if (!market) {
+    market = "US";
   }
+  params.market = market;
+
   if (limit) {
     params.limit = String(limit);
   }
