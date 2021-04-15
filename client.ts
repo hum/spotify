@@ -86,7 +86,9 @@ export class Client {
     if (name.length == 0) {
       throw new Error("Parameter 'name' needs to be specified.");
     }
-    const data = await this.#caller.fetch(endpoints.SEARCH(name, SearchType.Artist));
+    const data = await this.#caller.fetch(
+      endpoints.SEARCH(name, SearchType.Artist),
+    );
     const value: ArtistObj = data["artists"]["items"][0];
     return value.id;
   }
