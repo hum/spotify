@@ -22,6 +22,8 @@ export class Caller {
     });
     const json = await response.json();
 
+    // TODO:
+    // Handle rate limiting
     if (response.status != 200) {
       const err = `Server returned a non-successful response. 
                 ${JSON.stringify(json["error"])}`;
