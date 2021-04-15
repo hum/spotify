@@ -28,7 +28,7 @@ Absolutely unusable.**
 - [ ] **Tracks API**
 - [ ] **User Profile API**
 
-## Usage
+## Example Usage
 
 ---
 
@@ -37,10 +37,9 @@ Import the module and initialise the `Client` class.
 ```ts
 import { Client } from "https://deno.land/x/spotify/mod.ts";
 
-// Create the API client
+// Initialize the API client
 const spotify = new Client({
   token: "your_token",
-  refresh_token: "refresh_token",
 });
 ```
 
@@ -48,10 +47,23 @@ Make calls to the API
 
 ```ts
 const artist = spotify.getArtist("joji");
+console.log(artist.name, artist.genres, artist.id);
 
-for (const image of artist.images) {
-  console.log(image.height, image.url, image.width);
+// Get all albums related to the artist
+const albums = await artist.getAlbums();
+for (const album of albums) {
+  console.log(album.name, album.releaseDate);
 }
+
+// Albums can be fetched even without an artist
+const album = await spotify.getAlbum("Nectar");
+const tracks = await album.getTracks();
+
+for (const track of tracks) {
+  console.log(${album.artists[0].name} - ${track.name});
+}
+```
+```ts
 ```
 
 **More usage in `/examples`** -- `TODO`
