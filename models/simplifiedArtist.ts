@@ -1,10 +1,12 @@
 import {
+  ArtistObj,
   ExternalUrlObj,
   SimplifiedAlbumObj,
   SimplifiedArtistObj,
+  TrackObj,
 } from "../types.ts";
 import { Caller } from "../handlers/caller.ts";
-import { Artist, SimplifiedAlbum } from "./models.ts";
+import { Artist, SimplifiedAlbum, Track } from "./models.ts";
 import { endpoints } from "../endpoints.ts";
 
 export class SimplifiedArtist {
@@ -84,15 +86,29 @@ export class SimplifiedArtist {
     return result;
   }
 
-  /*async getRelatedArtists(): Promise<Array<Artist>> {
+  async getTopTracks(id: string, market: string): Promise<Array<Track>> {
+    const data = await this.#caller.fetch(
+      endpoints.GET_ARTIST_TOP_TRACKS(id, market),
+    );
+    const values: Array<TrackObj> = data["tracks"];
+    const result: Array<Track> = [];
+
+    for (const track of values) {
+      result.push(new Track(track, this.#caller));
+    }
+    return result;
+  }
+
+  async getRelatedArtists(): Promise<Array<Artist>> {
     const data = await this.#caller.fetch(
       endpoints.GET_RELATED_ARTISTS(this.id),
     );
+    const values: Array<ArtistObj> = data["artists"];
+    const result: Array<Artist> = [];
 
-    const artists: Array<Artist> = [];
-    for (const artist of data["artists"]) {
-      artists.push(new Artist(artist, this.#caller));
+    for (const artist of values) {
+      result.push(new Artist(artist, this.#caller));
     }
-    return artists;
-  }*/
+    return result;
+  }
 }
