@@ -84,7 +84,7 @@ export class SimplifiedArtist {
     return result;
   }
 
-  async getRelatedArtists(): Promise<Array<Artist>> {
+  /*async getRelatedArtists(): Promise<Array<Artist>> {
     const data = await this.#caller.fetch(
       endpoints.GET_RELATED_ARTISTS(this.id),
     );
@@ -94,5 +94,5 @@ export class SimplifiedArtist {
       artists.push(new Artist(artist, this.#caller));
     }
     return artists;
-  }
+  }*/
 }
