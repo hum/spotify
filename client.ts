@@ -1,6 +1,6 @@
 import { AlbumObj, ArtistObj, SimplifiedAlbumObj } from "./types.ts";
 import { endpoints, SearchType } from "./endpoints.ts";
-import { Album, Artist, SimplifiedAlbum } from "./models/models.ts";
+import { Album, Artist } from "./models/models.ts";
 import { Caller, CallerOpt } from "./handlers/caller.ts";
 
 export class Client {
