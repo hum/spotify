@@ -102,4 +102,22 @@ export class Client {
     const album: AlbumObj = data["albums"]["items"][0];
     return album.id;
   }
+
+  private async getArtistId(name: string): Promise<string> {
+    if (name.length == 0) {
+      throw new Error("Parameter 'name' needs to be specified.");
+    }
+    const data = await this.#caller.fetch(endpoints.SEARCH(name, SearchType.Artist));
+    const value: ArtistObj = data["artists"]["items"][0];
+    return value.id;
+  }
+
+  async getMultipleArtists(artists: Array<string>): Promise<Array<Artist>> {
+    const result: Array<Artist> = [];
+    for (const artist of artists) {
+      const id = await this.getArtistId(artist);
+      result.push(await this.getArtistById(id));
+    }
+    return result;
+  }
 }
