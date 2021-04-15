@@ -10,22 +10,9 @@ export class Client {
     this.#caller = new Caller(conf);
   }
 
-  async getArtist(name: string, market?: string): Promise<Artist> {
-    if (name.length == 0) {
-      throw new Error("Parameter 'name' needs to be specified.");
-    }
-    if (!market) {
-      market = "US";
-    }
-
-    const result = await this.#caller.fetch(
-      endpoints.SEARCH(name, SearchType.Artist, market),
-    );
-    // This might not always be the correct item to pick.
-    // It returns an array of values, picking the first one could be wrong. (?)
-    const data = result["artists"]["items"][0] as ArtistObj;
-    const artist = new Artist(data, this.#caller);
-    return artist;
+  async getArtist(name: string): Promise<Artist> {
+    const id = await this.getArtistId(name);
+    return await this.getArtistById(id);
   }
 
   async getArtistById(id: string): Promise<Artist> {
@@ -36,22 +23,14 @@ export class Client {
     const result: ArtistObj = await this.#caller.fetch(
       endpoints.GET_ARTIST(id),
     );
+
     const artist = new Artist(result, this.#caller);
     return artist;
   }
 
   async getAlbum(name: string): Promise<Album> {
-    if (name.length == 0) {
-      throw new Error("Parameter 'id' needs to be specified.");
-    }
-
-    const result = await this.#caller.fetch(
-      endpoints.SEARCH(name, SearchType.Album),
-    );
-    const data = result["albums"]["items"][0] as SimplifiedAlbumObj;
-    const simpleAlbum = new SimplifiedAlbum(data, this.#caller);
-    const album = await simpleAlbum.getAllData();
-    return album;
+    const id = await this.getAlbumId(name);
+    return await this.getAlbumById(id);
   }
 
   async getAlbumById(id: string, market?: string): Promise<Album> {
