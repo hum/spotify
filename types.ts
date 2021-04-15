@@ -2,10 +2,12 @@
 
 export interface AlbumObj {
   album_type: string;
+  album_group: string;
   artists: Array<ArtistObj>;
   available_markets: Array<string>;
   copyrights: Array<CopyrightObj>;
   external_ids: ExternalIdObj;
+  external_url: ExternalUrlObj;
   external_urls: ExternalUrlObj;
   genres: Array<string>;
   href: string;
@@ -368,7 +370,7 @@ export interface SimplifiedAlbumObj {
   album_type: string;
   artists: Array<SimplifiedArtistObj>;
   available_markets: Array<string>;
-  externalUrl: ExternalUrlObj;
+  external_url: ExternalUrlObj;
   href: string;
   id: string;
   images: Array<ImageObj>;
