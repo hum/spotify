@@ -7,7 +7,6 @@ export interface AlbumObj {
   available_markets: Array<string>;
   copyrights: Array<CopyrightObj>;
   external_ids: ExternalIdObj;
-  external_url: ExternalUrlObj;
   external_urls: ExternalUrlObj;
   genres: Array<string>;
   href: string;
@@ -370,7 +369,7 @@ export interface SimplifiedAlbumObj {
   album_type: string;
   artists: Array<SimplifiedArtistObj>;
   available_markets: Array<string>;
-  external_url: ExternalUrlObj;
+  external_urls: ExternalUrlObj;
   href: string;
   id: string;
   images: Array<ImageObj>;
@@ -447,20 +446,20 @@ export interface SimplifiedShowObj {
 
 export interface SimplifiedTrackObj {
   artists: Array<SimplifiedArtistObj>;
-  availableMarkets: Array<string>;
-  discNumber: number;
-  durationMs: number;
+  available_markets: Array<string>;
+  disc_number: number;
+  duration_ms: number;
   explicit: boolean;
-  externalUrls: ExternalUrlObj;
+  external_urls: ExternalUrlObj;
   href: string;
   id: string;
-  isLocal: boolean;
-  isPlayable: boolean;
-  linkedFrom: LinkedTrackObj;
+  is_local: boolean;
+  is_playable: boolean;
+  linked_from: LinkedTrackObj;
   name: string;
-  previewUrl: string;
+  preview_url: string;
   restrictions: TrackRestrictionObj;
-  trackNumber: number;
+  track_number: number;
   type: string;
   uri: string;
 }
@@ -468,22 +467,22 @@ export interface SimplifiedTrackObj {
 export interface TrackObj {
   album: SimplifiedAlbumObj;
   artists: Array<ArtistObj>;
-  availableMarket: Array<string>;
-  discNumber: number;
-  durationMs: number;
+  available_markets: Array<string>;
+  disc_number: number;
+  duration_ms: number;
   explicit: boolean;
-  externalIds: ExternalIdObj;
-  externalUrl: ExternalUrlObj;
+  external_ids: ExternalIdObj;
+  external_urls: ExternalUrlObj;
   href: string;
   id: string;
-  isLocal: boolean;
-  isPlayable: boolean;
-  linkedFrom: LinkedTrackObj;
+  is_local: boolean;
+  is_playable: boolean;
+  linked_from: LinkedTrackObj;
   name: string;
   popularity: number;
-  previewUrl: string;
+  preview_url: string;
   restrictions: TrackRestrictionObj;
-  trackNumber: number;
+  track_number: number;
   type: string;
   uri: string;
 }
