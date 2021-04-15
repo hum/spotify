@@ -26,7 +26,7 @@ export class SimplifiedAlbum {
     return this.#data.album_type;
   }
 
-  getArtists(): Array<SimplifiedArtist> {
+  get artists(): Array<SimplifiedArtist> {
     const result: Array<SimplifiedArtist> = [];
 
     for (const artist of this.#data.artists) {
@@ -36,9 +36,10 @@ export class SimplifiedAlbum {
   }
 
   async getAllData(market?: string): Promise<Album> {
-    const data: AlbumObj = await this.#caller.fetch(
+    const data = await this.#caller.fetch(
       endpoints.GET_ALBUM(this.id, market),
-    );
+    ) as AlbumObj;
+
     const album = new Album(data, this.#caller);
     return album;
   }
@@ -47,8 +48,8 @@ export class SimplifiedAlbum {
     return this.#data.available_markets;
   }
 
-  get externalUrl(): ExternalUrlObj {
-    return this.#data.external_url;
+  get externalUrls(): ExternalUrlObj {
+    return this.#data.external_urls;
   }
 
   get href(): string {
