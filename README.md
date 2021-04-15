@@ -35,7 +35,7 @@ Absolutely unusable.**
 Import the module and initialise the `Client` class.
 
 ```ts
-import { Client } from "https://deno.land/x/spotify/mod.ts";
+import { Client } from "url";
 
 // Initialize the API client
 const spotify = new Client({
