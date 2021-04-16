@@ -148,7 +148,7 @@ Deno.test("Get albums and singles", async () => {
     "Yeah Right",
     "YEAH RIGHT",
     "In Tongues",
-    "In Tongues"
+    "In Tongues",
   ];
 
   for (let i = 0; i < expectedAlbums.length; i++) {
