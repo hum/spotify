@@ -222,6 +222,83 @@ const GET_PLAYLIST_ITEMS = (
   return query;
 };
 
+const GET_ALL_CATEGORIES = (
+  country?: string,
+  locale?: string,
+  limit?: number,
+  offset?: number 
+) => {
+  const params: Record<string, string> = {};
+  let query = `${API_PREFIX}/browse/categories`;
+
+  if (country) {
+    params.country = country;
+  }
+  if (locale) {
+    params.locale = locale;
+  }
+  if (limit) {
+    params.limit = String(limit);
+  }
+  if (offset) {
+    params.offset = String(offset);
+  }
+  query = format(query, params);
+  return query;
+};
+
+const GET_CATEGORY = (
+  id: string,
+  country?: string,
+  locale?: string
+) => {
+  const params: Record<string, string> = {};
+  let query = `${API_PREFIX}/browse/categories/${id}`;
+
+  if (country) {
+    params.country = country;
+  }
+  if (locale) {
+    params.locale = locale;
+  }
+  query = format(query, params);
+  return query;
+};
+
+const GET_CATEGORY_PLAYLISTS = (
+  id: string,
+  country?: string,
+  limit?: number,
+  offset?: number
+) => {
+  const params: Record<string, string> = {};
+  let query = `${API_PREFIX}/browse/categories/${id}/playlists`;
+  
+  if (country) {
+    params.country = country;
+  }
+  if (limit) {
+    params.limit = String(limit);
+  }
+  if (offset) {
+    params.offset = String(offset);
+  }
+  query = format(query, params);
+  return query;
+};
+
+const GET_RECOMMENDATIONS = (
+
+) => {
+  // TODO
+};
+
+const GET_RECOMMENDATION_GENRES = (
+
+) => {
+  // TODO
+};
+
 const format = (query: string, params: Record<string, string>) => {
   let result = "?";
   for (const [k, v] of Object.entries(params)) {
@@ -258,6 +335,11 @@ export const endpoints = {
 
   GET_ALL_NEW_RELEASES,
   GET_ALL_FEATURED_PLAYLISTS,
+  GET_ALL_CATEGORIES,
+  GET_CATEGORY,
+  GET_CATEGORY_PLAYLISTS,
+  GET_RECOMMENDATIONS,
+  GET_RECOMMENDATION_GENRES,
 
   GET_PLAYLIST_ITEMS,
 
