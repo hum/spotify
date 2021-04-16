@@ -1,6 +1,7 @@
 import {
   AlbumObj,
   ArtistObj,
+  CategoryObj,
   SimplifiedAlbumObj,
   SimplifiedPlaylistObj,
 } from "./types.ts";
@@ -8,6 +9,7 @@ import { endpoints, SearchType } from "./endpoints.ts";
 import {
   Album,
   Artist,
+  Category,
   SimplifiedAlbum,
   SimplifiedPlaylist,
 } from "./models/models.ts";
@@ -154,6 +156,25 @@ export class Client {
 
     for (const playlist of playlists) {
       result.push(new SimplifiedPlaylist(playlist, this.#caller));
+    }
+    return result;
+  }
+
+  async getCategories(
+    country?: string,
+    locale?: string,
+    limit?: number,
+    offset?: number,
+  ): Promise<Array<Category>> {
+    const data = await this.#caller.fetch(
+      endpoints.GET_ALL_CATEGORIES(country, locale, limit, offset),
+    );
+
+    const categories: Array<CategoryObj> = data["categories"]["items"];
+
+    const result: Array<Category> = [];
+    for (const category of categories) {
+      result.push(new Category(category, this.#caller));
     }
     return result;
   }
