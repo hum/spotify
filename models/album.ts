@@ -10,18 +10,15 @@ import {
   SimplifiedArtist,
   SimplifiedTrack,
 } from "./models.ts";
-import { endpoints } from "../endpoints.ts";
 
 export class Album extends SimplifiedAlbum {
   #caller: Caller;
   #data: AlbumObj;
-  #tracks: Array<SimplifiedTrack>;
 
   constructor(data: AlbumObj, caller: Caller) {
     super(data, caller);
     this.#caller = caller;
     this.#data = data;
-    this.#tracks = [];
   }
 
   get copyrights(): Array<CopyrightObj> {
@@ -40,19 +37,13 @@ export class Album extends SimplifiedAlbum {
     return this.#data.popularity;
   }
 
-  async getTracks(): Promise<Array<SimplifiedTrack>> {
-    if (this.#tracks.length > 0) {
-      return this.#tracks;
-    }
-
-    const data = await this.#caller.fetch(endpoints.GET_ALBUM_TRACKS(this.id));
-    const values: Array<SimplifiedTrackObj> = data["items"];
-
+  get tracks(): Array<SimplifiedTrack> {
     const result: Array<SimplifiedTrack> = [];
-    for (const track of values) {
-      result.push(new SimplifiedTrack(track, this.#caller));
+    for (const track of this.#data.tracks.items) {
+      result.push(
+        new SimplifiedTrack(track as SimplifiedTrackObj, this.#caller),
+      );
     }
-    this.#tracks = result;
     return result;
   }
 

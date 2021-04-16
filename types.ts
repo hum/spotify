@@ -18,7 +18,7 @@ export interface AlbumObj {
   release_date: string;
   release_date_precision: string;
   restrictions: AlbumRestrictionObj;
-  tracks: Array<SimplifiedTrackObj>;
+  tracks: PagingObj;
   type: string;
   uri: string;
 }
@@ -210,7 +210,8 @@ export interface LinkedTrackObj {
 
 export interface PagingObj {
   href: string;
-  items: Array<Record<string, unknown>>;
+  // deno-lint-ignore no-explicit-any
+  items: Array<Record<string, any>>;
   limit: number;
   next: string;
   offset: number;

@@ -55,7 +55,7 @@ Deno.test("Fetch album data", async () => {
 
 Deno.test("Get all album tracks", async () => {
   const album = await spotify.getAlbum("Nectar");
-  const tracks = await album.getTracks();
+  const tracks = album.tracks;
   const expected = [
     "Ew",
     "MODUS",
@@ -77,7 +77,7 @@ Deno.test("Get all album tracks", async () => {
     "Your Man",
   ];
 
-  for (let i = 0; i < tracks.length; i++) {
+  for (let i = 0; i < expected.length; i++) {
     assertEquals(expected[i], tracks[i].name);
   }
 });
