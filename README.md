@@ -16,6 +16,13 @@ Absolutely unusable.**
   - [x] Get an Artist's Related Artists
   - [x] Get an Artist's Albums
 - [ ] **Browse API**
+  - [x] Get All New Releases
+  - [ ] Get All Featured Playlists
+  - [ ] Get All Categories
+  - [ ] Get a Category
+  - [ ] Get a Category's Playlists
+  - [ ] Get Recommendations
+  - [ ] Get Recommendation Genres
 - [ ] **Episodes API**
 - [ ] **Follow API**
 - [ ] **Library API**

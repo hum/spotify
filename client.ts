@@ -1,6 +1,6 @@
-import { AlbumObj, ArtistObj } from "./types.ts";
+import { AlbumObj, ArtistObj, PagingObj, SimplifiedAlbumObj } from "./types.ts";
 import { endpoints, SearchType } from "./endpoints.ts";
-import { Album, Artist } from "./models/models.ts";
+import { Album, Artist, SimplifiedAlbum } from "./models/models.ts";
 import { Caller, CallerOpt } from "./handlers/caller.ts";
 
 export class Client {
@@ -98,6 +98,25 @@ export class Client {
     for (const artist of artists) {
       const id = await this.getArtistId(artist);
       result.push(await this.getArtistById(id));
+    }
+    return result;
+  }
+
+  async getNewReleases(
+    country?: string,
+    limit?: number,
+    offset?: number,
+  ): Promise<Array<SimplifiedAlbum>> {
+    const result: Array<SimplifiedAlbum> = [];
+
+    const data = await this.#caller.fetch(
+      endpoints.GET_ALL_NEW_RELEASES(country, limit, offset),
+    );
+
+    const albums: Array<SimplifiedAlbumObj> = data["albums"].items;
+
+    for (const album of albums) {
+      result.push(new SimplifiedAlbum(album, this.#caller));
     }
     return result;
   }

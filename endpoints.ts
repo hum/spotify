@@ -141,6 +141,27 @@ const SEARCH = (
   return query;
 };
 
+const GET_ALL_NEW_RELEASES = (
+  country?: string,
+  limit?: number,
+  offset?: number,
+) => {
+  const params: Record<string, string> = {};
+  let query = `${API_PREFIX}/browse/new-releases`;
+
+  if (country) {
+    params.country = country;
+  }
+  if (limit) {
+    params.limit = String(limit);
+  }
+  if (offset) {
+    params.offset = String(offset);
+  }
+  query = format(query, params);
+  return query;
+};
+
 const format = (query: string, params: Record<string, string>) => {
   let result = "?";
   for (const [k, v] of Object.entries(params)) {
@@ -174,6 +195,8 @@ export const endpoints = {
   GET_ARTIST_TOP_TRACKS,
   GET_RELATED_ARTISTS,
   GET_ARTISTS_ALBUMS,
+
+  GET_ALL_NEW_RELEASES,
 
   SEARCH,
   /*GET_ALL_NEW_RELEASES,
