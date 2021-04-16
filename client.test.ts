@@ -97,3 +97,65 @@ Deno.test("Get multiple albums", async () => {
     assertEquals(multipleAlbums[i].artists[0].name, artist);
   }
 });
+
+Deno.test("Get artist's top songs", async () => {
+  const artist = await spotify.getArtist("Joji");
+  const topTracks = await artist.getTopTracks();
+
+  const expected = [
+    "SLOW DANCING IN THE DARK",
+    "YEAH RIGHT",
+    "worldstar money (interlude)",
+    "Daylight",
+    "Your Man",
+    "Will He",
+    "Gimme Love",
+    "CAN'T GET OVER YOU (feat. Clams Casino)",
+    "Midsummer Madness",
+    "Sanctuary",
+  ];
+
+  for (let i = 0; i < expected.length; i++) {
+    assertEquals(expected[i], topTracks[i].name);
+  }
+});
+
+Deno.test("Get albums and singles", async () => {
+  const artist = await spotify.getArtist("joji");
+  const albums = await artist.getAlbums();
+  const singles = await artist.getSingles();
+
+  const expectedAlbums = [
+    "Nectar",
+    "Nectar",
+    "BALLADS 1",
+    "BALLADS 1",
+    "In Tongues (Deluxe)",
+    "In Tongues Deluxe",
+  ];
+
+  const expectedSingles = [
+    "Daylight",
+    "Daylight",
+    "Gimme Love",
+    "Gimme Love (Channel Tres Remix)",
+    "Run",
+    "Sanctuary",
+    "SLOW DANCING IN THE DARK (Loud Luxury Remix)",
+    "SLOW DANCING IN THE DARK (Mr. Mitch Remix)",
+    "SLOW DANCING IN THE DARK (Acoustic Remix)",
+    "Peach Jam",
+    "Yeah Right",
+    "YEAH RIGHT",
+    "In Tongues",
+    "In Tongues"
+  ];
+
+  for (let i = 0; i < expectedAlbums.length; i++) {
+    assertEquals(expectedAlbums[i], albums[i].name);
+  }
+
+  for (let i = 0; i < expectedSingles.length; i++) {
+    assertEquals(expectedSingles[i], singles[i].name);
+  }
+});

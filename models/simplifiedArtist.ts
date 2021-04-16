@@ -12,10 +12,14 @@ import { endpoints } from "../endpoints.ts";
 export class SimplifiedArtist {
   #caller: Caller;
   #data: SimplifiedArtistObj;
+  #albums: Array<SimplifiedAlbum>;
+  #singles: Array<SimplifiedAlbum>;
 
   constructor(data: SimplifiedArtistObj, caller: Caller) {
     this.#caller = caller;
     this.#data = data;
+    this.#albums = [];
+    this.#singles = [];
   }
 
   get externalUrls(): ExternalUrlObj {
@@ -63,6 +67,10 @@ export class SimplifiedArtist {
     limit?: number,
     offset?: number,
   ): Promise<Array<SimplifiedAlbum>> {
+    if (this.#albums.length > 0) {
+      return this.#albums;
+    }
+
     const data = await this.#caller.fetch(
       endpoints.GET_ARTISTS_ALBUMS(
         this.id,
@@ -73,22 +81,59 @@ export class SimplifiedArtist {
       ),
     );
 
-    let values: Array<SimplifiedAlbumObj> = data["items"];
+    const values: Array<SimplifiedAlbumObj> = data["items"];
 
-    values = values.filter((value) => {
-      return value.album_type == "album";
-    });
-
-    const result: Array<SimplifiedAlbum> = [];
     for (const album of values) {
-      result.push(new SimplifiedAlbum(album, this.#caller));
+      const simpleAlbum = new SimplifiedAlbum(album, this.#caller);
+      if (simpleAlbum.albumType == "single") {
+        this.#singles.push(simpleAlbum);
+      } else {
+        this.#albums.push(simpleAlbum);
+      }
     }
-    return result;
+    return this.#albums;
   }
 
-  async getTopTracks(id: string, market: string): Promise<Array<Track>> {
+  async getSingles(
+    includeGroups?: Array<string>,
+    market?: string,
+    limit?: number,
+    offset?: number,
+  ): Promise<Array<SimplifiedAlbum>> {
+    if (this.#singles.length > 0) {
+      return this.#singles;
+    }
+
     const data = await this.#caller.fetch(
-      endpoints.GET_ARTIST_TOP_TRACKS(id, market),
+      endpoints.GET_ARTISTS_ALBUMS(
+        this.id,
+        includeGroups,
+        market,
+        limit,
+        offset,
+      ),
+    );
+
+    const values: Array<SimplifiedAlbumObj> = data["items"];
+
+    for (const album of values) {
+      const simpleAlbum = new SimplifiedAlbum(album, this.#caller);
+      if (simpleAlbum.albumType == "single") {
+        this.#singles.push(simpleAlbum);
+      } else {
+        this.#albums.push(simpleAlbum);
+      }
+    }
+    return this.#singles;
+  }
+
+  async getTopTracks(market?: string): Promise<Array<Track>> {
+    if (!market) {
+      market = "US";
+    }
+
+    const data = await this.#caller.fetch(
+      endpoints.GET_ARTIST_TOP_TRACKS(this.id, market),
     );
     const values: Array<TrackObj> = data["tracks"];
     const result: Array<Track> = [];
