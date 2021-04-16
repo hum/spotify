@@ -17,7 +17,7 @@ Absolutely unusable.**
   - [x] Get an Artist's Albums
 - [ ] **Browse API**
   - [x] Get All New Releases
-  - [ ] Get All Featured Playlists
+  - [x] Get All Featured Playlists
   - [ ] Get All Categories
   - [ ] Get a Category
   - [ ] Get a Category's Playlists
