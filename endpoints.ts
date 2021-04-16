@@ -226,7 +226,7 @@ const GET_ALL_CATEGORIES = (
   country?: string,
   locale?: string,
   limit?: number,
-  offset?: number 
+  offset?: number,
 ) => {
   const params: Record<string, string> = {};
   let query = `${API_PREFIX}/browse/categories`;
@@ -250,7 +250,7 @@ const GET_ALL_CATEGORIES = (
 const GET_CATEGORY = (
   id: string,
   country?: string,
-  locale?: string
+  locale?: string,
 ) => {
   const params: Record<string, string> = {};
   let query = `${API_PREFIX}/browse/categories/${id}`;
@@ -269,11 +269,11 @@ const GET_CATEGORY_PLAYLISTS = (
   id: string,
   country?: string,
   limit?: number,
-  offset?: number
+  offset?: number,
 ) => {
   const params: Record<string, string> = {};
   let query = `${API_PREFIX}/browse/categories/${id}/playlists`;
-  
+
   if (country) {
     params.country = country;
   }
@@ -287,15 +287,11 @@ const GET_CATEGORY_PLAYLISTS = (
   return query;
 };
 
-const GET_RECOMMENDATIONS = (
-
-) => {
+const GET_RECOMMENDATIONS = () => {
   // TODO
 };
 
-const GET_RECOMMENDATION_GENRES = (
-
-) => {
+const GET_RECOMMENDATION_GENRES = () => {
   // TODO
 };
 
