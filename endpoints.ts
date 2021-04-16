@@ -162,6 +162,66 @@ const GET_ALL_NEW_RELEASES = (
   return query;
 };
 
+const GET_ALL_FEATURED_PLAYLISTS = (
+  country?: string,
+  locale?: string,
+  timestamp?: string,
+  limit?: number,
+  offset?: number,
+) => {
+  const params: Record<string, string> = {};
+  let query = `${API_PREFIX}/browse/featured-playlists`;
+
+  if (country) {
+    params.country = country;
+  }
+  if (locale) {
+    params.locale = locale;
+  }
+  if (timestamp) {
+    params.timestamp = timestamp;
+  }
+  if (limit) {
+    params.limit = String(limit);
+  }
+  if (offset) {
+    params.offset = String(offset);
+  }
+  query = format(query, params);
+  return query;
+};
+
+const GET_PLAYLIST_ITEMS = (
+  id: string,
+  market?: string,
+  fields?: string,
+  limit?: number,
+  offset?: number,
+  additionalTypes?: string,
+) => {
+  const params: Record<string, string> = {};
+  let query = `${API_PREFIX}/playlists/${id}/tracks`;
+
+  if (!market) {
+    market = "US";
+  }
+  params.market = market;
+  if (fields) {
+    params.fields = fields;
+  }
+  if (limit) {
+    params.limit = String(limit);
+  }
+  if (offset) {
+    params.offset = String(offset);
+  }
+  if (additionalTypes) {
+    params.additional_types = additionalTypes;
+  }
+  query = format(query, params);
+  return query;
+};
+
 const format = (query: string, params: Record<string, string>) => {
   let result = "?";
   for (const [k, v] of Object.entries(params)) {
@@ -197,6 +257,9 @@ export const endpoints = {
   GET_ARTISTS_ALBUMS,
 
   GET_ALL_NEW_RELEASES,
+  GET_ALL_FEATURED_PLAYLISTS,
+
+  GET_PLAYLIST_ITEMS,
 
   SEARCH,
   /*GET_ALL_NEW_RELEASES,
