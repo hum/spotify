@@ -159,3 +159,18 @@ Deno.test("Get albums and singles", async () => {
     assertEquals(expectedSingles[i], singles[i].name);
   }
 });
+
+Deno.test("Get new releases", async () => {
+  const newReleases = await spotify.getNewReleases();
+  for (const release of newReleases) {
+    console.log(release.artists[0].name, " - ", release.name);
+  }
+});
+
+Deno.test("Test", async () => {
+  const featuredPlaylists = await spotify.getFeaturedPlaylists();
+  const tracks = await featuredPlaylists[0].getTracks();
+  for (const track of tracks) {
+    console.log(track.name);
+  }
+});
