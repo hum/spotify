@@ -66,7 +66,7 @@ for (const album of albums) {
 const album = await spotify.getAlbum("Nectar");
 
 for (const track of album.tracks) {
-  console.log(${album.artists[0].name} - ${track.name});
+  console.log(`${album.artists[0].name} - ${track.name}`);
 }
 ```
 
