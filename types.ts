@@ -270,9 +270,9 @@ export interface PlaylistObj {
 }
 
 export interface PlaylistTrackObj {
-  addedAt: Date;
-  addedBy: PublicUserObj;
-  isLocal: boolean;
+  added_at: Date;
+  added_by: PublicUserObj;
+  is_local: boolean;
   track: TrackObj | EpisodeObj;
 }
 
@@ -298,7 +298,7 @@ export interface PrivateUserObj {
 
 export interface PublicUserObj {
   displayName: string;
-  externalUrls: ExternalUrlObj;
+  external_urls: ExternalUrlObj;
   followers: FollowersObj;
   href: string;
   id: string;
@@ -414,14 +414,14 @@ export interface SimplifiedEpisodeObj {
 export interface SimplifiedPlaylistObj {
   collaborative: boolean;
   description: string;
-  externalUrls: ExternalUrlObj;
+  external_urls: ExternalUrlObj;
   href: string;
   id: string;
   images: Array<ImageObj>;
   name: string;
   owner: PublicUserObj;
   public: boolean;
-  snapshotId: string;
+  snapshot_id: string;
   tracks: PlaylistTracksRefObj;
   type: string;
   uri: string;
