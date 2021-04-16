@@ -1,6 +1,16 @@
-import { AlbumObj, ArtistObj, SimplifiedAlbumObj } from "./types.ts";
+import {
+  AlbumObj,
+  ArtistObj,
+  SimplifiedAlbumObj,
+  SimplifiedPlaylistObj,
+} from "./types.ts";
 import { endpoints, SearchType } from "./endpoints.ts";
-import { Album, Artist, SimplifiedAlbum } from "./models/models.ts";
+import {
+  Album,
+  Artist,
+  SimplifiedAlbum,
+  SimplifiedPlaylist,
+} from "./models/models.ts";
 import { Caller, CallerOpt } from "./handlers/caller.ts";
 
 export class Client {
@@ -117,6 +127,33 @@ export class Client {
 
     for (const album of albums) {
       result.push(new SimplifiedAlbum(album, this.#caller));
+    }
+    return result;
+  }
+
+  async getFeaturedPlaylists(
+    country?: string,
+    locale?: string,
+    timestamp?: string,
+    limit?: number,
+    offset?: number,
+  ): Promise<Array<SimplifiedPlaylist>> {
+    const result: Array<SimplifiedPlaylist> = [];
+
+    const data = await this.#caller.fetch(
+      endpoints.GET_ALL_FEATURED_PLAYLISTS(
+        country,
+        locale,
+        timestamp,
+        limit,
+        offset,
+      ),
+    );
+
+    const playlists: Array<SimplifiedPlaylistObj> = data["playlists"].items;
+
+    for (const playlist of playlists) {
+      result.push(new SimplifiedPlaylist(playlist, this.#caller));
     }
     return result;
   }
