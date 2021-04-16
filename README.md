@@ -18,7 +18,7 @@ Absolutely unusable.**
 - [ ] **Browse API**
   - [x] Get All New Releases
   - [x] Get All Featured Playlists
-  - [ ] Get All Categories
+  - [x] Get All Categories
   - [ ] Get a Category
   - [ ] Get a Category's Playlists
   - [ ] Get Recommendations
