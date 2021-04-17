@@ -1,5 +1,7 @@
 import { Caller } from "../handlers/caller.ts";
-import { CategoryObj, ImageObj } from "../types.ts";
+import { CategoryObj, ImageObj, SimplifiedPlaylistObj } from "../types.ts";
+import { SimplifiedPlaylist } from "./models.ts";
+import { endpoints } from "../endpoints.ts";
 
 export class Category {
   #caller: Caller;
@@ -24,5 +26,22 @@ export class Category {
 
   get name(): string {
     return this.#data.name;
+  }
+
+  async getPlaylists(
+    country?: string,
+    limit?: number,
+    offset?: number,
+  ): Promise<Array<SimplifiedPlaylist>> {
+    const result: Array<SimplifiedPlaylist> = [];
+    const data = await this.#caller.fetch(
+      endpoints.GET_CATEGORY_PLAYLISTS(this.id, country, limit, offset),
+    );
+    const playlists: Array<SimplifiedPlaylistObj> = data["playlists"]["items"];
+
+    for (const playlist of playlists) {
+      result.push(new SimplifiedPlaylist(playlist, this.#caller));
+    }
+    return result;
   }
 }

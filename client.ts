@@ -178,4 +178,16 @@ export class Client {
     }
     return result;
   }
+
+  async getCategory(
+    id: string,
+    country?: string,
+    locale?: string,
+  ): Promise<Category> {
+    const data: CategoryObj = await this.#caller.fetch(
+      endpoints.GET_CATEGORY(id, country, locale),
+    );
+    const category = new Category(data, this.#caller);
+    return category;
+  }
 }
