@@ -19,7 +19,7 @@ Absolutely unusable.**
   - [x] Get All New Releases
   - [x] Get All Featured Playlists
   - [x] Get All Categories
-  - [ ] Get a Category
+  - [x] Get a Category
   - [ ] Get a Category's Playlists
   - [ ] Get Recommendations
   - [ ] Get Recommendation Genres
