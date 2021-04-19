@@ -29,7 +29,9 @@ Deno.test("Fetch artist data", async () => {
 
 Deno.test("Fetch album data", async () => {
   const artist = await spotify.getArtist("joji");
-  const albums = await artist.getAlbums();
+  const albums = await artist.getAlbums({
+    market: "US",
+  });
 
   const expected = {
     id: "5EzDhyNZuO7kuaABHwbBKX",
@@ -114,8 +116,12 @@ Deno.test("Get artist's top songs", async () => {
 
 Deno.test("Get albums and singles", async () => {
   const artist = await spotify.getArtist("joji");
-  const albums = await artist.getAlbums();
-  const singles = await artist.getSingles();
+  const albums = await artist.getAlbums({
+    market: "US",
+  });
+  const singles = await artist.getSingles({
+    market: "US",
+  });
 
   const expectedAlbums = [
     "Nectar",
