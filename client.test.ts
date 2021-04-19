@@ -10,14 +10,6 @@ const spotify = new Client({
   accessToken: TOKEN,
 });
 
-Deno.test("Incorrect token provided error", async () => {
-  const client = new Client({
-    accessToken: "aaa",
-  });
-
-  await assertThrowsAsync(() => client.getArtist("joji"));
-});
-
 Deno.test("Fetch artist data", async () => {
   const artist = await spotify.getArtist("Joji");
   const expected = {
