@@ -1,15 +1,27 @@
 import {
+  EpisodeObj,
   ExternalUrlObj,
   ImageObj,
   ResumePointObj,
   SimplifiedEpisodeObj,
 } from "../types.ts";
+import { Episode } from "./models.ts";
+import { caller } from "../handlers/caller.ts";
+import { endpoints } from "../endpoints.ts";
 
 export class SimplifiedEpisode {
   #data: SimplifiedEpisodeObj;
 
   constructor(data: SimplifiedEpisodeObj) {
     this.#data = data;
+  }
+
+  async getAllData(market?: string): Promise<Episode> {
+    const data: EpisodeObj = await caller.fetch(endpoints.GET_EPISODE({
+      id: this.id,
+      market: market ?? "US",
+    }));
+    return new Episode(data);
   }
 
   get audioPreviewUrl(): string {

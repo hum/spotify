@@ -8,3 +8,4 @@ export { Album } from "./album.ts";
 export { Track } from "./track.ts";
 export { PlaylistTrack } from "./playlistTrack.ts";
 export { Category } from "./category.ts";
+export { Episode } from "./episode.ts";
