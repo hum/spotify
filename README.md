@@ -66,12 +66,22 @@ for (const track of album.tracks) {
 - [ ] **Follow API**
 - [ ] **Library API**
 - [ ] **Markets API**
+  - [ ] Get available markets 
 - [ ] **Personalization API**
 - [ ] **Player API**
 - [ ] **Playlists API**
-- [ ] **Search API**
+- [x] **Search API**
+  - [x] Search for an Item 
 - [ ] **Shows API**
+  - [ ] Get Multiple Shows
+  - [ ] Get a Show
+  - [ ] Get a Show's Episodes 
 - [ ] **Tracks API**
+  - [ ] Get Several Tracks
+  - [ ] Get a Track
+  - [ ] Get Audio Features for Serveral Tracks
+  - [ ] Get Audio Features for a Track
+  - [ ] Get Audio Analysis for a Track 
 - [ ] **User Profile API**
 
 **More usage in `/examples`** -- `TODO`
