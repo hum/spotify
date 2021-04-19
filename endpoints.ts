@@ -1,102 +1,62 @@
+import * as opts from "./opts.ts";
+
 const API_PREFIX = "https://api.spotify.com/v1";
 
-const GET_MULTIPLE_ALBUMS = (ids: Array<string>, market?: string) => {
-  if (ids.length > 20 || ids.length == 0) {
+const GET_MULTIPLE_ALBUMS = (opts: opts.MultipleAlbumsOpt) => {
+  if (opts.ids.length > 20 || opts.ids.length == 0) {
     throw new Error(
       `Parameter 'ids' did not provide an array between the size of 1 and 20.`,
     );
   }
 
-  const params: Record<string, string> = {};
+  const params: Record<string, string> = parseOpts(opts);
   let query = `${API_PREFIX}/albums`;
 
-  params.ids = ids.join(",");
+  query = format(query, params);
+  return query;
+};
 
-  if (market) {
-    params.market = market;
-  }
+const GET_ALBUM = (opts: opts.AlbumOpt) => {
+  let query = `${API_PREFIX}/albums/${opts.id}`;
+  const params: Record<string, string> = parseOpts(opts);
 
   query = format(query, params);
   return query;
 };
 
-const GET_ALBUM = (id: string, market?: string) => {
-  let query = `${API_PREFIX}/albums/${id}`;
-
-  if (market) {
-    query = format(query, { "market": market });
-  }
-  return query;
-};
-
-const GET_ALBUM_TRACKS = (
-  id: string,
-  market?: string,
-  limit?: number,
-  offset?: number,
-) => {
-  const params: Record<string, string> = {};
-  let query = `${API_PREFIX}/albums/${id}/tracks`;
-
-  if (market) {
-    params.market = market;
-  }
-  if (limit) {
-    params.limit = String(limit);
-  }
-  if (offset) {
-    params.offset = String(offset);
-  }
+const GET_ALBUM_TRACKS = (opts: opts.AlbumTracksOpt) => {
+  const params: Record<string, string> = parseOpts(opts);
+  let query = `${API_PREFIX}/albums/${opts.id}/tracks`;
 
   query = format(query, params);
   return query;
 };
 
-const GET_MULTIPLE_ARTISTS = (ids: Array<string>) => {
+const GET_MULTIPLE_ARTISTS = (opts: opts.MultipleArtists) => {
   let query = `${API_PREFIX}/artists`;
-  query = format(query, { ids: ids.join(",") });
+  const params: Record<string, string> = parseOpts(opts);
+  query = format(query, params);
   return query;
 };
 
-const GET_ARTIST = (id: string) => {
-  return `${API_PREFIX}/artists/${id}`;
+const GET_ARTIST = (opts: opts.ArtistOpt) => {
+  return `${API_PREFIX}/artists/${opts.id}`;
 };
 
-const GET_ARTIST_TOP_TRACKS = (id: string, market: string) => {
-  let query = `${API_PREFIX}/artists/${id}/top-tracks`;
-  query = format(query, { market: market });
+const GET_ARTIST_TOP_TRACKS = (opts: opts.ArtistTopTracksOpt) => {
+  const params: Record<string, string> = parseOpts(opts);
+  let query = `${API_PREFIX}/artists/${opts.id}/top-tracks`;
+  query = format(query, params);
   return query;
 };
 
-const GET_RELATED_ARTISTS = (id: string) => {
-  return `${API_PREFIX}/artists/${id}/related-artists`;
+const GET_RELATED_ARTISTS = (opts: opts.RelatedArtistsOpt) => {
+  return `${API_PREFIX}/artists/${opts.id}/related-artists`;
 };
 
-const GET_ARTISTS_ALBUMS = (
-  id: string,
-  includeGroups?: Array<string>,
-  market?: string,
-  limit?: number,
-  offset?: number,
-) => {
-  const params: Record<string, string> = {};
-  let query = `${API_PREFIX}/artists/${id}/albums`;
-
-  if (includeGroups) {
-    params.include_groups = includeGroups.join(",");
-  }
-
-  if (!market) {
-    market = "US";
-  }
-  params.market = market;
-
-  if (limit) {
-    params.limit = String(limit);
-  }
-  if (offset) {
-    params.offset = String(offset);
-  }
+const GET_ARTISTS_ALBUMS = (opts: opts.ArtistAlbumsOpt) => {
+  const params: Record<string, string> = parseOpts(opts);
+  let query = `${API_PREFIX}/artists/${opts.id}/albums`;
 
   query = format(query, params);
   return query;
@@ -111,191 +71,92 @@ export enum SearchType {
   Episode = "episode",
 }
 
-const SEARCH = (
-  q: string,
-  type: SearchType,
-  market?: string,
-  limit?: number,
-  offset?: number,
-  includeExternal?: string,
-) => {
-  const params: Record<string, string> = {};
+const SEARCH = (opts: opts.SearchOpt) => {
+  const params: Record<string, string> = parseOpts(opts);
   let query = `${API_PREFIX}/search`;
 
-  params.q = q;
-  params.type = type;
-
-  if (market) {
-    params.market = market;
-  }
-  if (limit) {
-    params.limit = String(limit);
-  }
-  if (offset) {
-    params.offset = String(offset);
-  }
-  if (includeExternal) {
-    params.include_external = includeExternal;
-  }
   query = format(query, params);
   return query;
 };
 
-const GET_ALL_NEW_RELEASES = (
-  country?: string,
-  limit?: number,
-  offset?: number,
-) => {
-  const params: Record<string, string> = {};
+const GET_ALL_NEW_RELEASES = (opts: opts.NewReleasesOpt) => {
+  const params: Record<string, string> = parseOpts(opts);
   let query = `${API_PREFIX}/browse/new-releases`;
 
-  if (country) {
-    params.country = country;
-  }
-  if (limit) {
-    params.limit = String(limit);
-  }
-  if (offset) {
-    params.offset = String(offset);
-  }
   query = format(query, params);
   return query;
 };
 
-const GET_ALL_FEATURED_PLAYLISTS = (
-  country?: string,
-  locale?: string,
-  timestamp?: string,
-  limit?: number,
-  offset?: number,
-) => {
-  const params: Record<string, string> = {};
+const GET_ALL_FEATURED_PLAYLISTS = (opts: opts.AllFeaturedPlaylistsOpt) => {
+  const params: Record<string, string> = parseOpts(opts);
   let query = `${API_PREFIX}/browse/featured-playlists`;
 
-  if (country) {
-    params.country = country;
-  }
-  if (locale) {
-    params.locale = locale;
-  }
-  if (timestamp) {
-    params.timestamp = timestamp;
-  }
-  if (limit) {
-    params.limit = String(limit);
-  }
-  if (offset) {
-    params.offset = String(offset);
-  }
   query = format(query, params);
   return query;
 };
 
-const GET_PLAYLIST_ITEMS = (
-  id: string,
-  market?: string,
-  fields?: string,
-  limit?: number,
-  offset?: number,
-  additionalTypes?: string,
-) => {
-  const params: Record<string, string> = {};
-  let query = `${API_PREFIX}/playlists/${id}/tracks`;
+const GET_PLAYLIST_ITEMS = (opts: opts.PlaylistItemsOpt) => {
+  const params: Record<string, string> = parseOpts(opts);
+  let query = `${API_PREFIX}/playlists/${opts.id}/tracks`;
 
-  if (!market) {
-    market = "US";
-  }
-  params.market = market;
-  if (fields) {
-    params.fields = fields;
-  }
-  if (limit) {
-    params.limit = String(limit);
-  }
-  if (offset) {
-    params.offset = String(offset);
-  }
-  if (additionalTypes) {
-    params.additional_types = additionalTypes;
-  }
   query = format(query, params);
   return query;
 };
 
-const GET_ALL_CATEGORIES = (
-  country?: string,
-  locale?: string,
-  limit?: number,
-  offset?: number,
-) => {
-  const params: Record<string, string> = {};
+const GET_ALL_CATEGORIES = (opts: opts.AllCategoriesOpt) => {
+  const params: Record<string, string> = parseOpts(opts);
   let query = `${API_PREFIX}/browse/categories`;
 
-  if (country) {
-    params.country = country;
-  }
-  if (locale) {
-    params.locale = locale;
-  }
-  if (limit) {
-    params.limit = String(limit);
-  }
-  if (offset) {
-    params.offset = String(offset);
-  }
   query = format(query, params);
   return query;
 };
 
-const GET_CATEGORY = (
-  id: string,
-  country?: string,
-  locale?: string,
-) => {
-  const params: Record<string, string> = {};
-  let query = `${API_PREFIX}/browse/categories/${id}`;
+const GET_CATEGORY = (opts: opts.CategoryOpt) => {
+  const params: Record<string, string> = parseOpts(opts);
+  let query = `${API_PREFIX}/browse/categories/${opts.id}`;
 
-  if (country) {
-    params.country = country;
-  }
-  if (locale) {
-    params.locale = locale;
-  }
   query = format(query, params);
   return query;
 };
 
-const GET_CATEGORY_PLAYLISTS = (
-  id: string,
-  country?: string,
-  limit?: number,
-  offset?: number,
-) => {
-  const params: Record<string, string> = {};
-  let query = `${API_PREFIX}/browse/categories/${id}/playlists`;
+const GET_CATEGORY_PLAYLISTS = (opts: opts.CategoryPlaylistsOpt) => {
+  const params: Record<string, string> = parseOpts(opts);
+  let query = `${API_PREFIX}/browse/categories/${opts.id}/playlists`;
 
-  if (country) {
-    params.country = country;
-  }
-  if (limit) {
-    params.limit = String(limit);
-  }
-  if (offset) {
-    params.offset = String(offset);
-  }
   query = format(query, params);
   return query;
 };
 
-const GET_RECOMMENDATIONS = () => {
-  // TODO
+const GET_RECOMMENDATIONS = (opt: opts.RecommendationsOpt) => {
+  const params: Record<string, string> = parseOpts(opt);
+
+  let query = `${API_PREFIX}/recommendations`;
+  query = format(query, params);
+  return query;
 };
 
 const GET_RECOMMENDATION_GENRES = () => {
   // TODO
 };
 
+function parseOpts<T>(opts: T): Record<string, string> {
+  const result: Record<string, string> = {};
+  for (const [k, v] of Object.entries(opts)) {
+    let value = "";
+    if (Array.isArray(v)) {
+      value = v.join(",");
+    } else {
+      value = String(v);
+    }
+    result[toSnakeCase(k)] = value;
+  }
+  return result;
+}
+
 const format = (query: string, params: Record<string, string>) => {
+  if (params == {}) {
+    return query;
+  }
   let result = "?";
   for (const [k, v] of Object.entries(params)) {
     result += `${k}=${v}&`;
@@ -303,20 +164,20 @@ const format = (query: string, params: Record<string, string>) => {
   return query.concat(result.substr(0, result.length - 1));
 };
 
-/*const toSnakeCase = (str: string) => {
-    let result = "";
-    let char = "";
+const toSnakeCase = (str: string) => {
+  let result = "";
+  let char = "";
 
-    for(let i = 0; i < str.length; i++) {
-        char = str[i];
-        if (char == char.toUpperCase()) {
-            char = char.toLowerCase();
-            result += '_';
-        }
-        result += `${char}`;
+  for (let i = 0; i < str.length; i++) {
+    char = str[i];
+    if (char == char.toUpperCase()) {
+      char = char.toLowerCase();
+      result += "_";
     }
-    return result;
-}*/
+    result += `${char}`;
+  }
+  return result;
+};
 
 export const endpoints = {
   GET_MULTIPLE_ALBUMS,
