@@ -1,4 +1,3 @@
-import { Caller } from "../handlers/caller.ts";
 import { SimplifiedArtist } from "./models.ts";
 import {
   ExternalUrlObj,
@@ -9,17 +8,15 @@ import {
 
 export class SimplifiedTrack {
   #data: SimplifiedTrackObj;
-  #caller: Caller;
 
-  constructor(data: SimplifiedTrackObj, caller: Caller) {
-    this.#caller = caller;
+  constructor(data: SimplifiedTrackObj) {
     this.#data = data;
   }
 
   get artists(): Array<SimplifiedArtist> {
     const artists: Array<SimplifiedArtist> = [];
     for (const artist of this.#data.artists) {
-      artists.push(new SimplifiedArtist(artist, this.#caller));
+      artists.push(new SimplifiedArtist(artist));
     }
     return artists;
   }

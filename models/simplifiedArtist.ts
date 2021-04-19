@@ -5,18 +5,16 @@ import {
   SimplifiedArtistObj,
   TrackObj,
 } from "../types.ts";
-import { Caller } from "../handlers/caller.ts";
+import { caller } from "../handlers/caller.ts";
 import { Artist, SimplifiedAlbum, Track } from "./models.ts";
 import { endpoints } from "../endpoints.ts";
 
 export class SimplifiedArtist {
-  #caller: Caller;
   #data: SimplifiedArtistObj;
   #albums: Array<SimplifiedAlbum>;
   #singles: Array<SimplifiedAlbum>;
 
-  constructor(data: SimplifiedArtistObj, caller: Caller) {
-    this.#caller = caller;
+  constructor(data: SimplifiedArtistObj) {
     this.#data = data;
     this.#albums = [];
     this.#singles = [];
@@ -47,7 +45,7 @@ export class SimplifiedArtist {
   }
 
   async getAllData(): Promise<Artist> {
-    const data: Artist = await this.#caller.fetch(
+    const data: Artist = await caller.fetch(
       endpoints.GET_ARTIST(this.id),
     );
     return data;
@@ -71,7 +69,7 @@ export class SimplifiedArtist {
       return this.#albums;
     }
 
-    const data = await this.#caller.fetch(
+    const data = await caller.fetch(
       endpoints.GET_ARTISTS_ALBUMS(
         this.id,
         includeGroups,
@@ -84,7 +82,7 @@ export class SimplifiedArtist {
     const values: Array<SimplifiedAlbumObj> = data["items"];
 
     for (const album of values) {
-      const simpleAlbum = new SimplifiedAlbum(album, this.#caller);
+      const simpleAlbum = new SimplifiedAlbum(album);
       if (simpleAlbum.albumType == "single") {
         this.#singles.push(simpleAlbum);
       } else {
@@ -104,7 +102,7 @@ export class SimplifiedArtist {
       return this.#singles;
     }
 
-    const data = await this.#caller.fetch(
+    const data = await caller.fetch(
       endpoints.GET_ARTISTS_ALBUMS(
         this.id,
         includeGroups,
@@ -117,7 +115,7 @@ export class SimplifiedArtist {
     const values: Array<SimplifiedAlbumObj> = data["items"];
 
     for (const album of values) {
-      const simpleAlbum = new SimplifiedAlbum(album, this.#caller);
+      const simpleAlbum = new SimplifiedAlbum(album);
       if (simpleAlbum.albumType == "single") {
         this.#singles.push(simpleAlbum);
       } else {
@@ -132,27 +130,27 @@ export class SimplifiedArtist {
       market = "US";
     }
 
-    const data = await this.#caller.fetch(
+    const data = await caller.fetch(
       endpoints.GET_ARTIST_TOP_TRACKS(this.id, market),
     );
     const values: Array<TrackObj> = data["tracks"];
     const result: Array<Track> = [];
 
     for (const track of values) {
-      result.push(new Track(track, this.#caller));
+      result.push(new Track(track));
     }
     return result;
   }
 
   async getRelatedArtists(): Promise<Array<Artist>> {
-    const data = await this.#caller.fetch(
+    const data = await caller.fetch(
       endpoints.GET_RELATED_ARTISTS(this.id),
     );
     const values: Array<ArtistObj> = data["artists"];
     const result: Array<Artist> = [];
 
     for (const artist of values) {
-      result.push(new Artist(artist, this.#caller));
+      result.push(new Artist(artist));
     }
     return result;
   }

@@ -1,4 +1,4 @@
-import { Caller } from "../handlers/caller.ts";
+import { caller } from "../handlers/caller.ts";
 import {
   AlbumObj,
   CopyrightObj,
@@ -12,12 +12,10 @@ import {
 } from "./models.ts";
 
 export class Album extends SimplifiedAlbum {
-  #caller: Caller;
   #data: AlbumObj;
 
-  constructor(data: AlbumObj, caller: Caller) {
-    super(data, caller);
-    this.#caller = caller;
+  constructor(data: AlbumObj) {
+    super(data);
     this.#data = data;
   }
 
@@ -41,7 +39,7 @@ export class Album extends SimplifiedAlbum {
     const result: Array<SimplifiedTrack> = [];
     for (const track of this.#data.tracks.items) {
       result.push(
-        new SimplifiedTrack(track as SimplifiedTrackObj, this.#caller),
+        new SimplifiedTrack(track as SimplifiedTrackObj),
       );
     }
     return result;
@@ -50,7 +48,7 @@ export class Album extends SimplifiedAlbum {
   get artists(): Array<SimplifiedArtist> {
     const artists: Array<SimplifiedArtist> = [];
     for (const artist of this.#data.artists) {
-      artists.push(new SimplifiedArtist(artist, this.#caller));
+      artists.push(new SimplifiedArtist(artist));
     }
     return artists;
   }

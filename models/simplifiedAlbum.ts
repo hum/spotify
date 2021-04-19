@@ -1,4 +1,4 @@
-import { Caller } from "../handlers/caller.ts";
+import { caller } from "../handlers/caller.ts";
 import {
   AlbumObj,
   AlbumRestrictionObj,
@@ -10,11 +10,9 @@ import { Album, SimplifiedArtist } from "./models.ts";
 import { endpoints } from "../endpoints.ts";
 
 export class SimplifiedAlbum {
-  #caller: Caller;
   #data: SimplifiedAlbumObj;
 
-  constructor(data: SimplifiedAlbumObj, caller: Caller) {
-    this.#caller = caller;
+  constructor(data: SimplifiedAlbumObj) {
     this.#data = data;
   }
 
@@ -30,17 +28,17 @@ export class SimplifiedAlbum {
     const result: Array<SimplifiedArtist> = [];
 
     for (const artist of this.#data.artists) {
-      result.push(new SimplifiedArtist(artist, this.#caller));
+      result.push(new SimplifiedArtist(artist));
     }
     return result;
   }
 
   async getAllData(market?: string): Promise<Album> {
-    const data = await this.#caller.fetch(
+    const data = await caller.fetch(
       endpoints.GET_ALBUM(this.id, market),
     ) as AlbumObj;
 
-    const album = new Album(data, this.#caller);
+    const album = new Album(data);
     return album;
   }
 

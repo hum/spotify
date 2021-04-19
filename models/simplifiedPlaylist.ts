@@ -1,4 +1,4 @@
-import { Caller } from "../handlers/caller.ts";
+import { caller } from "../handlers/caller.ts";
 import {
   ExternalUrlObj,
   ImageObj,
@@ -10,11 +10,9 @@ import { PlaylistTrack } from "./models.ts";
 import { endpoints } from "../endpoints.ts";
 
 export class SimplifiedPlaylist {
-  #caller: Caller;
   #data: SimplifiedPlaylistObj;
 
-  constructor(data: SimplifiedPlaylistObj, caller: Caller) {
-    this.#caller = caller;
+  constructor(data: SimplifiedPlaylistObj) {
     this.#data = data;
   }
 
@@ -59,7 +57,7 @@ export class SimplifiedPlaylist {
   }
 
   async getTracks(): Promise<Array<PlaylistTrack>> {
-    const data = await this.#caller.fetch(
+    const data = await caller.fetch(
       endpoints.GET_PLAYLIST_ITEMS(this.#data.id),
     );
     const playlistTracks: Array<PlaylistTrackObj> = data["items"];
@@ -67,7 +65,7 @@ export class SimplifiedPlaylist {
     const result: Array<PlaylistTrack> = [];
 
     for (const track of playlistTracks) {
-      result.push(new PlaylistTrack(track, this.#caller));
+      result.push(new PlaylistTrack(track));
     }
     return result;
   }

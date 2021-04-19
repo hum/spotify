@@ -1,22 +1,19 @@
-import { Caller } from "../handlers/caller.ts";
 import { Artist, SimplifiedTrack } from "./models.ts";
 import { ExternalIdObj, TrackObj } from "../types.ts";
 
 export class Track extends SimplifiedTrack {
   #data: TrackObj;
-  #caller: Caller;
 
-  constructor(data: TrackObj, caller: Caller) {
-    super(data, caller);
+  constructor(data: TrackObj) {
+    super(data);
     this.#data = data;
-    this.#caller = caller;
   }
 
   get artists(): Array<Artist> {
     const result: Array<Artist> = [];
 
     for (const artist of this.#data.artists) {
-      result.push(new Artist(artist, this.#caller));
+      result.push(new Artist(artist));
     }
     return result;
   }

@@ -1,15 +1,12 @@
-import { Caller } from "../handlers/caller.ts";
 import { Track } from "./models.ts";
 import { PlaylistTrackObj, PublicUserObj, TrackObj } from "../types.ts";
 
 export class PlaylistTrack extends Track {
-  #caller: Caller;
   #data: PlaylistTrackObj;
 
-  constructor(data: PlaylistTrackObj, caller: Caller) {
-    super(data.track as TrackObj, caller);
+  constructor(data: PlaylistTrackObj) {
+    super(data.track as TrackObj);
     this.#data = data;
-    this.#caller = caller;
   }
 
   get addedAt(): Date {

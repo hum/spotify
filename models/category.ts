@@ -1,14 +1,12 @@
-import { Caller } from "../handlers/caller.ts";
+import { caller } from "../handlers/caller.ts";
 import { CategoryObj, ImageObj, SimplifiedPlaylistObj } from "../types.ts";
 import { SimplifiedPlaylist } from "./models.ts";
 import { endpoints } from "../endpoints.ts";
 
 export class Category {
-  #caller: Caller;
   #data: CategoryObj;
 
-  constructor(data: CategoryObj, caller: Caller) {
-    this.#caller = caller;
+  constructor(data: CategoryObj) {
     this.#data = data;
   }
 
@@ -34,13 +32,13 @@ export class Category {
     offset?: number,
   ): Promise<Array<SimplifiedPlaylist>> {
     const result: Array<SimplifiedPlaylist> = [];
-    const data = await this.#caller.fetch(
+    const data = await caller.fetch(
       endpoints.GET_CATEGORY_PLAYLISTS(this.id, country, limit, offset),
     );
     const playlists: Array<SimplifiedPlaylistObj> = data["playlists"]["items"];
 
     for (const playlist of playlists) {
-      result.push(new SimplifiedPlaylist(playlist, this.#caller));
+      result.push(new SimplifiedPlaylist(playlist));
     }
     return result;
   }

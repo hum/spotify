@@ -1,15 +1,12 @@
 import { ArtistObj, FollowersObj, ImageObj } from "../types.ts";
-import { Caller } from "../handlers/caller.ts";
 import { SimplifiedArtist } from "./models.ts";
 
 export class Artist extends SimplifiedArtist {
   #data: ArtistObj;
-  #caller: Caller;
 
-  constructor(data: ArtistObj, caller: Caller) {
-    super(data, caller);
+  constructor(data: ArtistObj) {
+    super(data);
     this.#data = data;
-    this.#caller = caller;
   }
 
   get followers(): FollowersObj {

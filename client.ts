@@ -13,13 +13,11 @@ import {
   SimplifiedAlbum,
   SimplifiedPlaylist,
 } from "./models/models.ts";
-import { Caller, CallerOpt } from "./handlers/caller.ts";
+import { caller, CallerOpt } from "./handlers/caller.ts";
 
 export class Client {
-  #caller: Caller;
-
-  constructor(conf: CallerOpt) {
-    this.#caller = new Caller(conf);
+  constructor(opt: CallerOpt) {
+    caller.setCallerOpt(opt);
   }
 
   async getArtist(name: string): Promise<Artist> {
@@ -32,11 +30,11 @@ export class Client {
       throw new Error("Parameter 'id' needs to be specified");
     }
 
-    const result: ArtistObj = await this.#caller.fetch(
+    const result: ArtistObj = await caller.fetch(
       endpoints.GET_ARTIST(id),
     );
 
-    const artist = new Artist(result, this.#caller);
+    const artist = new Artist(result);
     return artist;
   }
 
@@ -49,10 +47,10 @@ export class Client {
     if (id.length == 0) {
       throw new Error("Parameter 'id' needs to be specified.");
     }
-    const result: AlbumObj = await this.#caller.fetch(
+    const result: AlbumObj = await caller.fetch(
       endpoints.GET_ALBUM(id, market),
     );
-    const album = new Album(result, this.#caller);
+    const album = new Album(result);
     return album;
   }
 
@@ -70,14 +68,14 @@ export class Client {
       ids.push(id);
     }
 
-    const data = await this.#caller.fetch(
+    const data = await caller.fetch(
       endpoints.GET_MULTIPLE_ALBUMS(ids, market),
     );
     const values: Array<AlbumObj> = data["albums"];
 
     const result: Array<Album> = [];
     for (const album of values) {
-      result.push(new Album(album, this.#caller));
+      result.push(new Album(album));
     }
     return result;
   }
@@ -87,7 +85,7 @@ export class Client {
       throw new Error("Parameter 'name' needs to be specified.");
     }
 
-    const data = await this.#caller.fetch(
+    const data = await caller.fetch(
       endpoints.SEARCH(name, SearchType.Album),
     );
     const album: AlbumObj = data["albums"]["items"][0];
@@ -98,7 +96,7 @@ export class Client {
     if (name.length == 0) {
       throw new Error("Parameter 'name' needs to be specified.");
     }
-    const data = await this.#caller.fetch(
+    const data = await caller.fetch(
       endpoints.SEARCH(name, SearchType.Artist),
     );
     const value: ArtistObj = data["artists"]["items"][0];
@@ -121,14 +119,14 @@ export class Client {
   ): Promise<Array<SimplifiedAlbum>> {
     const result: Array<SimplifiedAlbum> = [];
 
-    const data = await this.#caller.fetch(
+    const data = await caller.fetch(
       endpoints.GET_ALL_NEW_RELEASES(country, limit, offset),
     );
 
     const albums: Array<SimplifiedAlbumObj> = data["albums"].items;
 
     for (const album of albums) {
-      result.push(new SimplifiedAlbum(album, this.#caller));
+      result.push(new SimplifiedAlbum(album));
     }
     return result;
   }
@@ -142,7 +140,7 @@ export class Client {
   ): Promise<Array<SimplifiedPlaylist>> {
     const result: Array<SimplifiedPlaylist> = [];
 
-    const data = await this.#caller.fetch(
+    const data = await caller.fetch(
       endpoints.GET_ALL_FEATURED_PLAYLISTS(
         country,
         locale,
@@ -155,7 +153,7 @@ export class Client {
     const playlists: Array<SimplifiedPlaylistObj> = data["playlists"].items;
 
     for (const playlist of playlists) {
-      result.push(new SimplifiedPlaylist(playlist, this.#caller));
+      result.push(new SimplifiedPlaylist(playlist));
     }
     return result;
   }
@@ -166,7 +164,7 @@ export class Client {
     limit?: number,
     offset?: number,
   ): Promise<Array<Category>> {
-    const data = await this.#caller.fetch(
+    const data = await caller.fetch(
       endpoints.GET_ALL_CATEGORIES(country, locale, limit, offset),
     );
 
@@ -174,7 +172,7 @@ export class Client {
 
     const result: Array<Category> = [];
     for (const category of categories) {
-      result.push(new Category(category, this.#caller));
+      result.push(new Category(category));
     }
     return result;
   }
@@ -184,10 +182,10 @@ export class Client {
     country?: string,
     locale?: string,
   ): Promise<Category> {
-    const data: CategoryObj = await this.#caller.fetch(
+    const data: CategoryObj = await caller.fetch(
       endpoints.GET_CATEGORY(id, country, locale),
     );
-    const category = new Category(data, this.#caller);
+    const category = new Category(data);
     return category;
   }
 }
