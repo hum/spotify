@@ -1,4 +1,3 @@
-import { caller } from "../handlers/caller.ts";
 import {
   AlbumObj,
   CopyrightObj,
