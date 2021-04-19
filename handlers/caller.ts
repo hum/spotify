@@ -44,4 +44,4 @@ export class Caller {
 }
 
 const caller = new Caller({});
-export { caller }
+export { caller };
