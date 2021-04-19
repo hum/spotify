@@ -20,7 +20,7 @@ Absolutely unusable.**
   - [x] Get All Featured Playlists
   - [x] Get All Categories
   - [x] Get a Category
-  - [ ] Get a Category's Playlists
+  - [x] Get a Category's Playlists
   - [ ] Get Recommendations
   - [ ] Get Recommendation Genres
 - [ ] **Episodes API**
