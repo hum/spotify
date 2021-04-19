@@ -3,38 +3,6 @@
 Deno wrapper for the Spotify API. **This is a very early stage of the wrapper.
 Absolutely unusable.**
 
-## TODO:
-
-- [x] **Albums API**
-  - [x] Get Multiple Albums
-  - [x] Get an Album
-  - [x] Get an Album's Tracks
-- [x] **Artists API**
-  - [x] Get Multiple Artists
-  - [x] Get an Artist
-  - [x] Get an Artist's Top Tracks
-  - [x] Get an Artist's Related Artists
-  - [x] Get an Artist's Albums
-- [ ] **Browse API**
-  - [x] Get All New Releases
-  - [x] Get All Featured Playlists
-  - [x] Get All Categories
-  - [x] Get a Category
-  - [x] Get a Category's Playlists
-  - [x] Get Recommendations
-  - [x] Get Recommendation Genres
-- [ ] **Episodes API**
-- [ ] **Follow API**
-- [ ] **Library API**
-- [ ] **Markets API**
-- [ ] **Personalization API**
-- [ ] **Player API**
-- [ ] **Playlists API**
-- [ ] **Search API**
-- [ ] **Shows API**
-- [ ] **Tracks API**
-- [ ] **User Profile API**
-
 ## Example Usage
 
 ---
@@ -57,7 +25,9 @@ const artist = spotify.getArtist("joji");
 console.log(artist.name, artist.genres, artist.id);
 
 // Get all albums related to the artist
-const albums = await artist.getAlbums();
+const albums = await artist.getAlbums({
+  market: "US",
+});
 for (const album of albums) {
   console.log(album.name, album.releaseDate);
 }
@@ -70,8 +40,38 @@ for (const track of album.tracks) {
 }
 ```
 
-```ts
-```
+## API COVERAGE:
+- [x] **Albums API**
+  - [x] Get Multiple Albums
+  - [x] Get an Album
+  - [x] Get an Album's Tracks
+- [x] **Artists API**
+  - [x] Get Multiple Artists
+  - [x] Get an Artist
+  - [x] Get an Artist's Top Tracks
+  - [x] Get an Artist's Related Artists
+  - [x] Get an Artist's Albums
+- [x] **Browse API**
+  - [x] Get All New Releases
+  - [x] Get All Featured Playlists
+  - [x] Get All Categories
+  - [x] Get a Category
+  - [x] Get a Category's Playlists
+  - [x] Get Recommendations
+  - [x] Get Recommendation Genres
+- [ ] **Episodes API**
+  - [ ] Get Multiple Episodes
+  - [ ] Get an Episode
+- [ ] **Follow API**
+- [ ] **Library API**
+- [ ] **Markets API**
+- [ ] **Personalization API**
+- [ ] **Player API**
+- [ ] **Playlists API**
+- [ ] **Search API**
+- [ ] **Shows API**
+- [ ] **Tracks API**
+- [ ] **User Profile API**
 
 **More usage in `/examples`** -- `TODO`
 
