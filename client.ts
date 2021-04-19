@@ -178,4 +178,9 @@ export class Client {
     );
     return data;
   }
+
+  async getRecommendationGenres(): Promise<Array<string>> {
+    const data = await caller.fetch(endpoints.GET_RECOMMENDATION_GENRES());
+    return data["genres"];
+  }
 }

@@ -21,8 +21,8 @@ Absolutely unusable.**
   - [x] Get All Categories
   - [x] Get a Category
   - [x] Get a Category's Playlists
-  - [ ] Get Recommendations
-  - [ ] Get Recommendation Genres
+  - [x] Get Recommendations
+  - [x] Get Recommendation Genres
 - [ ] **Episodes API**
 - [ ] **Follow API**
 - [ ] **Library API**

@@ -136,7 +136,8 @@ const GET_RECOMMENDATIONS = (opt: opts.RecommendationsOpt) => {
 };
 
 const GET_RECOMMENDATION_GENRES = () => {
-  // TODO
+  const query = `${API_PREFIX}/recommendations/available-genre-seeds`;
+  return query;
 };
 
 function parseOpts<T>(opts: T): Record<string, string> {

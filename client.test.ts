@@ -165,10 +165,17 @@ Deno.test("Get new releases", async () => {
   }
 });
 
-Deno.test("Test", async () => {
+Deno.test("Get Tracks from a featured playlist", async () => {
   const featuredPlaylists = await spotify.getFeaturedPlaylists();
   const tracks = await featuredPlaylists[0].getTracks();
   for (const track of tracks) {
     console.log(track.name);
+  }
+});
+
+Deno.test("Get Recommendation genres", async () => {
+  const genres = await spotify.getRecommendationGenres();
+  for (const genre of genres) {
+    console.log(genre);
   }
 });
