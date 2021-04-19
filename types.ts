@@ -149,21 +149,21 @@ export interface DisallowsObj {
 }
 
 export interface EpisodeObj {
-  AudioPreviewUrl: string;
+  audio_preview_url: string;
   description: string;
-  durationMs: number;
+  duration_ms: number;
   explicit: boolean;
-  externalUrls: ExternalUrlObj;
+  external_urls: ExternalUrlObj;
   href: string;
   id: string;
   images: Array<ImageObj>;
-  isExternallyHosted: boolean;
-  isPlayable: boolean;
+  is_externally_hosted: boolean;
+  is_playable: boolean;
   languages: Array<string>;
   name: string;
-  releaseDate: string;
-  releaseDatePrecision: string;
-  resumePoint: ResumePointObj;
+  release_date: string;
+  release_date_precision: string;
+  resume_point: ResumePointObj;
   show: SimplifiedShowObj;
   type: string;
   uri: string;
@@ -394,19 +394,19 @@ export interface SimplifiedArtistObj {
 export interface SimplifiedEpisodeObj {
   audio_preview_url: string;
   description: string;
-  durationMs: number;
+  duration_ms: number;
   explicit: boolean;
-  externalUrls: ExternalUrlObj;
+  external_urls: ExternalUrlObj;
   href: string;
   id: string;
   images: Array<ImageObj>;
-  isExternallyHosted: boolean;
-  isPlayable: boolean;
+  is_externally_hosted: boolean;
+  is_playable: boolean;
   languages: Array<string>;
   name: string;
-  releaseDate: string;
-  releaseDatePrecision: string;
-  resumePoint: ResumePointObj;
+  release_date: string;
+  release_date_precision: string;
+  resume_point: ResumePointObj;
   type: string;
   uri: string;
 }
