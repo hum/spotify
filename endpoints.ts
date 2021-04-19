@@ -127,8 +127,8 @@ const GET_CATEGORY_PLAYLISTS = (opts: opts.CategoryPlaylistsOpt) => {
   return query;
 };
 
-const GET_RECOMMENDATIONS = (opt: opts.RecommendationsOpt) => {
-  const params: Record<string, string> = parseOpts(opt);
+const GET_RECOMMENDATIONS = (opts: opts.RecommendationsOpt) => {
+  const params: Record<string, string> = parseOpts(opts);
 
   let query = `${API_PREFIX}/recommendations`;
   query = format(query, params);
@@ -137,6 +137,20 @@ const GET_RECOMMENDATIONS = (opt: opts.RecommendationsOpt) => {
 
 const GET_RECOMMENDATION_GENRES = () => {
   const query = `${API_PREFIX}/recommendations/available-genre-seeds`;
+  return query;
+};
+
+const GET_MULTIPLE_EPISODES = (opts: opts.MultipleEpisodesOpt) => {
+  const params: Record<string, string> = parseOpts(opts);
+  let query = `${API_PREFIX}/episodes`;
+  query = format(query, params);
+  return query;
+};
+
+const GET_EPISODE = (opts: opts.EpisodeOpt) => {
+  const params: Record<string, string> = parseOpts(opts);
+  let query = `${API_PREFIX}/episodes/${opts.id}`;
+  query = format(query, params);
   return query;
 };
 
@@ -202,17 +216,8 @@ export const endpoints = {
   GET_PLAYLIST_ITEMS,
 
   SEARCH,
-  /*GET_ALL_NEW_RELEASES,
-    GET_ALL_FEATURED_PLAYLISTS,
-    GET_ALL_CATEGORIES,
-    GET_CATEGORY,
-    GET_CATEGORYS_PLAYLIST,
-    GET_RECOMMENDATIONS,
-    GET_RECOMMENDATION_GENRES,
-
-    GET_MULTIPLE_EPISODES,
-    GET_EPISODE,*/
-
+  GET_MULTIPLE_EPISODES,
+  GET_EPISODE,
   /**
     * TODO:
     * 1. Episode endpoints

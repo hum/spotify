@@ -4,6 +4,7 @@ import {
   CategoryObj,
   RecommendationsObj,
   SimplifiedAlbumObj,
+  SimplifiedEpisodeObj,
   SimplifiedPlaylistObj,
 } from "./types.ts";
 import { endpoints, SearchType } from "./endpoints.ts";
@@ -11,7 +12,9 @@ import {
   Album,
   Artist,
   Category,
+  Episode,
   SimplifiedAlbum,
+  SimplifiedEpisode,
   SimplifiedPlaylist,
 } from "./models/models.ts";
 import { caller, CallerOpt } from "./handlers/caller.ts";
@@ -182,5 +185,42 @@ export class Client {
   async getRecommendationGenres(): Promise<Array<string>> {
     const data = await caller.fetch(endpoints.GET_RECOMMENDATION_GENRES());
     return data["genres"];
+  }
+
+  async getMultipleEpisodes(
+    opts: opts.MultipleEpisodesOpt,
+  ): Promise<Array<Episode>> {
+    const data = await caller.fetch(endpoints.GET_MULTIPLE_EPISODES(opts));
+    const result: Array<Episode> = [];
+
+    for (const episode of data["episodes"]) {
+      result.push(new Episode(episode));
+    }
+    return result;
+  }
+
+  private async getEpisodeId(
+    name: string,
+    market?: string,
+  ): Promise<SimplifiedEpisodeObj> {
+    const data = await caller.fetch(endpoints.SEARCH({
+      q: name,
+      type: SearchType.Episode,
+      market: market ?? "US",
+    }));
+    // TODO:
+    // Return an array instead?
+    const result = data["episodes"]["items"][0];
+    return result;
+  }
+
+  async getEpisode(name: string, market?: string): Promise<SimplifiedEpisode> {
+    const data: SimplifiedEpisodeObj = await this.getEpisodeId(name, market);
+    return new SimplifiedEpisode(data);
+  }
+
+  async getEpisodeById(opts: opts.EpisodeOpt): Promise<Episode> {
+    const data = await caller.fetch(endpoints.GET_EPISODE(opts));
+    return new Episode(data);
   }
 }

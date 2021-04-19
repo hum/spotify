@@ -41,6 +41,7 @@ for (const track of album.tracks) {
 ```
 
 ## API COVERAGE:
+
 - [x] **Albums API**
   - [x] Get Multiple Albums
   - [x] Get an Album
@@ -59,9 +60,9 @@ for (const track of album.tracks) {
   - [x] Get a Category's Playlists
   - [x] Get Recommendations
   - [x] Get Recommendation Genres
-- [ ] **Episodes API**
-  - [ ] Get Multiple Episodes
-  - [ ] Get an Episode
+- [x] **Episodes API**
+  - [x] Get Multiple Episodes
+  - [x] Get an Episode
 - [ ] **Follow API**
 - [ ] **Library API**
 - [ ] **Markets API**

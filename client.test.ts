@@ -179,3 +179,8 @@ Deno.test("Get Recommendation genres", async () => {
     console.log(genre);
   }
 });
+
+Deno.test("Get episodes", async () => {
+  const episode = await spotify.getEpisode("joe rogan");
+  console.log(episode.name);
+});
