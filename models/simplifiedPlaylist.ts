@@ -56,9 +56,9 @@ export class SimplifiedPlaylist {
     return this.#data.snapshot_id;
   }
 
-  async getTracks(): Promise<Array<PlaylistTrack>> {
+  async getTracks(market?: string): Promise<Array<PlaylistTrack>> {
     const data = await caller.fetch(
-      endpoints.GET_PLAYLIST_ITEMS(this.#data.id),
+      endpoints.GET_PLAYLIST_ITEMS({ id: this.id, market: market ?? "US" }),
     );
     const playlistTracks: Array<PlaylistTrackObj> = data["items"];
 

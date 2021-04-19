@@ -2,6 +2,7 @@ import {
   AlbumObj,
   ArtistObj,
   CategoryObj,
+  RecommendationsObj,
   SimplifiedAlbumObj,
   SimplifiedPlaylistObj,
 } from "./types.ts";
@@ -14,6 +15,7 @@ import {
   SimplifiedPlaylist,
 } from "./models/models.ts";
 import { caller, CallerOpt } from "./handlers/caller.ts";
+import * as opts from "./opts.ts";
 
 export class Client {
   constructor(opt: CallerOpt) {
@@ -22,16 +24,16 @@ export class Client {
 
   async getArtist(name: string): Promise<Artist> {
     const id = await this.getArtistId(name);
-    return await this.getArtistById(id);
+    return await this.getArtistById({ id: id });
   }
 
-  async getArtistById(id: string): Promise<Artist> {
-    if (id.length == 0) {
+  async getArtistById(opts: opts.ArtistOpt): Promise<Artist> {
+    if (opts.id.length == 0) {
       throw new Error("Parameter 'id' needs to be specified");
     }
 
     const result: ArtistObj = await caller.fetch(
-      endpoints.GET_ARTIST(id),
+      endpoints.GET_ARTIST(opts),
     );
 
     const artist = new Artist(result);
@@ -40,15 +42,15 @@ export class Client {
 
   async getAlbum(name: string): Promise<Album> {
     const id = await this.getAlbumId(name);
-    return await this.getAlbumById(id);
+    return await this.getAlbumById({ id: id });
   }
 
-  async getAlbumById(id: string, market?: string): Promise<Album> {
-    if (id.length == 0) {
+  async getAlbumById(opts: opts.AlbumOpt): Promise<Album> {
+    if (opts.id.length == 0) {
       throw new Error("Parameter 'id' needs to be specified.");
     }
     const result: AlbumObj = await caller.fetch(
-      endpoints.GET_ALBUM(id, market),
+      endpoints.GET_ALBUM(opts),
     );
     const album = new Album(result);
     return album;
@@ -69,7 +71,7 @@ export class Client {
     }
 
     const data = await caller.fetch(
-      endpoints.GET_MULTIPLE_ALBUMS(ids, market),
+      endpoints.GET_MULTIPLE_ALBUMS({ ids: ids, market: market ?? "US" }),
     );
     const values: Array<AlbumObj> = data["albums"];
 
@@ -86,7 +88,7 @@ export class Client {
     }
 
     const data = await caller.fetch(
-      endpoints.SEARCH(name, SearchType.Album),
+      endpoints.SEARCH({ q: name, type: SearchType.Album }),
     );
     const album: AlbumObj = data["albums"]["items"][0];
     return album.id;
@@ -97,7 +99,7 @@ export class Client {
       throw new Error("Parameter 'name' needs to be specified.");
     }
     const data = await caller.fetch(
-      endpoints.SEARCH(name, SearchType.Artist),
+      endpoints.SEARCH({ q: name, type: SearchType.Artist }),
     );
     const value: ArtistObj = data["artists"]["items"][0];
     return value.id;
@@ -107,20 +109,18 @@ export class Client {
     const result: Array<Artist> = [];
     for (const artist of artists) {
       const id = await this.getArtistId(artist);
-      result.push(await this.getArtistById(id));
+      result.push(await this.getArtistById({ id: id }));
     }
     return result;
   }
 
   async getNewReleases(
-    country?: string,
-    limit?: number,
-    offset?: number,
+    opts?: opts.NewReleasesOpt,
   ): Promise<Array<SimplifiedAlbum>> {
     const result: Array<SimplifiedAlbum> = [];
 
     const data = await caller.fetch(
-      endpoints.GET_ALL_NEW_RELEASES(country, limit, offset),
+      endpoints.GET_ALL_NEW_RELEASES(opts ?? {}),
     );
 
     const albums: Array<SimplifiedAlbumObj> = data["albums"].items;
@@ -132,22 +132,12 @@ export class Client {
   }
 
   async getFeaturedPlaylists(
-    country?: string,
-    locale?: string,
-    timestamp?: string,
-    limit?: number,
-    offset?: number,
+    opts?: opts.AllFeaturedPlaylistsOpt,
   ): Promise<Array<SimplifiedPlaylist>> {
     const result: Array<SimplifiedPlaylist> = [];
 
     const data = await caller.fetch(
-      endpoints.GET_ALL_FEATURED_PLAYLISTS(
-        country,
-        locale,
-        timestamp,
-        limit,
-        offset,
-      ),
+      endpoints.GET_ALL_FEATURED_PLAYLISTS(opts ?? {}),
     );
 
     const playlists: Array<SimplifiedPlaylistObj> = data["playlists"].items;
@@ -158,14 +148,9 @@ export class Client {
     return result;
   }
 
-  async getCategories(
-    country?: string,
-    locale?: string,
-    limit?: number,
-    offset?: number,
-  ): Promise<Array<Category>> {
+  async getCategories(opts: opts.AllCategoriesOpt): Promise<Array<Category>> {
     const data = await caller.fetch(
-      endpoints.GET_ALL_CATEGORIES(country, locale, limit, offset),
+      endpoints.GET_ALL_CATEGORIES(opts),
     );
 
     const categories: Array<CategoryObj> = data["categories"]["items"];
@@ -177,15 +162,20 @@ export class Client {
     return result;
   }
 
-  async getCategory(
-    id: string,
-    country?: string,
-    locale?: string,
-  ): Promise<Category> {
+  async getCategory(opts: opts.CategoryOpt): Promise<Category> {
     const data: CategoryObj = await caller.fetch(
-      endpoints.GET_CATEGORY(id, country, locale),
+      endpoints.GET_CATEGORY(opts),
     );
     const category = new Category(data);
     return category;
+  }
+
+  async getRecommendations(
+    opts: opts.RecommendationsOpt,
+  ): Promise<RecommendationsObj> {
+    const data: RecommendationsObj = await caller.fetch(
+      endpoints.GET_RECOMMENDATIONS(opts),
+    );
+    return data;
   }
 }

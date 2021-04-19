@@ -2,6 +2,7 @@ import { caller } from "../handlers/caller.ts";
 import { CategoryObj, ImageObj, SimplifiedPlaylistObj } from "../types.ts";
 import { SimplifiedPlaylist } from "./models.ts";
 import { endpoints } from "../endpoints.ts";
+import * as opts from "../opts.ts";
 
 export class Category {
   #data: CategoryObj;
@@ -27,13 +28,11 @@ export class Category {
   }
 
   async getPlaylists(
-    country?: string,
-    limit?: number,
-    offset?: number,
+    opts: opts.CategoryPlaylistsOpt,
   ): Promise<Array<SimplifiedPlaylist>> {
     const result: Array<SimplifiedPlaylist> = [];
     const data = await caller.fetch(
-      endpoints.GET_CATEGORY_PLAYLISTS(this.id, country, limit, offset),
+      endpoints.GET_CATEGORY_PLAYLISTS(opts),
     );
     const playlists: Array<SimplifiedPlaylistObj> = data["playlists"]["items"];
 
