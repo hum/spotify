@@ -15,14 +15,20 @@ export class Caller {
   }
 
   // deno-lint-ignore no-explicit-any
-  async fetch(url: string): Promise<any> {
+  async fetch(url: string, method?: string): Promise<any> {
     console.log(++this.#count);
     const response = await fetch(url, {
-      method: "GET",
+      method: method ?? "GET",
       headers: {
         "Authorization": this.#accessToken,
       },
     });
+    // TODO:
+    // Figure out a better way later
+    if (response.body == null && response.status == 204) {
+      return null;
+    }
+
     const json = await response.json();
 
     // TODO:
