@@ -72,15 +72,15 @@ for (const track of album.tracks) {
 - [ ] **Playlists API**
 - [x] **Search API**
   - [x] Search for an Item 
-- [ ] **Shows API**
-  - [ ] Get Multiple Shows
-  - [ ] Get a Show
-  - [ ] Get a Show's Episodes 
+- [x] **Shows API**
+  - [x] Get Multiple Shows
+  - [x] Get a Show
+  - [x] Get a Show's Episodes 
 - [ ] **Tracks API**
-  - [ ] Get Several Tracks
-  - [ ] Get a Track
-  - [ ] Get Audio Features for Serveral Tracks
-  - [ ] Get Audio Features for a Track
+  - [x] Get Several Tracks
+  - [x] Get a Track
+  - [x] Get Audio Features for Serveral Tracks
+  - [x] Get Audio Features for a Track
   - [ ] Get Audio Analysis for a Track 
 - [ ] **User Profile API**
 
