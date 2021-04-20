@@ -5,12 +5,22 @@ import {
   ImageObj,
   SimplifiedShowObj,
 } from "../types.ts";
+import { Show } from "./models.ts";
+import { endpoints } from "../endpoints.ts";
 
 export class SimplifiedShow {
   #data: SimplifiedShowObj;
 
   constructor(data: SimplifiedShowObj) {
     this.#data = data;
+  }
+
+  async getAllData(market?: string): Promise<Show> {
+    const data = await caller.fetch(
+      endpoints.GET_SHOW({ id: this.id, market: market ?? "US" }),
+    );
+    const show = new Show(data);
+    return show;
   }
 
   get availableMarkets(): Array<string> {
