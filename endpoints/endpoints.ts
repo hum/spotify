@@ -1,4 +1,5 @@
 import * as opts from "../opts/opts.ts";
+import { format, parseOpts } from "../utils/utils.ts";
 
 const API_PREFIX = "https://api.spotify.com/v1";
 
@@ -216,46 +217,6 @@ const GET_AUDIO_ANALYSIS_FOR_TRACK = (opts: opts.AudioAnalysisForTrackOpt) => {
   let query = `${API_PREFIX}/audio-analysis/${opts.id}`;
   query = format(query, params);
   return query;
-};
-
-function parseOpts<T>(opts: T): Record<string, string> {
-  const result: Record<string, string> = {};
-  for (const [k, v] of Object.entries(opts)) {
-    let value = "";
-    if (Array.isArray(v)) {
-      value = v.join(",");
-    } else {
-      value = String(v);
-    }
-    result[toSnakeCase(k)] = value;
-  }
-  return result;
-}
-
-const format = (query: string, params: Record<string, string>) => {
-  if (params == {}) {
-    return query;
-  }
-  let result = "?";
-  for (const [k, v] of Object.entries(params)) {
-    result += `${k}=${v}&`;
-  }
-  return query.concat(result.substr(0, result.length - 1));
-};
-
-const toSnakeCase = (str: string) => {
-  let result = "";
-  let char = "";
-
-  for (let i = 0; i < str.length; i++) {
-    char = str[i];
-    if (char == char.toUpperCase()) {
-      char = char.toLowerCase();
-      result += "_";
-    }
-    result += `${char}`;
-  }
-  return result;
 };
 
 export const endpoints = {
