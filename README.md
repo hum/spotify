@@ -65,8 +65,8 @@ for (const track of album.tracks) {
   - [x] Get an Episode
 - [ ] **Follow API**
 - [ ] **Library API**
-- [ ] **Markets API**
-  - [ ] Get available markets 
+- [x] **Markets API**
+  - [x] Get available markets 
 - [ ] **Personalization API**
 - [ ] **Player API**
 - [ ] **Playlists API**

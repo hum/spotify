@@ -226,6 +226,11 @@ export class Client {
     return new Episode(data);
   }
 
+  async getAvailableMarkets(): Promise<Array<string>> {
+    const data = await caller.fetch(endpoints.GET_AVAILABLE_MARKETS());
+    return data["markets"] as Array<string>;
+  }
+
   // TODO:
   // Expose raw endpoints
   async rawSearch(

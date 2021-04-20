@@ -156,6 +156,10 @@ const GET_EPISODE = (opts: opts.EpisodeOpt) => {
   return query;
 };
 
+const GET_AVAILABLE_MARKETS = () => {
+  return `${API_PREFIX}/markets`;
+};
+
 function parseOpts<T>(opts: T): Record<string, string> {
   const result: Record<string, string> = {};
   for (const [k, v] of Object.entries(opts)) {
@@ -220,6 +224,8 @@ export const endpoints = {
   SEARCH,
   GET_MULTIPLE_EPISODES,
   GET_EPISODE,
+
+  GET_AVAILABLE_MARKETS,
   /**
     * TODO:
     * 1. Episode endpoints
