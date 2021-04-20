@@ -6,6 +6,8 @@ import {
   SimplifiedAlbumObj,
   SimplifiedEpisodeObj,
   SimplifiedPlaylistObj,
+  SimplifiedShowObj,
+  TrackObj,
 } from "./types.ts";
 import { endpoints, SearchType } from "./endpoints.ts";
 import {
@@ -222,5 +224,40 @@ export class Client {
   async getEpisodeById(opts: opts.EpisodeOpt): Promise<Episode> {
     const data = await caller.fetch(endpoints.GET_EPISODE(opts));
     return new Episode(data);
+  }
+
+  // TODO:
+  // Expose raw endpoints
+  async rawSearch(
+    opts: opts.SearchOpt,
+  ): Promise<
+    | Array<ArtistObj>
+    | Array<SimplifiedAlbumObj>
+    | Array<TrackObj>
+    | Array<SimplifiedShowObj>
+    | Array<SimplifiedEpisodeObj>
+  > {
+    const data = await caller.fetch(endpoints.SEARCH(opts));
+    switch (opts.type) {
+      case SearchType.Album: {
+        return data["albums"].items as Array<SimplifiedAlbumObj>;
+      }
+      case SearchType.Artist: {
+        return data["artists"].items as Array<ArtistObj>;
+      }
+      case SearchType.Episode: {
+        return data["tracks"].items as Array<TrackObj>;
+      }
+      case SearchType.Playlist: {
+        break;
+      }
+      case SearchType.Show: {
+        return data["shows"].items as Array<SimplifiedShowObj>;
+      }
+      case SearchType.Track: {
+        return data["tracks"].items as Array<TrackObj>;
+      }
+    }
+    return [];
   }
 }

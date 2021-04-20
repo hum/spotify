@@ -3,6 +3,7 @@ import {
   assertThrowsAsync,
 } from "https://deno.land/std@0.93.0/testing/asserts.ts";
 import { Client } from "./client.ts";
+import { SearchType } from "./endpoints.ts";
 
 const TOKEN = Deno.env.get("spotify_access_token") ?? "";
 
@@ -183,4 +184,12 @@ Deno.test("Get Recommendation genres", async () => {
 Deno.test("Get episodes", async () => {
   const episode = await spotify.getEpisode("joe rogan");
   console.log(episode.name);
+});
+
+Deno.test("Search", async () => {
+  const albums = await spotify.rawSearch({
+    q: "Nectar",
+    type: SearchType.Album,
+  });
+  console.log(albums);
 });

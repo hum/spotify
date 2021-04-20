@@ -72,6 +72,8 @@ export enum SearchType {
 }
 
 const SEARCH = (opts: opts.SearchOpt) => {
+  opts.q = opts.q.replace(" ", "%20");
+
   const params: Record<string, string> = parseOpts(opts);
   let query = `${API_PREFIX}/search`;
 
