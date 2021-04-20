@@ -11,3 +11,4 @@ export { PlaylistTrack } from "./playlistTrack.ts";
 export { Category } from "./category.ts";
 export { Episode } from "./episode.ts";
 export { Show } from "./show.ts";
+export { AudioFeatures } from "./audioFeatures.ts";

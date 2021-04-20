@@ -48,9 +48,9 @@ export interface ArtistObj {
 
 export interface AudioFeaturesObj {
   acousticness: number;
-  analysisUrl: string;
+  analysis_url: string;
   danceability: number;
-  durationMs: number;
+  duration_ms: number;
   energy: number;
   id: string;
   instrumentalness: number;
@@ -60,8 +60,8 @@ export interface AudioFeaturesObj {
   mode: number;
   speechiness: number;
   tempo: number;
-  timeSignature: number;
-  trackHref: string;
+  time_signature: number;
+  track_href: string;
   type: string;
   uri: string;
   valence: number;
