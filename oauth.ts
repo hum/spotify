@@ -10,6 +10,8 @@ import { Application, encode, Router } from "./deps.ts";
  * 1. Create your app
  * 2. Get "client ID" and "client secret" tokens
  * 3. Export them to your env as "spotify_client_id" and "spotify_client_secret"
+ * 
+ * PS: Make sure to also add 'http://localhost:8080/callback' in your app's settings
  */
 const clientId = Deno.env.get("spotify_client_id") ?? "";
 const clientSecret = Deno.env.get("spotify_client_secret") ?? "";
@@ -72,17 +74,17 @@ router
       },
     );
     const json = await data.json();
+    const accessToken = json["access_token"];
+    const refreshToken = json["refresh_token"];
+    const expiresIn = json["expires_in"];
+
     console.log(
-      `ACCESS TOKEN: ${json["access_token"]}\n\nREFRESH TOKEN: ${
-        json["refresh_token"]
-      }`,
+      `ACCESS TOKEN: ${accessToken}\n\n` +
+        `REFRESH TOKEN: ${refreshToken}\n\n` +
+        `EXPIRES IN: ${expiresIn}`,
     );
-    console.log({
-      accessToken: json["access_token"],
-      refreshToken: json["refresh_token"],
-    });
-    ctx.response.type = "application/json";
-    ctx.response.body = json;
+
+    ctx.response.body = `You can close this window now.`;
     return;
   });
 
