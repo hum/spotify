@@ -160,6 +160,57 @@ const GET_AVAILABLE_MARKETS = () => {
   return `${API_PREFIX}/markets`;
 };
 
+const GET_SHOW = (opts: opts.ShowOpt) => {
+  const params: Record<string, string> = parseOpts(opts);
+  let query = `${API_PREFIX}/shows/${opts.id}`;
+  query = format(query, params);
+  return query;
+};
+
+const GET_SHOW_EPISODES = (opts: opts.ShowEpisodesOpt) => {
+  const params: Record<string, string> = parseOpts(opts);
+  let query = `${API_PREFIX}/shows/${opts.id}/episodes`;
+  query = format(query, params);
+  return query;
+};
+
+const GET_SEVERAL_TRACKS = (opts: opts.SeveralTracksOpt) => {
+  const params: Record<string, string> = parseOpts(opts);
+  let query = `${API_PREFIX}/tracks`;
+  query = format(query, params);
+  return query;
+};
+
+const GET_TRACK = (opts: opts.TrackOpt) => {
+  const params: Record<string, string> = parseOpts(opts);
+  let query = `${API_PREFIX}/tracks/${opts.id}`;
+  query = format(query, params);
+  return query;
+};
+
+const GET_AUDIO_FEATURES_FOR_SEVERAL_TRACKS = (
+  opts: opts.AudioFeaturesForSeveralTracksOpt,
+) => {
+  const params: Record<string, string> = parseOpts(opts);
+  let query = `${API_PREFIX}/audio-features`;
+  query = format(query, params);
+  return query;
+};
+
+const GET_AUDIO_FEATURES_FOR_TRACK = (opts: opts.AudioFeaturesForTrackOpt) => {
+  const params: Record<string, string> = parseOpts(opts);
+  let query = `${API_PREFIX}/audio-features/${opts.id}`;
+  query = format(query, params);
+  return query;
+};
+
+const GET_AUDIO_ANALYSIS_FOR_TRACK = (opts: opts.AudioAnalysisForTrackOpt) => {
+  const params: Record<string, string> = parseOpts(opts);
+  let query = `${API_PREFIX}/audio-analysis/${opts.id}`;
+  query = format(query, params);
+  return query;
+};
+
 function parseOpts<T>(opts: T): Record<string, string> {
   const result: Record<string, string> = {};
   for (const [k, v] of Object.entries(opts)) {
@@ -226,6 +277,13 @@ export const endpoints = {
   GET_EPISODE,
 
   GET_AVAILABLE_MARKETS,
+  GET_SHOW,
+  GET_SHOW_EPISODES,
+  GET_SEVERAL_TRACKS,
+  GET_TRACK,
+  GET_AUDIO_FEATURES_FOR_SEVERAL_TRACKS,
+  GET_AUDIO_FEATURES_FOR_TRACK,
+  GET_AUDIO_ANALYSIS_FOR_TRACK,
   /**
     * TODO:
     * 1. Episode endpoints

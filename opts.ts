@@ -153,3 +153,37 @@ export interface EpisodeOpt {
   id: string;
   market?: string;
 }
+
+export interface ShowOpt {
+  id: string;
+  market?: string;
+}
+
+export interface ShowEpisodesOpt {
+  id: string;
+  market?: string;
+  limit?: number;
+  offset?: number;
+}
+
+export interface SeveralTracksOpt {
+  ids: Array<string>;
+  market?: string;
+}
+
+export interface TrackOpt {
+  id: string;
+  market?: string;
+}
+
+export interface AudioFeaturesForSeveralTracksOpt {
+  ids: Array<string>;
+}
+
+export interface AudioFeaturesForTrackOpt {
+  id: string;
+}
+
+export interface AudioAnalysisForTrackOpt {
+  id: string;
+}
