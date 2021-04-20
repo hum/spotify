@@ -9,7 +9,7 @@ import {
   SimplifiedShowObj,
   TrackObj,
 } from "./structures/structs.ts";
-import { endpoints, SearchType } from "./endpoints/endpoints.ts";
+import { endpoints } from "./endpoints/endpoints.ts";
 import {
   Album,
   Artist,
@@ -25,6 +25,7 @@ import {
 } from "./types/types.ts";
 import { caller, CallerOpt } from "./handlers/caller.ts";
 import * as opts from "./opts/opts.ts";
+import { SearchType } from "./opts/opts.ts";
 
 export class Client {
   constructor(opt: CallerOpt) {

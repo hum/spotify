@@ -63,15 +63,6 @@ const GET_ARTISTS_ALBUMS = (opts: opts.ArtistAlbumsOpt) => {
   return query;
 };
 
-export enum SearchType {
-  Album = "album",
-  Artist = "artist",
-  Playlist = "playlist",
-  Track = "track",
-  Show = "show",
-  Episode = "episode",
-}
-
 const SEARCH = (opts: opts.SearchOpt) => {
   opts.q = opts.q.replace(" ", "%20");
 
