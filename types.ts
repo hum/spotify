@@ -428,17 +428,17 @@ export interface SimplifiedPlaylistObj {
 }
 
 export interface SimplifiedShowObj {
-  availableMarkets: Array<string>;
+  available_markets: Array<string>;
   copyrights: Array<CopyrightObj>;
   description: string;
   explicit: boolean;
-  externalUrls: ExternalUrlObj;
+  external_urls: ExternalUrlObj;
   href: string;
   id: string;
   images: Array<ImageObj>;
-  isExternallyHosted: boolean;
+  is_externally_hosted: boolean;
   languages: Array<string>;
-  mediaType: string;
+  media_type: string;
   name: string;
   publisher: string;
   type: string;
