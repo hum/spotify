@@ -3,12 +3,8 @@ import {
   CopyrightObj,
   ExternalIdObj,
   SimplifiedTrackObj,
-} from "../types.ts";
-import {
-  SimplifiedAlbum,
-  SimplifiedArtist,
-  SimplifiedTrack,
-} from "./models.ts";
+} from "../structures/structs.ts";
+import { SimplifiedAlbum, SimplifiedArtist, SimplifiedTrack } from "./types.ts";
 
 export class Album extends SimplifiedAlbum {
   #data: AlbumObj;

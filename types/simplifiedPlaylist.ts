@@ -5,9 +5,9 @@ import {
   PlaylistTrackObj,
   PublicUserObj,
   SimplifiedPlaylistObj,
-} from "../types.ts";
-import { PlaylistTrack } from "./models.ts";
-import { endpoints } from "../endpoints.ts";
+} from "../structures/structs.ts";
+import { PlaylistTrack } from "./types.ts";
+import { endpoints } from "../endpoints/endpoints.ts";
 
 export class SimplifiedPlaylist {
   #data: SimplifiedPlaylistObj;

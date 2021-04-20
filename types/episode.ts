@@ -1,5 +1,5 @@
-import { EpisodeObj, SimplifiedShowObj } from "../types.ts";
-import { SimplifiedEpisode } from "./models.ts";
+import { EpisodeObj, SimplifiedShowObj } from "../structures/structs.ts";
+import { SimplifiedEpisode } from "./types.ts";
 
 export class Episode extends SimplifiedEpisode {
   #data: EpisodeObj;

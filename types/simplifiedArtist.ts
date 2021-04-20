@@ -4,11 +4,11 @@ import {
   SimplifiedAlbumObj,
   SimplifiedArtistObj,
   TrackObj,
-} from "../types.ts";
+} from "../structures/structs.ts";
 import { caller } from "../handlers/caller.ts";
-import { Artist, SimplifiedAlbum, Track } from "./models.ts";
-import { endpoints } from "../endpoints.ts";
-import * as opts from "../opts.ts";
+import { Artist, SimplifiedAlbum, Track } from "./types.ts";
+import { endpoints } from "../endpoints/endpoints.ts";
+import * as opts from "../opts/opts.ts";
 
 export class SimplifiedArtist {
   #data: SimplifiedArtistObj;

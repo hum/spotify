@@ -4,9 +4,9 @@ import {
   ExternalUrlObj,
   ImageObj,
   SimplifiedShowObj,
-} from "../types.ts";
-import { Show } from "./models.ts";
-import { endpoints } from "../endpoints.ts";
+} from "../structures/structs.ts";
+import { Show } from "./types.ts";
+import { endpoints } from "../endpoints/endpoints.ts";
 
 export class SimplifiedShow {
   #data: SimplifiedShowObj;

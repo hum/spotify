@@ -1,4 +1,4 @@
-import { AudioFeaturesObj } from "../types.ts";
+import { AudioFeaturesObj } from "../structures/structs.ts";
 
 export class AudioFeatures {
   #data: AudioFeaturesObj;

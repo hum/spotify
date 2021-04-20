@@ -1,4 +1,4 @@
-import { SearchType } from "./endpoints.ts";
+import { SearchType } from "../endpoints/endpoints.ts";
 
 export interface MultipleAlbumsOpt {
   ids: string | Array<string>;

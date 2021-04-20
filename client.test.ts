@@ -3,7 +3,7 @@ import {
   assertThrowsAsync,
 } from "https://deno.land/std@0.93.0/testing/asserts.ts";
 import { Client } from "./client.ts";
-import { SearchType } from "./endpoints.ts";
+import { SearchType } from "./endpoints/endpoints.ts";
 
 const TOKEN = Deno.env.get("spotify_access_token") ?? "";
 

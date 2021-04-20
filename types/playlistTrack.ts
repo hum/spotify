@@ -1,5 +1,9 @@
-import { Track } from "./models.ts";
-import { PlaylistTrackObj, PublicUserObj, TrackObj } from "../types.ts";
+import { Track } from "./types.ts";
+import {
+  PlaylistTrackObj,
+  PublicUserObj,
+  TrackObj,
+} from "../structures/structs.ts";
 
 export class PlaylistTrack extends Track {
   #data: PlaylistTrackObj;

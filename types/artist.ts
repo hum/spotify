@@ -1,5 +1,5 @@
-import { ArtistObj, FollowersObj, ImageObj } from "../types.ts";
-import { SimplifiedArtist } from "./models.ts";
+import { ArtistObj, FollowersObj, ImageObj } from "../structures/structs.ts";
+import { SimplifiedArtist } from "./types.ts";
 
 export class Artist extends SimplifiedArtist {
   #data: ArtistObj;

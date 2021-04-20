@@ -1,5 +1,5 @@
-import { SimplifiedEpisode, SimplifiedShow } from "./models.ts";
-import { ShowObj } from "../types.ts";
+import { SimplifiedEpisode, SimplifiedShow } from "./types.ts";
+import { ShowObj } from "../structures/structs.ts";
 
 export class Show extends SimplifiedShow {
   #data: ShowObj;

@@ -1,5 +1,5 @@
-import { Artist, SimplifiedTrack } from "./models.ts";
-import { ExternalIdObj, TrackObj } from "../types.ts";
+import { Artist, SimplifiedTrack } from "./types.ts";
+import { ExternalIdObj, TrackObj } from "../structures/structs.ts";
 
 export class Track extends SimplifiedTrack {
   #data: TrackObj;

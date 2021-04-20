@@ -1,10 +1,10 @@
-import { SimplifiedArtist } from "./models.ts";
+import { SimplifiedArtist } from "./types.ts";
 import {
   ExternalUrlObj,
   LinkedTrackObj,
   SimplifiedTrackObj,
   TrackRestrictionObj,
-} from "../types.ts";
+} from "../structures/structs.ts";
 
 export class SimplifiedTrack {
   #data: SimplifiedTrackObj;

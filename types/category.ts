@@ -1,8 +1,12 @@
 import { caller } from "../handlers/caller.ts";
-import { CategoryObj, ImageObj, SimplifiedPlaylistObj } from "../types.ts";
-import { SimplifiedPlaylist } from "./models.ts";
-import { endpoints } from "../endpoints.ts";
-import * as opts from "../opts.ts";
+import {
+  CategoryObj,
+  ImageObj,
+  SimplifiedPlaylistObj,
+} from "../structures/structs.ts";
+import { SimplifiedPlaylist } from "./types.ts";
+import { endpoints } from "../endpoints/endpoints.ts";
+import * as opts from "../opts/opts.ts";
 
 export class Category {
   #data: CategoryObj;

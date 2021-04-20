@@ -8,8 +8,8 @@ import {
   SimplifiedPlaylistObj,
   SimplifiedShowObj,
   TrackObj,
-} from "./types.ts";
-import { endpoints, SearchType } from "./endpoints.ts";
+} from "./structures/structs.ts";
+import { endpoints, SearchType } from "./endpoints/endpoints.ts";
 import {
   Album,
   Artist,
@@ -22,9 +22,9 @@ import {
   SimplifiedPlaylist,
   SimplifiedShow,
   Track,
-} from "./models/models.ts";
+} from "./types/types.ts";
 import { caller, CallerOpt } from "./handlers/caller.ts";
-import * as opts from "./opts.ts";
+import * as opts from "./opts/opts.ts";
 
 export class Client {
   constructor(opt: CallerOpt) {

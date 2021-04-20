@@ -4,10 +4,10 @@ import {
   ImageObj,
   ResumePointObj,
   SimplifiedEpisodeObj,
-} from "../types.ts";
-import { Episode } from "./models.ts";
+} from "../structures/structs.ts";
+import { Episode } from "./types.ts";
 import { caller } from "../handlers/caller.ts";
-import { endpoints } from "../endpoints.ts";
+import { endpoints } from "../endpoints/endpoints.ts";
 
 export class SimplifiedEpisode {
   #data: SimplifiedEpisodeObj;

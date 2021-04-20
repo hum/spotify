@@ -1,4 +1,4 @@
-import * as opts from "./opts.ts";
+import * as opts from "../opts/opts.ts";
 
 const API_PREFIX = "https://api.spotify.com/v1";
 

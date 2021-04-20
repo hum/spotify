@@ -5,9 +5,9 @@ import {
   ExternalUrlObj,
   ImageObj,
   SimplifiedAlbumObj,
-} from "../types.ts";
-import { Album, SimplifiedArtist } from "./models.ts";
-import { endpoints } from "../endpoints.ts";
+} from "../structures/structs.ts";
+import { Album, SimplifiedArtist } from "./types.ts";
+import { endpoints } from "../endpoints/endpoints.ts";
 
 export class SimplifiedAlbum {
   #data: SimplifiedAlbumObj;
