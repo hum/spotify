@@ -160,6 +160,13 @@ const GET_AVAILABLE_MARKETS = () => {
   return `${API_PREFIX}/markets`;
 };
 
+const GET_MULTIPLE_SHOWS = (opts: opts.MultipleShowsOpt) => {
+  const params: Record<string, string> = parseOpts(opts);
+  let query = `${API_PREFIX}/shows`;
+  query = format(query, params);
+  return query;
+};
+
 const GET_SHOW = (opts: opts.ShowOpt) => {
   const params: Record<string, string> = parseOpts(opts);
   let query = `${API_PREFIX}/shows/${opts.id}`;
@@ -277,6 +284,7 @@ export const endpoints = {
   GET_EPISODE,
 
   GET_AVAILABLE_MARKETS,
+  GET_MULTIPLE_SHOWS,
   GET_SHOW,
   GET_SHOW_EPISODES,
   GET_SEVERAL_TRACKS,

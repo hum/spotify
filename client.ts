@@ -13,11 +13,15 @@ import { endpoints, SearchType } from "./endpoints.ts";
 import {
   Album,
   Artist,
+  AudioFeatures,
   Category,
   Episode,
+  Show,
   SimplifiedAlbum,
   SimplifiedEpisode,
   SimplifiedPlaylist,
+  SimplifiedShow,
+  Track,
 } from "./models/models.ts";
 import { caller, CallerOpt } from "./handlers/caller.ts";
 import * as opts from "./opts.ts";
@@ -231,17 +235,85 @@ export class Client {
     return data["markets"] as Array<string>;
   }
 
+  async getMultipleShows(
+    opts: opts.MultipleShowsOpt,
+  ): Promise<Array<SimplifiedShow>> {
+    const result: Array<SimplifiedShow> = [];
+    const data = await caller.fetch(endpoints.GET_MULTIPLE_SHOWS(opts));
+    for (const show of data["shows"]) {
+      result.push(new SimplifiedShow(show));
+    }
+    return result;
+  }
+
+  async getShow(name: string, market?: string): Promise<Show> {
+    const data: Array<SimplifiedShowObj> = await this.rawSearch({
+      q: name,
+      type: SearchType.Show,
+      market: market,
+    });
+    const simpleShow = new SimplifiedShow(data[0]);
+    return simpleShow.getAllData();
+  }
+
+  async getShowById(opts: opts.ShowOpt): Promise<Show> {
+    const data = await caller.fetch(endpoints.GET_SHOW(opts));
+    return new Show(data);
+  }
+
+  async getSeveralTracks(opts: opts.SeveralTracksOpt): Promise<Array<Track>> {
+    const data = await caller.fetch(endpoints.GET_SEVERAL_TRACKS(opts));
+    const result: Array<Track> = [];
+
+    for (const track of data["tracks"]) {
+      result.push(new Track(track));
+    }
+    return result;
+  }
+
+  async getTrack(name: string, market?: string): Promise<Track> {
+    const data: Array<TrackObj> = await this.rawSearch({
+      q: name,
+      type: SearchType.Track,
+      market: market,
+    });
+    return new Track(data[0]);
+  }
+
+  async getTrackById(opts: opts.TrackOpt): Promise<Track> {
+    const data = await caller.fetch(endpoints.GET_TRACK(opts));
+    return new Track(data);
+  }
+
+  async getAudioFeaturesForSeveralTracks(
+    opts: opts.AudioFeaturesForSeveralTracksOpt,
+  ): Promise<Array<AudioFeatures>> {
+    const result: Array<AudioFeatures> = [];
+    const data = await caller.fetch(
+      endpoints.GET_AUDIO_FEATURES_FOR_SEVERAL_TRACKS(opts),
+    );
+
+    for (const audioFeature of data) {
+      result.push(new AudioFeatures(audioFeature));
+    }
+    return result;
+  }
+
+  async getAudioFeaturesForTrack(
+    opts: opts.AudioFeaturesForTrackOpt,
+  ): Promise<AudioFeatures> {
+    const data = await caller.fetch(
+      endpoints.GET_AUDIO_FEATURES_FOR_TRACK(opts),
+    );
+    return new AudioFeatures(data);
+  }
+
   // TODO:
   // Expose raw endpoints
   async rawSearch(
     opts: opts.SearchOpt,
-  ): Promise<
-    | Array<ArtistObj>
-    | Array<SimplifiedAlbumObj>
-    | Array<TrackObj>
-    | Array<SimplifiedShowObj>
-    | Array<SimplifiedEpisodeObj>
-  > {
+    // deno-lint-ignore no-explicit-any
+  ): Promise<Array<any>> {
     const data = await caller.fetch(endpoints.SEARCH(opts));
     switch (opts.type) {
       case SearchType.Album: {
