@@ -25,7 +25,7 @@ Deno.test("Fetch artist data", async () => {
   assertEquals(expected.genres, artist.genres);
   assertEquals(expected.type, artist.type);
 
-  assertThrowsAsync(() => spotify.getArtist(""), Error);
+  assertThrowsAsync(() => spotify.getArtist(""));
 });
 
 Deno.test("Fetch album data", async () => {
@@ -192,4 +192,22 @@ Deno.test("Search", async () => {
     type: SearchType.Album,
   });
   console.log(albums);
+});
+
+Deno.test("Get Track", async () => {
+  const track = await spotify.getTrack("Peach Jam");
+  console.log(track.previewUrl);
+});
+
+Deno.test("Get Audio Features", async () => {
+  const track = await spotify.getTrack("Peach Jam");
+  const audioFeatures = await spotify.getAudioFeaturesForTrack({
+    id: track.id,
+  });
+  console.log(
+    audioFeatures.danceability,
+    audioFeatures.acousticness,
+    audioFeatures.liveness,
+    audioFeatures.timeSignature,
+  );
 });
