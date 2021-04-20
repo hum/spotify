@@ -31,9 +31,16 @@ export class Client {
     caller.setCallerOpt(opt);
   }
 
-  async getArtist(name: string): Promise<Artist> {
-    const id = await this.getArtistId(name);
-    return await this.getArtistById({ id: id });
+  async getArtist(name: string, market?: string): Promise<Artist> {
+    if (!name) {
+      throw new Error("Parameter 'name' needs to be specified");
+    }
+    const artist = await this.rawSearch({
+      q: name,
+      type: SearchType.Artist,
+      market: market ?? "US",
+    });
+    return new Artist(artist[0]);
   }
 
   async getArtistById(opts: opts.ArtistOpt): Promise<Artist> {
@@ -275,7 +282,7 @@ export class Client {
     const data: Array<TrackObj> = await this.rawSearch({
       q: name,
       type: SearchType.Track,
-      market: market,
+      market: market ?? "US",
     });
     return new Track(data[0]);
   }
