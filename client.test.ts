@@ -2,7 +2,7 @@ import {
   assertEquals,
   assertThrowsAsync,
 } from "https://deno.land/std@0.93.0/testing/asserts.ts";
-import { Client } from "./client.ts";
+import { Client, Episode, Track } from "./mod.ts";
 import { SearchType } from "./opts/opts.ts";
 
 const TOKEN = Deno.env.get("spotify_access_token") ?? "";
@@ -210,4 +210,25 @@ Deno.test("Get Audio Features", async () => {
     audioFeatures.liveness,
     audioFeatures.timeSignature,
   );
+});
+
+Deno.test("Get Player", async () => {
+  const player = spotify.getPlayer();
+  const devices = await player.getDevices();
+  for (const device of devices) {
+    console.log(device);
+  }
+
+  const playback = await player.getCurrentPlaybackInfo();
+  if (playback.isPlaying) {
+    if (playback.item instanceof Track) {
+      const track: Track = playback.item;
+      console.log(`Playing track: ${track.artists[0].name} - ${track.name}`);
+    } else if (playback.item instanceof Episode) {
+      const episode: Episode = playback.item;
+      console.log(`Playing episode: ${episode.name}`);
+    }
+  } else {
+    console.log(`Nothing is playing`);
+  }
 });
