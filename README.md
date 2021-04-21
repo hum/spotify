@@ -72,9 +72,9 @@ for (const track of album.tracks) {
   - [x] Get Information About The User's Current Playback
   - [x] Transfer a User's Playback
   - [x] Get a User's Available Devices
-  - [ ] Get the User's Currently Playing Track
-  - [ ] Start/Resume a User's Playback
-  - [ ] Pause a User's Playback
+  - [x] Get the User's Currently Playing Track
+  - [x] Start/Resume a User's Playback
+  - [x] Pause a User's Playback
   - [ ] Skip User’s Playback To Next Track
   - [ ] Skip User’s Playback To Previous Track
   - [ ] Seek To Position In Currently Playing Track
