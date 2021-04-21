@@ -159,6 +159,10 @@ const GET_USER_DEVICES = () => {
   return `${API_PREFIX}/me/player/devices`;
 };
 
+const TRANSFER_PLAYBACK = () => {
+  return `${API_PREFIX}/me/player`;
+};
+
 export const endpoints = {
   GET_MULTIPLE_ALBUMS,
   GET_ALBUM,
@@ -196,6 +200,7 @@ export const endpoints = {
 
   GET_USER_CURRENT_PLAYBACK,
   GET_USER_DEVICES,
+  TRANSFER_PLAYBACK,
   /**
     * TODO:
     * 1. Episode endpoints

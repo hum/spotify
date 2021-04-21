@@ -13,3 +13,7 @@ export { Episode } from "./episode.ts";
 export { Show } from "./show.ts";
 export { AudioFeatures } from "./audioFeatures.ts";
 export { Player } from "./player.ts";
+export { Device } from "./device.ts";
+export { CurrentlyPlaying } from "./currentlyPlaying.ts";
+export { CurrentlyPlayingContext } from "./currentlyPlayingContext.ts";
+export { PlayerContext } from "./playerContext.ts";

@@ -10,6 +10,6 @@ export class Episode extends SimplifiedEpisode {
   }
 
   get show(): SimplifiedShowObj {
-    return this.show;
+    return this.#data.show;
   }
 }
