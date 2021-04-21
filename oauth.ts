@@ -17,9 +17,6 @@ const clientId = Deno.env.get("spotify_client_id") ?? "";
 const clientSecret = Deno.env.get("spotify_client_secret") ?? "";
 const redirectUri = "http://localhost:8080/callback";
 
-const app = new Application();
-const router = new Router();
-
 /**
  * full list of scopes can be found at
  * https://developer.spotify.com/documentation/general/guides/scopes/
@@ -44,12 +41,16 @@ const scopes = [
   "user-read-private",
 ].join(" ");
 
+const url = "https://accounts.spotify.com/authorize?response_type=code" +
+  `&client_id=${clientId}` +
+  `&scope=${encodeURIComponent(scopes)}` +
+  `&redirect_uri=${encodeURIComponent(redirectUri)}`;
+
+const app = new Application();
+const router = new Router();
+
 router
   .get("/login", (ctx) => {
-    const url = "https://accounts.spotify.com/authorize?response_type=code" +
-      `&client_id=${clientId}` +
-      `&scope=${encodeURIComponent(scopes)}` +
-      `&redirect_uri=${encodeURIComponent(redirectUri)}`;
     ctx.response.redirect(url);
   })
   .get("/callback", async (ctx) => {
@@ -91,4 +92,22 @@ router
 app.use(router.routes());
 app.use(router.allowedMethods());
 
-await app.listen({ port: 8080 });
+app.addEventListener("listen", ({ secure, hostname, port }) => {
+  const protocol = secure ? "https://" : "http://";
+  const url = `${protocol}${hostname ?? "localhost"}:${port}`;
+  console.log(`To get OAuth tokens, navigate to: ${url}/login`);
+});
+
+async function main() {
+  if (!clientId) {
+    console.log("Please export 'spotify_client_id' value.");
+  }
+  if (!clientSecret) {
+    console.log("Please export 'spotify_client_secret' value.");
+  }
+  await app.listen({ port: 8080 });
+}
+
+if (import.meta.main) {
+  await main();
+}
