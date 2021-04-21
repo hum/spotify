@@ -75,7 +75,7 @@ export interface CategoryObj {
 }
 
 export interface ContextObj {
-  externalUrls: ExternalUrlObj;
+  external_urls: ExternalUrlObj;
   href: string;
   type: string;
   uri: string;
@@ -101,10 +101,10 @@ export interface CurrentlyPlayingContextObj {
 
 export interface CurrentlyPlayingObj {
   context: ContextObj;
-  currentlyPlayingType: string;
-  isPlaying: boolean;
+  currently_playing_type: string;
+  is_playing: boolean;
   item: TrackObj | EpisodeObj;
-  progressMs: number;
+  progress_ms: number;
   timestamp: number;
 }
 
@@ -123,12 +123,12 @@ export interface CursorPagingObj {
 
 export interface DeviceObj {
   id: string;
-  isActive: boolean;
-  isPrivateSession: boolean;
-  isRestricted: boolean;
+  is_active: boolean;
+  is_private_session: boolean;
+  is_restricted: boolean;
   name: string;
   type: string;
-  volumePercent: number;
+  volume_percent: number;
 }
 
 export interface DevicesObj {
