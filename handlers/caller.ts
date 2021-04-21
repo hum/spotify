@@ -3,6 +3,12 @@ export interface CallerOpt {
   refreshToken?: string;
 }
 
+export interface fetchOpt {
+  url: string;
+  method?: string;
+  body?: Record<string, unknown>;
+}
+
 export class Caller {
   #accessToken: string;
   #refreshToken: string;
@@ -15,13 +21,14 @@ export class Caller {
   }
 
   // deno-lint-ignore no-explicit-any
-  async fetch(url: string, method?: string): Promise<any> {
+  async fetch(opts: fetchOpt): Promise<any> {
     console.log(++this.#count);
-    const response = await fetch(url, {
-      method: method ?? "GET",
+    const response = await fetch(opts.url, {
+      method: opts.method ?? "GET",
       headers: {
         "Authorization": this.#accessToken,
       },
+      body: opts.body ? JSON.stringify(opts.body) : ``,
     });
     // TODO:
     // Figure out a better way later
