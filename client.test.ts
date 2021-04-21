@@ -219,16 +219,48 @@ Deno.test("Get Player", async () => {
     console.log(device);
   }
 
-  const playback = await player.getCurrentPlaybackInfo();
-  if (playback.isPlaying) {
-    if (playback.item instanceof Track) {
-      const track: Track = playback.item;
-      console.log(`Playing track: ${track.artists[0].name} - ${track.name}`);
-    } else if (playback.item instanceof Episode) {
-      const episode: Episode = playback.item;
-      console.log(`Playing episode: ${episode.name}`);
+  const playback = await player.getPlayback();
+  if (await playback.isPlaying()) {
+    const audio = await playback.getCurrentPlayingTrack();
+    if (audio instanceof Track) {
+      console.log(`Playing track: ${audio.artists[0].name} - ${audio.name}`);
+    } else if (audio instanceof Episode) {
+      console.log(`Playing episode: ${audio.name}`);
     }
   } else {
     console.log(`Nothing is playing`);
   }
+});
+
+Deno.test("Get current playing track", async () => {
+  const player = spotify.getPlayer();
+  const playback = await player.getPlayback();
+
+  const audio = await playback.getCurrentPlayingTrack();
+  if (audio) {
+    if (audio instanceof Track) {
+      console.log(
+        `Playing track: ${audio.artists[0].name} - ${audio.name}`,
+      );
+    } else if (audio instanceof Episode) {
+      console.log(
+        `Listening to ${audio.show.name} - ${audio.name}`,
+      );
+    }
+    return;
+  }
+  console.log("Nothing is playing.");
+});
+
+Deno.test("Test playback", async () => {
+  const player = await spotify.getPlayer();
+  const playback = await player.getPlayback();
+
+  if (await playback.isPlaying()) {
+    await playback.pause();
+  } else {
+    await playback.play();
+  }
+
+  console.log(playback.ctx?.repeatState, playback.ctx?.shuffleState);
 });
