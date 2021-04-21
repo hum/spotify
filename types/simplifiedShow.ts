@@ -16,9 +16,9 @@ export class SimplifiedShow {
   }
 
   async getAllData(market?: string): Promise<Show> {
-    const data = await caller.fetch(
-      endpoints.GET_SHOW({ id: this.id, market: market ?? "US" }),
-    );
+    const data = await caller.fetch({
+      url: endpoints.GET_SHOW({ id: this.id, market: market ?? "US" }),
+    });
     const show = new Show(data);
     return show;
   }

@@ -50,9 +50,9 @@ export class Client {
       throw new Error("Parameter 'id' needs to be specified");
     }
 
-    const result: ArtistObj = await caller.fetch(
-      endpoints.GET_ARTIST(opts),
-    );
+    const result: ArtistObj = await caller.fetch({
+      url: endpoints.GET_ARTIST(opts),
+    });
 
     const artist = new Artist(result);
     return artist;
@@ -67,9 +67,9 @@ export class Client {
     if (opts.id.length == 0) {
       throw new Error("Parameter 'id' needs to be specified.");
     }
-    const result: AlbumObj = await caller.fetch(
-      endpoints.GET_ALBUM(opts),
-    );
+    const result: AlbumObj = await caller.fetch({
+      url: endpoints.GET_ALBUM(opts),
+    });
     const album = new Album(result);
     return album;
   }
@@ -88,9 +88,9 @@ export class Client {
       ids.push(id);
     }
 
-    const data = await caller.fetch(
-      endpoints.GET_MULTIPLE_ALBUMS({ ids: ids, market: market ?? "US" }),
-    );
+    const data = await caller.fetch({
+      url: endpoints.GET_MULTIPLE_ALBUMS({ ids: ids, market: market ?? "US" }),
+    });
     const values: Array<AlbumObj> = data["albums"];
 
     const result: Array<Album> = [];
@@ -105,9 +105,9 @@ export class Client {
       throw new Error("Parameter 'name' needs to be specified.");
     }
 
-    const data = await caller.fetch(
-      endpoints.SEARCH({ q: name, type: SearchType.Album }),
-    );
+    const data = await caller.fetch({
+      url: endpoints.SEARCH({ q: name, type: SearchType.Album }),
+    });
     const album: AlbumObj = data["albums"]["items"][0];
     return album.id;
   }
@@ -116,9 +116,9 @@ export class Client {
     if (name.length == 0) {
       throw new Error("Parameter 'name' needs to be specified.");
     }
-    const data = await caller.fetch(
-      endpoints.SEARCH({ q: name, type: SearchType.Artist }),
-    );
+    const data = await caller.fetch({
+      url: endpoints.SEARCH({ q: name, type: SearchType.Artist }),
+    });
     const value: ArtistObj = data["artists"]["items"][0];
     return value.id;
   }
@@ -137,9 +137,9 @@ export class Client {
   ): Promise<Array<SimplifiedAlbum>> {
     const result: Array<SimplifiedAlbum> = [];
 
-    const data = await caller.fetch(
-      endpoints.GET_ALL_NEW_RELEASES(opts ?? {}),
-    );
+    const data = await caller.fetch({
+      url: endpoints.GET_ALL_NEW_RELEASES(opts ?? {}),
+    });
 
     const albums: Array<SimplifiedAlbumObj> = data["albums"].items;
 
@@ -154,9 +154,9 @@ export class Client {
   ): Promise<Array<SimplifiedPlaylist>> {
     const result: Array<SimplifiedPlaylist> = [];
 
-    const data = await caller.fetch(
-      endpoints.GET_ALL_FEATURED_PLAYLISTS(opts ?? {}),
-    );
+    const data = await caller.fetch({
+      url: endpoints.GET_ALL_FEATURED_PLAYLISTS(opts ?? {}),
+    });
 
     const playlists: Array<SimplifiedPlaylistObj> = data["playlists"].items;
 
@@ -167,9 +167,9 @@ export class Client {
   }
 
   async getCategories(opts: opts.AllCategoriesOpt): Promise<Array<Category>> {
-    const data = await caller.fetch(
-      endpoints.GET_ALL_CATEGORIES(opts),
-    );
+    const data = await caller.fetch({
+      url: endpoints.GET_ALL_CATEGORIES(opts),
+    });
 
     const categories: Array<CategoryObj> = data["categories"]["items"];
 
@@ -181,9 +181,9 @@ export class Client {
   }
 
   async getCategory(opts: opts.CategoryOpt): Promise<Category> {
-    const data: CategoryObj = await caller.fetch(
-      endpoints.GET_CATEGORY(opts),
-    );
+    const data: CategoryObj = await caller.fetch({
+      url: endpoints.GET_CATEGORY(opts),
+    });
     const category = new Category(data);
     return category;
   }
@@ -191,21 +191,25 @@ export class Client {
   async getRecommendations(
     opts: opts.RecommendationsOpt,
   ): Promise<RecommendationsObj> {
-    const data: RecommendationsObj = await caller.fetch(
-      endpoints.GET_RECOMMENDATIONS(opts),
-    );
+    const data: RecommendationsObj = await caller.fetch({
+      url: endpoints.GET_RECOMMENDATIONS(opts),
+    });
     return data;
   }
 
   async getRecommendationGenres(): Promise<Array<string>> {
-    const data = await caller.fetch(endpoints.GET_RECOMMENDATION_GENRES());
+    const data = await caller.fetch({
+      url: endpoints.GET_RECOMMENDATION_GENRES(),
+    });
     return data["genres"];
   }
 
   async getMultipleEpisodes(
     opts: opts.MultipleEpisodesOpt,
   ): Promise<Array<Episode>> {
-    const data = await caller.fetch(endpoints.GET_MULTIPLE_EPISODES(opts));
+    const data = await caller.fetch({
+      url: endpoints.GET_MULTIPLE_EPISODES(opts),
+    });
     const result: Array<Episode> = [];
 
     for (const episode of data["episodes"]) {
@@ -218,11 +222,13 @@ export class Client {
     name: string,
     market?: string,
   ): Promise<SimplifiedEpisodeObj> {
-    const data = await caller.fetch(endpoints.SEARCH({
-      q: name,
-      type: SearchType.Episode,
-      market: market ?? "US",
-    }));
+    const data = await caller.fetch({
+      url: endpoints.SEARCH({
+        q: name,
+        type: SearchType.Episode,
+        market: market ?? "US",
+      }),
+    });
     // TODO:
     // Return an array instead?
     const result = data["episodes"]["items"][0];
@@ -235,12 +241,16 @@ export class Client {
   }
 
   async getEpisodeById(opts: opts.EpisodeOpt): Promise<Episode> {
-    const data = await caller.fetch(endpoints.GET_EPISODE(opts));
+    const data = await caller.fetch({
+      url: endpoints.GET_EPISODE(opts),
+    });
     return new Episode(data);
   }
 
   async getAvailableMarkets(): Promise<Array<string>> {
-    const data = await caller.fetch(endpoints.GET_AVAILABLE_MARKETS());
+    const data = await caller.fetch({
+      url: endpoints.GET_AVAILABLE_MARKETS(),
+    });
     return data["markets"] as Array<string>;
   }
 
@@ -248,7 +258,9 @@ export class Client {
     opts: opts.MultipleShowsOpt,
   ): Promise<Array<SimplifiedShow>> {
     const result: Array<SimplifiedShow> = [];
-    const data = await caller.fetch(endpoints.GET_MULTIPLE_SHOWS(opts));
+    const data = await caller.fetch({
+      url: endpoints.GET_MULTIPLE_SHOWS(opts),
+    });
     for (const show of data["shows"]) {
       result.push(new SimplifiedShow(show));
     }
@@ -266,12 +278,16 @@ export class Client {
   }
 
   async getShowById(opts: opts.ShowOpt): Promise<Show> {
-    const data = await caller.fetch(endpoints.GET_SHOW(opts));
+    const data = await caller.fetch({
+      url: endpoints.GET_SHOW(opts),
+    });
     return new Show(data);
   }
 
   async getSeveralTracks(opts: opts.SeveralTracksOpt): Promise<Array<Track>> {
-    const data = await caller.fetch(endpoints.GET_SEVERAL_TRACKS(opts));
+    const data = await caller.fetch({
+      url: endpoints.GET_SEVERAL_TRACKS(opts),
+    });
     const result: Array<Track> = [];
 
     for (const track of data["tracks"]) {
@@ -290,7 +306,7 @@ export class Client {
   }
 
   async getTrackById(opts: opts.TrackOpt): Promise<Track> {
-    const data = await caller.fetch(endpoints.GET_TRACK(opts));
+    const data = await caller.fetch({ url: endpoints.GET_TRACK(opts) });
     return new Track(data);
   }
 
@@ -298,9 +314,9 @@ export class Client {
     opts: opts.AudioFeaturesForSeveralTracksOpt,
   ): Promise<Array<AudioFeatures>> {
     const result: Array<AudioFeatures> = [];
-    const data = await caller.fetch(
-      endpoints.GET_AUDIO_FEATURES_FOR_SEVERAL_TRACKS(opts),
-    );
+    const data = await caller.fetch({
+      url: endpoints.GET_AUDIO_FEATURES_FOR_SEVERAL_TRACKS(opts),
+    });
 
     for (const audioFeature of data) {
       result.push(new AudioFeatures(audioFeature));
@@ -311,9 +327,9 @@ export class Client {
   async getAudioFeaturesForTrack(
     opts: opts.AudioFeaturesForTrackOpt,
   ): Promise<AudioFeatures> {
-    const data = await caller.fetch(
-      endpoints.GET_AUDIO_FEATURES_FOR_TRACK(opts),
-    );
+    const data = await caller.fetch({
+      url: endpoints.GET_AUDIO_FEATURES_FOR_TRACK(opts),
+    });
     return new AudioFeatures(data);
   }
 
@@ -327,7 +343,7 @@ export class Client {
     opts: opts.SearchOpt,
     // deno-lint-ignore no-explicit-any
   ): Promise<Array<any>> {
-    const data = await caller.fetch(endpoints.SEARCH(opts));
+    const data = await caller.fetch({ url: endpoints.SEARCH(opts) });
     switch (opts.type) {
       case SearchType.Album: {
         return data["albums"].items as Array<SimplifiedAlbumObj>;

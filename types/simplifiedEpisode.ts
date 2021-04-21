@@ -17,10 +17,12 @@ export class SimplifiedEpisode {
   }
 
   async getAllData(market?: string): Promise<Episode> {
-    const data: EpisodeObj = await caller.fetch(endpoints.GET_EPISODE({
-      id: this.id,
-      market: market ?? "US",
-    }));
+    const data: EpisodeObj = await caller.fetch({
+      url: endpoints.GET_EPISODE({
+        id: this.id,
+        market: market ?? "US",
+      }),
+    });
     return new Episode(data);
   }
 

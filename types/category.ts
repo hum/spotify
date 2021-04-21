@@ -35,9 +35,9 @@ export class Category {
     opts: opts.CategoryPlaylistsOpt,
   ): Promise<Array<SimplifiedPlaylist>> {
     const result: Array<SimplifiedPlaylist> = [];
-    const data = await caller.fetch(
-      endpoints.GET_CATEGORY_PLAYLISTS(opts),
-    );
+    const data = await caller.fetch({
+      url: endpoints.GET_CATEGORY_PLAYLISTS(opts),
+    });
     const playlists: Array<SimplifiedPlaylistObj> = data["playlists"]["items"];
 
     for (const playlist of playlists) {

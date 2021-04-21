@@ -46,9 +46,9 @@ export class SimplifiedArtist {
   }
 
   async getAllData(): Promise<Artist> {
-    const data: Artist = await caller.fetch(
-      endpoints.GET_ARTIST({ id: this.id }),
-    );
+    const data: Artist = await caller.fetch({
+      url: endpoints.GET_ARTIST({ id: this.id }),
+    });
     return data;
   }
 
@@ -58,9 +58,9 @@ export class SimplifiedArtist {
     }
     opts.id = this.id;
 
-    const data = await caller.fetch(
-      endpoints.GET_ARTISTS_ALBUMS(opts),
-    );
+    const data = await caller.fetch({
+      url: endpoints.GET_ARTISTS_ALBUMS(opts),
+    });
 
     const values: Array<SimplifiedAlbumObj> = data["items"];
 
@@ -82,9 +82,9 @@ export class SimplifiedArtist {
       return this.#singles;
     }
 
-    const data = await caller.fetch(
-      endpoints.GET_ARTISTS_ALBUMS(opts),
-    );
+    const data = await caller.fetch({
+      url: endpoints.GET_ARTISTS_ALBUMS(opts),
+    });
 
     const values: Array<SimplifiedAlbumObj> = data["items"];
 
@@ -104,9 +104,9 @@ export class SimplifiedArtist {
       market = "US";
     }
 
-    const data = await caller.fetch(
-      endpoints.GET_ARTIST_TOP_TRACKS({ id: this.id, market: market }),
-    );
+    const data = await caller.fetch({
+      url: endpoints.GET_ARTIST_TOP_TRACKS({ id: this.id, market: market }),
+    });
     const values: Array<TrackObj> = data["tracks"];
     const result: Array<Track> = [];
 
@@ -117,9 +117,9 @@ export class SimplifiedArtist {
   }
 
   async getRelatedArtists(): Promise<Array<Artist>> {
-    const data = await caller.fetch(
-      endpoints.GET_RELATED_ARTISTS({ id: this.id }),
-    );
+    const data = await caller.fetch({
+      url: endpoints.GET_RELATED_ARTISTS({ id: this.id }),
+    });
     const values: Array<ArtistObj> = data["artists"];
     const result: Array<Artist> = [];
 

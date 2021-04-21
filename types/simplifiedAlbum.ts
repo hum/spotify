@@ -34,9 +34,9 @@ export class SimplifiedAlbum {
   }
 
   async getAllData(market?: string): Promise<Album> {
-    const data = await caller.fetch(
-      endpoints.GET_ALBUM({ id: this.id, market: market }),
-    ) as AlbumObj;
+    const data = await caller.fetch({
+      url: endpoints.GET_ALBUM({ id: this.id, market: market }),
+    }) as AlbumObj;
 
     const album = new Album(data);
     return album;
