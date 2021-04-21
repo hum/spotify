@@ -1,20 +1,16 @@
 import { caller } from "../handlers/caller.ts";
 import { endpoints } from "../endpoints/endpoints.ts";
-import { CurrentlyPlayingContext, Device } from "./types.ts";
+import { Device, Playback, PlayerContext } from "./types.ts";
 
 export class Player {
-  constructor() {}
+  #ctx: PlayerContext | null;
 
-  async getCurrentPlaybackInfo(
-    market?: string,
-  ): Promise<CurrentlyPlayingContext> {
-    const data = await caller.fetch({
-      url: endpoints.GET_USER_CURRENT_PLAYBACK({
-        market: market ?? "US",
-        additionalTypes: "episode",
-      }),
-    });
-    return new CurrentlyPlayingContext(data);
+  constructor() {
+    this.#ctx = null;
+  }
+
+  get ctx(): PlayerContext | null {
+    return this.#ctx;
   }
 
   async getDevices(): Promise<Array<Device>> {
@@ -26,10 +22,13 @@ export class Player {
     return result;
   }
 
-  async transferPlayback(id: string, play?: boolean) {
-    await caller.fetch({
-      url: endpoints.TRANSFER_PLAYBACK(),
-      body: { ids: [id], play: play ?? false },
+  async getPlayback(market?: string): Promise<Playback> {
+    const data = await caller.fetch({
+      url: endpoints.GET_USER_CURRENT_PLAYBACK({
+        market: market ?? "US",
+        additionalTypes: "episode",
+      }),
     });
+    return new Playback(data);
   }
 }
