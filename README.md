@@ -40,7 +40,7 @@ for (const track of album.tracks) {
 }
 ```
 
-## CURRENT API COVERAGE: 33%
+## CURRENT API COVERAGE: 35%
 
 - [x] **Albums API**
   - [x] Get Multiple Albums
@@ -69,6 +69,20 @@ for (const track of album.tracks) {
   - [x] Get available markets 
 - [ ] **Personalization API**
 - [ ] **Player API**
+  - [x] Get Information About The User's Current Playback
+  - [x] Transfer a User's Playback
+  - [x] Get a User's Available Devices
+  - [ ] Get the User's Currently Playing Track
+  - [ ] Start/Resume a User's Playback
+  - [ ] Pause a User's Playback
+  - [ ] Skip User’s Playback To Next Track
+  - [ ] Skip User’s Playback To Previous Track
+  - [ ] Seek To Position In Currently Playing Track
+  - [ ] Set Repeat Mode On User’s Playback
+  - [ ] Set Volume For User's Playback
+  - [ ] Toggle Shuffle For User’s Playback
+  - [ ] Get Current User's Recently Played Tracks
+  - [ ] Add an item to queue
 - [ ] **Playlists API**
 - [x] **Search API**
   - [x] Search for an Item 
