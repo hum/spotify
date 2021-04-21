@@ -150,6 +150,15 @@ const GET_AUDIO_ANALYSIS_FOR_TRACK = (opts: opts.AudioAnalysisForTrackOpt) => {
   return format(query, parseOpts(opts));
 };
 
+const GET_USER_CURRENT_PLAYBACK = (opts: opts.UserCurrentPlaybackOpt) => {
+  const query = `${API_PREFIX}/me/player`;
+  return format(query, parseOpts(opts));
+};
+
+const GET_USER_DEVICES = () => {
+  return `${API_PREFIX}/me/player/devices`;
+};
+
 export const endpoints = {
   GET_MULTIPLE_ALBUMS,
   GET_ALBUM,
@@ -184,6 +193,9 @@ export const endpoints = {
   GET_AUDIO_FEATURES_FOR_SEVERAL_TRACKS,
   GET_AUDIO_FEATURES_FOR_TRACK,
   GET_AUDIO_ANALYSIS_FOR_TRACK,
+
+  GET_USER_CURRENT_PLAYBACK,
+  GET_USER_DEVICES,
   /**
     * TODO:
     * 1. Episode endpoints

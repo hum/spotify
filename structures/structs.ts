@@ -89,13 +89,13 @@ export interface CopyrightObj {
 export interface CurrentlyPlayingContextObj {
   actions: DisallowsObj;
   context: ContextObj;
-  currentlyPlayingType: string;
+  currently_playing_type: string;
   device: DeviceObj;
-  isPlaying: boolean;
+  is_playing: boolean;
   item: TrackObj | EpisodeObj;
-  progressMs: number;
-  repeatState: string;
-  shuffleState: string;
+  progress_ms: number;
+  repeat_state: string;
+  shuffle_state: string;
   timestamp: number;
 }
 

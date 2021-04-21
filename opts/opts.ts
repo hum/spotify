@@ -6,3 +6,4 @@ export * from "./playlist.ts";
 export * from "./search.ts";
 export * from "./show.ts";
 export * from "./track.ts";
+export * from "./player.ts";

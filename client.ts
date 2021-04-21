@@ -16,6 +16,7 @@ import {
   AudioFeatures,
   Category,
   Episode,
+  Player,
   Show,
   SimplifiedAlbum,
   SimplifiedEpisode,
@@ -314,6 +315,10 @@ export class Client {
       endpoints.GET_AUDIO_FEATURES_FOR_TRACK(opts),
     );
     return new AudioFeatures(data);
+  }
+
+  getPlayer(): Player {
+    return new Player();
   }
 
   // TODO:

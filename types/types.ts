@@ -12,3 +12,4 @@ export { Category } from "./category.ts";
 export { Episode } from "./episode.ts";
 export { Show } from "./show.ts";
 export { AudioFeatures } from "./audioFeatures.ts";
+export { Player } from "./player.ts";
