@@ -163,6 +163,23 @@ const TRANSFER_PLAYBACK = () => {
   return `${API_PREFIX}/me/player`;
 };
 
+const GET_USER_CURRENTLY_PLAYING_SONG = (
+  opts: opts.CurrentlyPlayingTrackOpt,
+) => {
+  const query = `${API_PREFIX}/me/player/currently-playing`;
+  return format(query, parseOpts(opts));
+};
+
+const START_RESUME_PLAYBACK = (opts: opts.StartResumePlaybackOpt) => {
+  const query = `${API_PREFIX}/me/player/play`;
+  return format(query, parseOpts(opts));
+};
+
+const PAUSE_USER_PLAYBACK = (opts: opts.PauseUserPlaybackOpt) => {
+  const query = `${API_PREFIX}/me/player/pause`;
+  return format(query, parseOpts(opts));
+};
+
 export const endpoints = {
   GET_MULTIPLE_ALBUMS,
   GET_ALBUM,
@@ -201,6 +218,9 @@ export const endpoints = {
   GET_USER_CURRENT_PLAYBACK,
   GET_USER_DEVICES,
   TRANSFER_PLAYBACK,
+  GET_USER_CURRENTLY_PLAYING_SONG,
+  START_RESUME_PLAYBACK,
+  PAUSE_USER_PLAYBACK,
   /**
     * TODO:
     * 1. Episode endpoints
