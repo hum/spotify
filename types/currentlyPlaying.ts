@@ -9,7 +9,16 @@ export class CurrentlyPlaying {
   #data: CurrentlyPlayingObj;
 
   constructor(data: CurrentlyPlayingObj) {
-    this.#data = data;
+    // maybe have all interfaces in all objects initialise
+    // if data == null?
+    this.#data = data ?? {
+      context: null,
+      currently_playing_type: null,
+      is_playing: null,
+      item: null,
+      progress_ms: null,
+      timestamp: null,
+    };
   }
 
   get context(): PlayerContext {
