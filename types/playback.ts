@@ -8,6 +8,12 @@ import {
   TrackObj,
 } from "../structures/structs.ts";
 
+export enum RepeatState {
+  TRACK = "track",
+  CONTEXT = "context",
+  OFF = "off",
+}
+
 export class Playback {
   #ctx: PlaybackContext | null;
 
@@ -92,35 +98,81 @@ export class Playback {
     });
   }
 
-  async nextTrack() {
-    await this.refreshContext();
+  async nextTrack(deviceId?: string) {
+    await caller.fetch({
+      url: endpoints.SKIP_PLAYBACK_TO_NEXT_TRACK({ deviceId: deviceId }),
+      method: "POST",
+    });
   }
 
-  async previousTrack() {
-    await this.refreshContext();
+  async previousTrack(deviceId?: string) {
+    await caller.fetch({
+      url: endpoints.SKIP_PLAYBACK_TO_PREVIOUS_TRACK({ deviceId: deviceId }),
+      method: "POST",
+    });
   }
 
-  async jumpTo() {
-    await this.refreshContext();
+  async seekTo(miliseconds: number, deviceId?: string) {
+    if (miliseconds < 1) {
+      throw new Error("miliseconds parameter must be a positive number.");
+    }
+    await caller.fetch({
+      url: endpoints.SEEK_POSITION_IN_CURRENT_TRACK({
+        positionMs: miliseconds,
+        deviceId: deviceId,
+      }),
+      method: "PUT",
+    });
   }
 
-  async setRepeatMode() {
-    await this.refreshContext();
+  async setRepeatMode(state: RepeatState, deviceId?: string) {
+    await caller.fetch({
+      url: endpoints.SET_REPEAT_MODE({
+        state: state,
+        deviceId: deviceId,
+      }),
+      method: "PUT",
+    });
   }
 
-  async setVolume() {
-    await this.refreshContext();
+  async setVolume(volume: number, deviceId?: string) {
+    if (volume > 100 || volume < 0) {
+      throw new Error(
+        `The volume you are trying to set, "${volume}", is not in the correct range.`,
+      );
+    }
+    await caller.fetch({
+      url: endpoints.SET_VOLUME({
+        volumePercent: volume,
+        deviceId: deviceId,
+      }),
+      method: "PUT",
+    });
   }
 
-  async toggleShuffle() {
-    await this.refreshContext();
+  async toggleShuffle(shuffle: boolean, deviceId?: string) {
+    await caller.fetch({
+      url: endpoints.TOGGLE_SHUFFLE({
+        state: shuffle,
+        deviceId: deviceId,
+      }),
+      method: "PUT",
+    });
   }
 
-  async addItemToQueue() {
-    await this.refreshContext();
+  async addItemToQueue(uri: string, deviceId?: string) {
+    if (uri == "") {
+      throw new Error("Uri is not specified.");
+    }
+    await caller.fetch({
+      url: endpoints.ADD_ITEM_TO_QUEUE({
+        uri: uri,
+        deviceId: deviceId,
+      }),
+    });
   }
 
-  async refreshContext(market?: string) {
+  async refreshContext(market?: string): Promise<PlaybackContext> {
     const data = await caller.fetch({
       url: endpoints.GET_USER_CURRENT_PLAYBACK({
         market: market ?? "US",
@@ -128,5 +180,6 @@ export class Playback {
       }),
     });
     this.#ctx = new PlaybackContext(data);
+    return this.#ctx;
   }
 }
