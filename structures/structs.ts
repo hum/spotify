@@ -221,7 +221,7 @@ export interface PagingObj {
 
 export interface PlayHistoryObj {
   context: ContextObj;
-  playedAt: Date;
+  played_at: Date;
   track: SimplifiedTrackObj;
 }
 
