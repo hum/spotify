@@ -1,6 +1,6 @@
 import { caller } from "../handlers/caller.ts";
 import { endpoints } from "../endpoints/endpoints.ts";
-import { Device, Playback, PlayerContext } from "./types.ts";
+import { Device, Playback, PlayerContext, PlayHistory } from "./types.ts";
 
 export class Player {
   #ctx: PlayerContext | null;
@@ -30,5 +30,25 @@ export class Player {
       }),
     });
     return new Playback(data);
+  }
+
+  async getRecentlyPlayedTracks(
+    limit?: number,
+    after?: number,
+    before?: number,
+  ): Promise<Array<PlayHistory>> {
+    const data = await caller.fetch({
+      url: endpoints.GET_USER_RECENT_TRACKS({
+        limit: limit,
+        after: after,
+        before: before,
+      }),
+    });
+
+    const result: Array<PlayHistory> = [];
+    for (const track of data["items"]) {
+      result.push(new PlayHistory(track));
+    }
+    return result;
   }
 }
