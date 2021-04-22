@@ -1,5 +1,5 @@
 import { CurrentlyPlayingContextObj } from "../structures/structs.ts";
-import { Device, Episode, Track } from "./types.ts";
+import { Device } from "./types.ts";
 
 export class PlaybackContext {
   #data: CurrentlyPlayingContextObj;
