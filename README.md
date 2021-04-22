@@ -97,6 +97,8 @@ for (const track of album.tracks) {
   - [x] Get Audio Features for a Track
   - [x] Get Audio Analysis for a Track
 - [ ] **User Profile API**
+  - [ ] Get Current User's Profile
+  - [ ] Get a User's Profile 
 
 **More usage in `/examples`** -- `TODO`
 
