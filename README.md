@@ -40,7 +40,7 @@ for (const track of album.tracks) {
 }
 ```
 
-## CURRENT API COVERAGE: 35%
+## CURRENT API COVERAGE: 51%
 
 - [x] **Albums API**
   - [x] Get Multiple Albums
@@ -66,36 +66,36 @@ for (const track of album.tracks) {
 - [ ] **Follow API**
 - [ ] **Library API**
 - [x] **Markets API**
-  - [x] Get available markets 
+  - [x] Get available markets
 - [ ] **Personalization API**
-- [ ] **Player API**
+- [x] **Player API**
   - [x] Get Information About The User's Current Playback
   - [x] Transfer a User's Playback
   - [x] Get a User's Available Devices
-  - [ ] Get the User's Currently Playing Track
-  - [ ] Start/Resume a User's Playback
-  - [ ] Pause a User's Playback
-  - [ ] Skip User’s Playback To Next Track
-  - [ ] Skip User’s Playback To Previous Track
-  - [ ] Seek To Position In Currently Playing Track
-  - [ ] Set Repeat Mode On User’s Playback
-  - [ ] Set Volume For User's Playback
-  - [ ] Toggle Shuffle For User’s Playback
-  - [ ] Get Current User's Recently Played Tracks
-  - [ ] Add an item to queue
+  - [x] Get the User's Currently Playing Track
+  - [x] Start/Resume a User's Playback
+  - [x] Pause a User's Playback
+  - [x] Skip User’s Playback To Next Track
+  - [x] Skip User’s Playback To Previous Track
+  - [x] Seek To Position In Currently Playing Track
+  - [x] Set Repeat Mode On User’s Playback
+  - [x] Set Volume For User's Playback
+  - [x] Toggle Shuffle For User’s Playback
+  - [x] Get Current User's Recently Played Tracks
+  - [x] Add an item to queue
 - [ ] **Playlists API**
 - [x] **Search API**
-  - [x] Search for an Item 
+  - [x] Search for an Item
 - [x] **Shows API**
   - [x] Get Multiple Shows
   - [x] Get a Show
-  - [x] Get a Show's Episodes 
+  - [x] Get a Show's Episodes
 - [ ] **Tracks API**
   - [x] Get Several Tracks
   - [x] Get a Track
   - [x] Get Audio Features for Serveral Tracks
   - [x] Get Audio Features for a Track
-  - [ ] Get Audio Analysis for a Track 
+  - [ ] Get Audio Analysis for a Track
 - [ ] **User Profile API**
 
 **More usage in `/examples`** -- `TODO`
