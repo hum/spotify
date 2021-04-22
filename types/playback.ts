@@ -135,6 +135,11 @@ export class Playback {
     });
   }
 
+  async getVolume(): Promise<number> {
+    const ctx: PlaybackContext = await this.refreshContext();
+    return ctx.device.volumePercent;
+  }
+
   async setVolume(volume: number, deviceId?: string) {
     if (volume > 100 || volume < 0) {
       throw new Error(
