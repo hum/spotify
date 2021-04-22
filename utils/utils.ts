@@ -1,6 +1,9 @@
 export function parseOpts<T>(opts: T): Record<string, string> {
   const result: Record<string, string> = {};
   for (const [k, v] of Object.entries(opts)) {
+    if (v == undefined) {
+      continue;
+    }
     let value = "";
     if (Array.isArray(v)) {
       value = v.join(",");
