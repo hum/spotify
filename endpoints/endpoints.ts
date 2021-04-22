@@ -180,6 +180,48 @@ const PAUSE_USER_PLAYBACK = (opts: opts.PauseUserPlaybackOpt) => {
   return format(query, parseOpts(opts));
 };
 
+const SKIP_PLAYBACK_TO_NEXT_TRACK = (opts: opts.SkipPlaybackToNextOpt) => {
+  const query = `${API_PREFIX}/me/player/next`;
+  return format(query, parseOpts(opts));
+};
+
+const SKIP_PLAYBACK_TO_PREVIOUS_TRACK = (
+  opts: opts.SkipPlaybackToPreviousTrackOpt,
+) => {
+  const query = `${API_PREFIX}/me/player/previous`;
+  return format(query, parseOpts(opts));
+};
+
+const SEEK_POSITION_IN_CURRENT_TRACK = (opts: opts.SeekToPositionOpt) => {
+  const query = `${API_PREFIX}/me/player/seek`;
+  return format(query, parseOpts(opts));
+};
+
+const SET_REPEAT_MODE = (opts: opts.SetRepeatModeOpt) => {
+  const query = `${API_PREFIX}/me/player/repeat`;
+  return format(query, parseOpts(opts));
+};
+
+const SET_VOLUME = (opts: opts.SetVolumeOpt) => {
+  const query = `${API_PREFIX}/me/player/volume`;
+  return format(query, parseOpts(opts));
+};
+
+const TOGGLE_SHUFFLE = (opts: opts.ToggleShuffleOpt) => {
+  const query = `${API_PREFIX}/me/player/shuffle`;
+  return format(query, parseOpts(opts));
+};
+
+const GET_USER_RECENT_TRACKS = (opts: opts.UserRecentTracksOpt) => {
+  const query = `${API_PREFIX}/me/player/recently-played`;
+  return format(query, parseOpts(opts));
+};
+
+const ADD_ITEM_TO_QUEUE = (opts: opts.AddItemToQueueOpt) => {
+  const query = `${API_PREFIX}/me/player/queue`;
+  return format(query, parseOpts(opts));
+};
+
 export const endpoints = {
   GET_MULTIPLE_ALBUMS,
   GET_ALBUM,
@@ -221,17 +263,12 @@ export const endpoints = {
   GET_USER_CURRENTLY_PLAYING_SONG,
   START_RESUME_PLAYBACK,
   PAUSE_USER_PLAYBACK,
-  /**
-    * TODO:
-    * 1. Episode endpoints
-    * 2. Follow endpoints
-    * 3. Library endpoints
-    * 4. Markets endpoints
-    * 5. Personalization endpoints
-    * 6. Player endpoints
-    * 7. Playlists endpoints
-    * 8. Shows endpoints
-    * 9. Tracks endpoints
-    * 10. User profile endpoints
-    */
+  SKIP_PLAYBACK_TO_NEXT_TRACK,
+  SKIP_PLAYBACK_TO_PREVIOUS_TRACK,
+  SEEK_POSITION_IN_CURRENT_TRACK,
+  SET_REPEAT_MODE,
+  SET_VOLUME,
+  TOGGLE_SHUFFLE,
+  GET_USER_RECENT_TRACKS,
+  ADD_ITEM_TO_QUEUE,
 };
