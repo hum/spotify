@@ -90,12 +90,12 @@ for (const track of album.tracks) {
   - [x] Get Multiple Shows
   - [x] Get a Show
   - [x] Get a Show's Episodes
-- [ ] **Tracks API**
+- [x] **Tracks API**
   - [x] Get Several Tracks
   - [x] Get a Track
   - [x] Get Audio Features for Serveral Tracks
   - [x] Get Audio Features for a Track
-  - [ ] Get Audio Analysis for a Track
+  - [x] Get Audio Analysis for a Track
 - [ ] **User Profile API**
 
 **More usage in `/examples`** -- `TODO`
