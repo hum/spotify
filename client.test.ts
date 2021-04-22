@@ -2,8 +2,7 @@ import {
   assertEquals,
   assertThrowsAsync,
 } from "https://deno.land/std@0.93.0/testing/asserts.ts";
-import { Client, Episode, Track } from "./mod.ts";
-import { SearchType } from "./opts/opts.ts";
+import { Client, Episode, RepeatState, SearchType, Track } from "./mod.ts";
 
 const TOKEN = Deno.env.get("spotify_access_token") ?? "";
 
@@ -263,4 +262,25 @@ Deno.test("Test playback", async () => {
   }
 
   console.log(playback.ctx?.repeatState, playback.ctx?.shuffleState);
+});
+
+Deno.test("Next Track", async () => {
+  const player = await spotify.getPlayer();
+  const playback = await player.getPlayback();
+
+  await playback.nextTrack();
+});
+
+Deno.test("Previous Track", async () => {
+  const player = await spotify.getPlayer();
+  const playback = await player.getPlayback();
+
+  await playback.previousTrack();
+});
+
+Deno.test("Set Repeat Mode", async () => {
+  const player = await spotify.getPlayer();
+  const playback = await player.getPlayback();
+
+  await playback.setRepeatMode(RepeatState.CONTEXT);
 });
