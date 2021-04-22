@@ -1,6 +1,7 @@
 import {
   AlbumObj,
   ArtistObj,
+  AudioAnalysisObj,
   CategoryObj,
   RecommendationsObj,
   SimplifiedAlbumObj,
@@ -331,6 +332,13 @@ export class Client {
       url: endpoints.GET_AUDIO_FEATURES_FOR_TRACK(opts),
     });
     return new AudioFeatures(data);
+  }
+
+  async getAudioAnalysis(id: string): Promise<AudioAnalysisObj> {
+    const data = await caller.fetch({
+      url: endpoints.GET_AUDIO_ANALYSIS_FOR_TRACK({ id: id }),
+    });
+    return data;
   }
 
   getPlayer(): Player {

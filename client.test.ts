@@ -284,3 +284,9 @@ Deno.test("Set Repeat Mode", async () => {
 
   await playback.setRepeatMode(RepeatState.CONTEXT);
 });
+
+Deno.test("Get Audio Analysis", async () => {
+  const track = await spotify.getTrack("Peach Jam");
+  const analysis = await spotify.getAudioAnalysis(track.id);
+  console.log(analysis);
+});
