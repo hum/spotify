@@ -283,10 +283,10 @@ export interface PlaylistTracksRefObj {
 
 export interface PrivateUserObj {
   country: string;
-  displayName: string;
+  display_name: string;
   email: string;
-  explicitContent: ExplicitContentSettingsObj;
-  externalUrls: ExternalUrlObj;
+  explicit_content: ExplicitContentSettingsObj;
+  external_urls: ExternalUrlObj;
   followers: FollowersObj;
   href: string;
   id: string;
@@ -297,7 +297,7 @@ export interface PrivateUserObj {
 }
 
 export interface PublicUserObj {
-  displayName: string;
+  display_name: string;
   external_urls: ExternalUrlObj;
   followers: FollowersObj;
   href: string;
