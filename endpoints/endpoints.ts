@@ -68,7 +68,7 @@ const GET_PLAYLIST_ITEMS = (opts: opts.PlaylistItemsOpt) => {
   return format(query, parseOpts(opts));
 };
 
-const GET_ALL_CATEGORIES = (opts: opts.AllCategoriesOpt) => {
+const GET_ALL_CATEGORIES = (opts?: opts.AllCategoriesOpt) => {
   const query = `${API_PREFIX}/browse/categories`;
   return format(query, parseOpts(opts));
 };
