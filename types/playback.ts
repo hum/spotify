@@ -18,7 +18,6 @@ export class Playback {
   #ctx: PlaybackContext | null;
 
   constructor(data: CurrentlyPlayingContextObj) {
-    console.log(data);
     this.#ctx = new PlaybackContext(data);
   }
 
@@ -67,13 +66,18 @@ export class Playback {
 
   async play(deviceId?: string) {
     await this.refreshContext();
-
-    if (this.#ctx == null || await this.isPlaying()) {
+    /**
+     * TODO:
+     * Maybe throw an error if ctx == null || ctx.device == null
+     */
+    if (
+      this.#ctx == null || await this.isPlaying() || this.#ctx.device == null
+    ) {
       return;
     }
     await caller.fetch({
       url: endpoints.START_RESUME_PLAYBACK({
-        deviceId: deviceId ?? this.#ctx.device.id,
+        deviceId: deviceId ?? this.#ctx?.device.id,
       }),
       method: "PUT",
     });
@@ -86,13 +90,18 @@ export class Playback {
 
   async pause(deviceId?: string) {
     await this.refreshContext();
-
-    if (this.#ctx == null || !(await this.isPlaying())) {
+    /**
+     * TODO:
+     * Maybe throw an error if ctx == null || ctx.device == null
+     */
+    if (
+      this.#ctx == null || !(await this.isPlaying() || this.#ctx.device == null)
+    ) {
       return;
     }
     await caller.fetch({
       url: endpoints.PAUSE_USER_PLAYBACK({
-        deviceId: deviceId ?? this.#ctx.device.id,
+        deviceId: deviceId ?? this.#ctx?.device.id,
       }),
       method: "PUT",
     });
