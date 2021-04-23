@@ -18,3 +18,5 @@ export { PlayerContext } from "./playerContext.ts";
 export { Playback } from "./playback.ts";
 export { PlaybackContext } from "./playbackContext.ts";
 export { PlayHistory } from "./playHistory.ts";
+export { PublicUser } from "./publicUser.ts";
+export { PrivateUser } from "./privateUser.ts";
