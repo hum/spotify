@@ -222,6 +222,15 @@ const ADD_ITEM_TO_QUEUE = (opts: opts.AddItemToQueueOpt) => {
   return format(query, parseOpts(opts));
 };
 
+const GET_CURRENT_USER = () => {
+  return `${API_PREFIX}/me`;
+};
+
+const GET_USER_PROFILE = (opts: opts.GetUserProfileOpt) => {
+  const query = `${API_PREFIX}/users`;
+  return format(query, parseOpts(opts));
+};
+
 export const endpoints = {
   GET_MULTIPLE_ALBUMS,
   GET_ALBUM,
@@ -271,4 +280,7 @@ export const endpoints = {
   TOGGLE_SHUFFLE,
   GET_USER_RECENT_TRACKS,
   ADD_ITEM_TO_QUEUE,
+
+  GET_CURRENT_USER,
+  GET_USER_PROFILE,
 };
