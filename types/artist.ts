@@ -2,7 +2,6 @@ import {
   ArtistObj,
   FollowersObj,
   ImageObj,
-  TrackObj,
 } from "../structures/structs.ts";
 import { SimplifiedArtist, Track } from "./types.ts";
 import { caller } from "../handlers/caller.ts";
