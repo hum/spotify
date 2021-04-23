@@ -18,6 +18,8 @@ import {
   Category,
   Episode,
   Player,
+  PrivateUser,
+  PublicUser,
   Show,
   SimplifiedAlbum,
   SimplifiedEpisode,
@@ -343,6 +345,32 @@ export class Client {
 
   getPlayer(): Player {
     return new Player();
+  }
+
+  /**
+   * Fetch information about the signed in user.
+   * @returns PrivateUser
+   */
+  async getCurrentUser(): Promise<PrivateUser> {
+    const data = await caller.fetch({
+      url: endpoints.GET_CURRENT_USER(),
+    });
+
+    return new PrivateUser(data);
+  }
+
+  /**
+   * Fetch information about any Spotify user.
+   * @param userId - ID of the specific account
+   * @returns PublicUser
+   */
+  async getUser(userId: string): Promise<PublicUser> {
+    const data = await caller.fetch({
+      url: endpoints.GET_USER_PROFILE({
+        userId: userId,
+      }),
+    });
+    return new PublicUser(data);
   }
 
   // TODO:
