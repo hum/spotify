@@ -1,5 +1,5 @@
 export interface CallerOpt {
-  accessToken?: string;
+  accessToken: string;
   refreshToken?: string;
 }
 
@@ -14,9 +14,9 @@ export class Caller {
   #refreshToken: string;
   #count: number;
 
-  constructor(conf: CallerOpt) {
-    this.#accessToken = conf.accessToken ?? "";
-    this.#refreshToken = conf.refreshToken ?? "";
+  constructor(conf?: CallerOpt) {
+    this.#accessToken = conf?.accessToken ?? "";
+    this.#refreshToken = conf?.refreshToken ?? "";
     this.#count = 0;
   }
 
@@ -56,5 +56,5 @@ export class Caller {
   }
 }
 
-const caller = new Caller({});
+const caller = new Caller();
 export { caller };
