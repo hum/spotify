@@ -1,8 +1,4 @@
-import {
-  ArtistObj,
-  FollowersObj,
-  ImageObj,
-} from "../structures/structs.ts";
+import { ArtistObj, FollowersObj, ImageObj } from "../structures/structs.ts";
 import { SimplifiedArtist, Track } from "./types.ts";
 import { caller } from "../handlers/caller.ts";
 import { endpoints } from "../endpoints/endpoints.ts";
