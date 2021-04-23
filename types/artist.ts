@@ -1,5 +1,13 @@
-import { ArtistObj, FollowersObj, ImageObj } from "../structures/structs.ts";
-import { SimplifiedArtist } from "./types.ts";
+import {
+  ArtistObj,
+  FollowersObj,
+  ImageObj,
+  TrackObj,
+} from "../structures/structs.ts";
+import { SimplifiedArtist, Track } from "./types.ts";
+import { caller } from "../handlers/caller.ts";
+import { endpoints } from "../endpoints/endpoints.ts";
+import { SearchType } from "../opts/opts.ts";
 
 export class Artist extends SimplifiedArtist {
   #data: ArtistObj;
@@ -23,5 +31,23 @@ export class Artist extends SimplifiedArtist {
 
   get popularity(): number {
     return this.#data.popularity;
+  }
+
+  async getSong(name: string): Promise<Track | null> {
+    const data = (await caller.fetch({
+      url: endpoints.SEARCH({
+        q: name,
+        type: SearchType.Track,
+      }),
+    }))["tracks"]["items"];
+
+    for (const track of data) {
+      for (const artist of track.artists) {
+        if (artist.name == this.name || artist.id == this.id) {
+          return new Track(track);
+        }
+      }
+    }
+    return null;
   }
 }
