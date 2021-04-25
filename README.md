@@ -64,6 +64,13 @@ for (const track of album.tracks) {
   - [x] Get Multiple Episodes
   - [x] Get an Episode
 - [ ] **Follow API**
+  - [ ] Follow a Playlist
+  - [ ] Unfollow Playlist
+  - [ ] Check if Users Follow a Playlist
+  - [ ] Get User's Followed Artists
+  - [ ] Follow Artists or Users
+  - [ ] Unfollow Artists or Users
+  - [ ] Get Following State for Artists/Users
 - [ ] **Library API**
 - [x] **Markets API**
   - [x] Get available markets
