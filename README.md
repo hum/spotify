@@ -1,7 +1,6 @@
 # Spotify [WIP]
 
-Deno wrapper for the Spotify API. **This is a very early stage of the wrapper.
-Absolutely unusable.**
+Deno wrapper for the Spotify API. **EARLY STAGE.**
 
 ## Example Usage
 
