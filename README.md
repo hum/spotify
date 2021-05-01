@@ -68,6 +68,7 @@ for (const track of album.tracks) {
 - [x] **Markets API**
   - [x] Get available markets
 - [ ] **Personalization API**
+  - [ ] Get a User's Top Artists and Tracks
 - [x] **Player API**
   - [x] Get Information About The User's Current Playback
   - [x] Transfer a User's Playback
