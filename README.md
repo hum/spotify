@@ -71,6 +71,22 @@ for (const track of album.tracks) {
   - [ ] Unfollow Artists or Users
   - [ ] Get Following State for Artists/Users
 - [ ] **Library API**
+ - [ ] Get User's Saved Albums
+ - [ ] Save Albums for Current User
+ - [ ] Remove Albums for Current User
+ - [ ] Check User's Saved Albums
+ - [ ] Get User's Saved Tracks
+ - [ ] Save Tracks for User
+ - [ ] Remove User's Saved Tracks
+ - [ ] Check User's Saved Tracks
+ - [ ] Get User's Saved Episodes
+ - [ ] Save Episodes for User
+ - [ ] Remove User's Saved Episodes
+ - [ ] Check User's Saved Episodes
+ - [ ] Get User's Saved Shows
+ - [ ] Save Shows for Current User
+ - [ ] Remove User's Saved Shows
+ - [ ] Check User's Saved Shows
 - [x] **Markets API**
   - [x] Get available markets
 - [ ] **Personalization API**
