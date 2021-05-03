@@ -66,10 +66,10 @@ for (const track of album.tracks) {
   - [ ] Follow a Playlist
   - [ ] Unfollow Playlist
   - [ ] Check if Users Follow a Playlist
-  - [ ] Get User's Followed Artists
-  - [ ] Follow Artists or Users
-  - [ ] Unfollow Artists or Users
-  - [ ] Get Following State for Artists/Users
+  - [x] Get User's Followed Artists
+  - [x] Follow Artists or Users
+  - [x] Unfollow Artists or Users
+  - [x] Get Following State for Artists/Users
 - [ ] **Library API**
   - [ ] Get User's Saved Albums
   - [ ] Save Albums for Current User
