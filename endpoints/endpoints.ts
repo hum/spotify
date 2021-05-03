@@ -231,6 +231,21 @@ const GET_USER_PROFILE = (opts: opts.GetUserProfileOpt) => {
   return format(query, parseOpts(opts));
 };
 
+const GET_FOLLOWED_ARTISTS = (opts: opts.GetFollowedArtists) => {
+  const query = `${API_PREFIX}/me/following`;
+  return format(query, parseOpts(opts));
+};
+
+const FOLLOW_ARTISTS_OR_USERS = (opts: opts.FollowArtistsOrUsers) => {
+  const query = `${API_PREFIX}/me/following`;
+  return format(query, parseOpts(opts));
+};
+
+const GET_FOLLOWING_STATE = (opts: opts.GetFollowingState) => {
+  const query = `${API_PREFIX}/me/following/contains`;
+  return format(query, parseOpts(opts));
+};
+
 export const endpoints = {
   GET_MULTIPLE_ALBUMS,
   GET_ALBUM,
@@ -283,4 +298,8 @@ export const endpoints = {
 
   GET_CURRENT_USER,
   GET_USER_PROFILE,
+
+  GET_FOLLOWED_ARTISTS,
+  FOLLOW_ARTISTS_OR_USERS,
+  GET_FOLLOWING_STATE,
 };
