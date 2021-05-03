@@ -1,7 +1,6 @@
 # Spotify [WIP]
 
-Deno wrapper for the Spotify API. **This is a very early stage of the wrapper.
-Absolutely unusable.**
+Deno wrapper for the Spotify API. **EARLY STAGE.**
 
 ## Example Usage
 
@@ -10,7 +9,7 @@ Absolutely unusable.**
 Import the module and initialise the `Client` class.
 
 ```ts
-import { Client } from "url";
+import { Client } from "https://github.com/hum/spotify/raw/main/mod.ts";
 
 // Initialize the API client
 const spotify = new Client({
@@ -64,6 +63,13 @@ for (const track of album.tracks) {
   - [x] Get Multiple Episodes
   - [x] Get an Episode
 - [ ] **Follow API**
+  - [ ] Follow a Playlist
+  - [ ] Unfollow Playlist
+  - [ ] Check if Users Follow a Playlist
+  - [ ] Get User's Followed Artists
+  - [ ] Follow Artists or Users
+  - [ ] Unfollow Artists or Users
+  - [ ] Get Following State for Artists/Users
 - [ ] **Library API**
 - [x] **Markets API**
   - [x] Get available markets

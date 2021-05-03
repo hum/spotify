@@ -12,17 +12,14 @@ export interface fetchOpt {
 export class Caller {
   #accessToken: string;
   #refreshToken: string;
-  #count: number;
 
   constructor(conf?: CallerOpt) {
     this.#accessToken = conf?.accessToken ?? "";
     this.#refreshToken = conf?.refreshToken ?? "";
-    this.#count = 0;
   }
 
   // deno-lint-ignore no-explicit-any
   async fetch(opts: fetchOpt): Promise<any> {
-    console.log(++this.#count);
     const response = await fetch(opts.url, {
       method: opts.method ?? "GET",
       headers: {
