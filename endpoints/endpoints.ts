@@ -231,17 +231,17 @@ const GET_USER_PROFILE = (opts: opts.GetUserProfileOpt) => {
   return format(query, parseOpts(opts));
 };
 
-const GET_FOLLOWED_ARTISTS = (opts: opts.GetFollowedArtists) => {
+const GET_FOLLOWED_ARTISTS = (opts: opts.GetFollowedArtistsOpt) => {
   const query = `${API_PREFIX}/me/following`;
   return format(query, parseOpts(opts));
 };
 
-const FOLLOW_ARTISTS_OR_USERS = (opts: opts.FollowArtistsOrUsers) => {
+const FOLLOW_ARTISTS_OR_USERS = (opts: opts.FollowArtistsOrUsersOpt) => {
   const query = `${API_PREFIX}/me/following`;
   return format(query, parseOpts(opts));
 };
 
-const GET_FOLLOWING_STATE = (opts: opts.GetFollowingState) => {
+const GET_FOLLOWING_STATE = (opts: opts.GetFollowingStateOpt) => {
   const query = `${API_PREFIX}/me/following/contains`;
   return format(query, parseOpts(opts));
 };

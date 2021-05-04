@@ -2,18 +2,18 @@ export interface GetUserProfileOpt {
   userId: string;
 }
 
-export interface GetFollowedArtists {
+export interface GetFollowedArtistsOpt {
   type: string;
   after?: string;
   limit?: number;
 }
 
-export interface FollowArtistsOrUsers {
+export interface FollowArtistsOrUsersOpt {
   type: string;
   ids: string | Array<string>;
 }
 
-export interface GetFollowingState {
+export interface GetFollowingStateOpt {
   type: string;
   ids: string | Array<string>;
 }
