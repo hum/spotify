@@ -13,7 +13,7 @@ import { Client } from "https://github.com/hum/spotify/raw/main/mod.ts";
 
 // Initialize the API client
 const spotify = new Client({
-  token: "your_token",
+  accessToken: "your_token",
 });
 ```
 
