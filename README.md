@@ -20,7 +20,7 @@ const spotify = new Client({
 Make calls to the API
 
 ```ts
-const artist = spotify.getArtist("joji");
+const artist = await spotify.getArtist("joji");
 console.log(artist.name, artist.genres, artist.id);
 
 // Get all albums related to the artist
