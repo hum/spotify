@@ -532,7 +532,7 @@ export class Client {
 
     const result: Array<SimplifiedPlaylist> = [];
     for (const playlist of data) {
-      result.push(new SimplifiedPlaylist(result));
+      result.push(new SimplifiedPlaylist(playlist));
     }
     return result;
   }
