@@ -4,7 +4,7 @@ import {
   SimplifiedPlaylistObj,
 } from "../structures/structs.ts";
 import { PublicUser, SimplifiedPlaylist } from "./types.ts";
-import { CreatePlaylistOpts, CurrentUserPlaylistOpts } from "../opts/opts.ts";
+import { CurrentUserPlaylistOpts } from "../opts/opts.ts";
 import { caller } from "../handlers/caller.ts";
 import { endpoints } from "../endpoints/endpoints.ts";
 

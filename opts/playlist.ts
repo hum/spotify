@@ -52,6 +52,3 @@ export interface AddItemsToPlaylistOpts {
   position?: number;
   uris?: Array<string>;
 }
-
-export interface ReorderOrReplacePlaylistItemsOpts {
-}
