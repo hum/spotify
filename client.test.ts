@@ -103,8 +103,8 @@ Deno.test("Get artist's top songs", async () => {
     "Daylight",
     "Your Man",
     "Will He",
-    "Gimme Love",
     "CAN'T GET OVER YOU (feat. Clams Casino)",
+    "Gimme Love",
     "Midsummer Madness",
     "Sanctuary",
   ];
@@ -289,4 +289,13 @@ Deno.test("Get Audio Analysis", async () => {
   const track = await spotify.getTrack("Peach Jam");
   const analysis = await spotify.getAudioAnalysis(track.id);
   console.log(analysis);
+});
+
+Deno.test("Get current user's playlists", async () => {
+  const currentUser = await spotify.getCurrentUser();
+
+  const playlists = await currentUser.getPlaylists();
+  for (const playlist of playlists) {
+    console.log(playlist.name);
+  }
 });

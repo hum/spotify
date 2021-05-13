@@ -522,6 +522,21 @@ export class Client {
     return new PublicUser(data);
   }
 
+  async getUsersPlaylists(
+    userId: string,
+    opts?: opts.UserPlaylistOpts,
+  ): Promise<Array<SimplifiedPlaylist>> {
+    const data: Array<SimplifiedPlaylistObj> = (await caller.fetch({
+      url: endpoints.GET_USER_PLAYLISTS(userId, opts),
+    }))["items"];
+
+    const result: Array<SimplifiedPlaylist> = [];
+    for (const playlist of data) {
+      result.push(new SimplifiedPlaylist(playlist));
+    }
+    return result;
+  }
+
   /**
    * Get information about albums, artists, playlists, tracks, shows or episodes
    * that match a keyword string 

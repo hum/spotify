@@ -13,14 +13,14 @@ import { Client } from "https://github.com/hum/spotify/raw/main/mod.ts";
 
 // Initialize the API client
 const spotify = new Client({
-  token: "your_token",
+  accessToken: "your_token",
 });
 ```
 
 Make calls to the API
 
 ```ts
-const artist = spotify.getArtist("joji");
+const artist = await spotify.getArtist("joji");
 console.log(artist.name, artist.genres, artist.id);
 
 // Get all albums related to the artist

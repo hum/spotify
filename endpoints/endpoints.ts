@@ -246,6 +246,26 @@ const GET_FOLLOWING_STATE = (opts: opts.GetFollowingStateOpt) => {
   return format(query, parseOpts(opts));
 };
 
+const GET_CURRENT_USER_PLAYLISTS = (opts?: opts.CurrentUserPlaylistOpts) => {
+  const query = `${API_PREFIX}/me/playlists`;
+  return format(query, parseOpts(opts ?? {}));
+};
+
+const GET_USER_PLAYLISTS = (userId: string, opts?: opts.UserPlaylistOpts) => {
+  const query = `${API_PREFIX}/users/${userId}/playlists`;
+  return format(query, parseOpts(opts ?? {}));
+};
+
+const CREATE_PLAYLIST = (userId: string, opts?: opts.CreatePlaylistOpts) => {
+  const query = `${API_PREFIX}/users/${userId}/playlists`;
+  return format(query, parseOpts(opts));
+};
+
+const GET_PLAYLIST = (playlistId: string, opts?: opts.PlaylistOpts) => {
+  const query = `${API_PREFIX}/playlists/${playlistId}`;
+  return format(query, parseOpts(opts ?? {}));
+};
+
 export const endpoints = {
   GET_MULTIPLE_ALBUMS,
   GET_ALBUM,
@@ -302,4 +322,9 @@ export const endpoints = {
   GET_FOLLOWED_ARTISTS,
   FOLLOW_ARTISTS_OR_USERS,
   GET_FOLLOWING_STATE,
+
+  GET_CURRENT_USER_PLAYLISTS,
+  GET_USER_PLAYLISTS,
+  CREATE_PLAYLIST,
+  GET_PLAYLIST,
 };
