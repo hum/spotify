@@ -24,6 +24,7 @@ export class Caller {
       method: opts.method ?? "GET",
       headers: {
         "Authorization": this.#accessToken,
+        "Content-Type": "application/json",
       },
       body: opts.body ? JSON.stringify(opts.body) : ``,
     });
