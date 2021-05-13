@@ -537,6 +537,33 @@ export class Client {
     return result;
   }
 
+  async checkFollowsPlaylist(
+    playlistId: string,
+    userIds: Array<string>,
+  ): Promise<Array<boolean>> {
+    const data: Array<boolean> = await caller.fetch({
+      url: endpoints.CHECK_FOLLOWS_PLAYLIST(playlistId, userIds),
+    });
+    return data;
+  }
+
+  async followPlaylist(opts: opts.FollowPlaylistOpts) {
+    await caller.fetch({
+      url: endpoints.FOLLOW_PLAYLIST(opts.playlistId),
+      method: "PUT",
+      body: {
+        public: opts.public ?? false,
+      },
+    });
+  }
+
+  async unfollowPlaylist(playlistId: string) {
+    await caller.fetch({
+      url: endpoints.UNFOLLOW_PLAYLIST(playlistId),
+      method: "DELETE",
+    });
+  }
+
   /**
    * Get information about albums, artists, playlists, tracks, shows or episodes
    * that match a keyword string 

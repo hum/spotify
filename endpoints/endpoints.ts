@@ -266,6 +266,19 @@ const GET_PLAYLIST = (playlistId: string, opts?: opts.PlaylistOpts) => {
   return format(query, parseOpts(opts ?? {}));
 };
 
+const CHECK_FOLLOWS_PLAYLIST = (playlistId: string, ids: Array<string>) => {
+  const query = `${API_PREFIX}/playlists/${playlistId}/followers/contains`;
+  return format(query, parseOpts({ ids: ids }));
+};
+
+const FOLLOW_PLAYLIST = (playlistId: string) => {
+  return `${API_PREFIX}/playlists/${playlistId}/followers`;
+};
+
+const UNFOLLOW_PLAYLIST = (playlistId: string) => {
+  return `${API_PREFIX}/playlists/${playlistId}/followers`;
+};
+
 export const endpoints = {
   GET_MULTIPLE_ALBUMS,
   GET_ALBUM,
@@ -327,4 +340,7 @@ export const endpoints = {
   GET_USER_PLAYLISTS,
   CREATE_PLAYLIST,
   GET_PLAYLIST,
+  CHECK_FOLLOWS_PLAYLIST,
+  FOLLOW_PLAYLIST,
+  UNFOLLOW_PLAYLIST,
 };
