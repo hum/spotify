@@ -62,10 +62,10 @@ for (const track of album.tracks) {
 - [x] **Episodes API**
   - [x] Get Multiple Episodes
   - [x] Get an Episode
-- [ ] **Follow API**
-  - [ ] Follow a Playlist
-  - [ ] Unfollow Playlist
-  - [ ] Check if Users Follow a Playlist
+- [x] **Follow API**
+  - [x] Follow a Playlist
+  - [x] Unfollow Playlist
+  - [x] Check if Users Follow a Playlist
   - [x] Get User's Followed Artists
   - [x] Follow Artists or Users
   - [x] Unfollow Artists or Users
