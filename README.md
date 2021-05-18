@@ -68,6 +68,17 @@ for (const track of album.tracks) {
   - [ ] Get a User's Top Artists and Tracks
 - [x] **Player API**
 - [ ] **Playlists API**
+  - [ ] Get a List of Current User's Playlists
+  - [ ] Get a List of a User's Playlists
+  - [ ] Create a Playlist
+  - [ ] Get a Playlist
+  - [ ] Change a Playlist's Details
+  - [ ] Get a Playlist's Items
+  - [ ] Add Items to a Playlist
+  - [ ] Reorder or Replace a Playlist's Items
+  - [ ] Remove Items from a Playlist
+  - [ ] Get a Playlist Cover Image
+  - [ ] Upload a Custom Playlist Cover Image
 - [x] **Search API**
 - [x] **Shows API**
 - [x] **Tracks API**
