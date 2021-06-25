@@ -20,3 +20,4 @@ export { PlaybackContext } from "./playbackContext.ts";
 export { PlayHistory } from "./playHistory.ts";
 export { PublicUser } from "./publicUser.ts";
 export { PrivateUser } from "./privateUser.ts";
+export { Playlist } from "./playlist.ts";
