@@ -255,7 +255,7 @@ export interface PlayerErrorObj {
 export interface PlaylistObj {
   collaborative: boolean;
   description: string;
-  externalUrls: ExternalUrlObj;
+  external_urls: ExternalUrlObj;
   followers: FollowersObj;
   href: string;
   id: string;
@@ -263,7 +263,7 @@ export interface PlaylistObj {
   name: string;
   owner: PublicUserObj;
   public: boolean;
-  snapshotId: string;
+  snapshot_id: string;
   tracks: Array<PlaylistTrackObj>;
   type: string;
   uri: string;
