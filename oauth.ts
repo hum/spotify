@@ -6,11 +6,11 @@ import { Application, encode, Router } from "./deps.ts";
 /**
  * CLIENT ID and CLIENT SECRET can be found at
  * https://developer.spotify.com/dashboard/applications
- * 
+ *
  * 1. Create your app
  * 2. Get "client ID" and "client secret" tokens
  * 3. Export them to your env as "spotify_client_id" and "spotify_client_secret"
- * 
+ *
  * PS: Make sure to also add 'http://localhost:8080/callback' in your app's settings
  */
 const clientId = Deno.env.get("spotify_client_id") ?? "";
