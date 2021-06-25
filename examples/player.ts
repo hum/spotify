@@ -39,7 +39,7 @@ async function run() {
   }
 
   /**
-  * Skip the current track 
+  * Skip the current track
   */
   await playback.nextTrack();
 

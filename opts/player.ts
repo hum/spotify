@@ -30,8 +30,8 @@ export interface SeekToPositionOpt {
 }
 
 export interface SetRepeatModeOpt {
-  /** 
-   *  @default 
+  /**
+   *  @default
    *  "track" - will repeat the current track
    *  "context" - will repeat the current context
    *  "off" - will turn repeat off
