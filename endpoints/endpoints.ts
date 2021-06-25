@@ -256,9 +256,8 @@ const GET_USER_PLAYLISTS = (userId: string, opts?: opts.UserPlaylistOpts) => {
   return format(query, parseOpts(opts ?? {}));
 };
 
-const CREATE_PLAYLIST = (userId: string, opts?: opts.CreatePlaylistOpts) => {
-  const query = `${API_PREFIX}/users/${userId}/playlists`;
-  return format(query, parseOpts(opts));
+const CREATE_PLAYLIST = (userId: string) => {
+  return `${API_PREFIX}/users/${userId}/playlists`;
 };
 
 const GET_PLAYLIST = (playlistId: string, opts?: opts.PlaylistOpts) => {
