@@ -3,6 +3,7 @@ import {
   ArtistObj,
   AudioAnalysisObj,
   CategoryObj,
+  PlaylistObj,
   RecommendationsObj,
   SimplifiedAlbumObj,
   SimplifiedEpisodeObj,
@@ -18,6 +19,7 @@ import {
   Category,
   Episode,
   Player,
+  Playlist,
   PrivateUser,
   PublicUser,
   Show,
@@ -104,7 +106,7 @@ export class Client {
    * Get catalog information for multiple albums.
    * @param albums Array of Spotify IDs of the albums.
    * @param market Optional 2 letter country code
-   * @returns Array 
+   * @returns Array
    * @throws Error 'albums' not specified.
    */
   async getMultipleAlbums(
@@ -254,7 +256,7 @@ export class Client {
   /**
    * Recommendations are generated based on the available information.
    * @param opts - Parameters passed to the endpoint
-   * @returns RecommendationsObj 
+   * @returns RecommendationsObj
    */
   async getRecommendations(
     opts: opts.RecommendationsOpt,
@@ -315,7 +317,7 @@ export class Client {
   /**
    * Get information for a single episode.
    * @param name Name of the episode
-   * @param market Optional 2 letter country code 
+   * @param market Optional 2 letter country code
    * @returns SimplifiedEpisode
    */
   async getEpisode(name: string, market?: string): Promise<SimplifiedEpisode> {
@@ -370,7 +372,7 @@ export class Client {
    * Get Spotify catalog information for a single show.
    * @param name Name of the show
    * @param market Optional 2 letter country code
-   * @returns Show 
+   * @returns Show
    */
   async getShow(name: string, market?: string): Promise<Show> {
     const data: Array<SimplifiedShowObj> = await this.rawSearch({
@@ -385,7 +387,7 @@ export class Client {
   /**
    * Get Spotify catalog information for a single show.
    * @param opts Parameters passed to the endpoint
-   * @example opts = {id: '123'} 
+   * @example opts = {id: '123'}
    * @returns Show
    */
   async getShowById(opts: opts.ShowOpt): Promise<Show> {
@@ -399,7 +401,7 @@ export class Client {
    * Get Spotify catalog information for multiple tracks.
    * @param opts - Params passed to the endpoint
    * @example opts = {ids: ['123', '456']}
-   * @returns Array 
+   * @returns Array
    */
   async getSeveralTracks(opts: opts.SeveralTracksOpt): Promise<Array<Track>> {
     const data = await caller.fetch({
@@ -496,7 +498,7 @@ export class Client {
   }
 
   /**
-   * Get detailed profile information about the current user 
+   * Get detailed profile information about the current user
    * (including the current user's username).
    * @returns PrivateUser
    */
@@ -547,6 +549,31 @@ export class Client {
     return data;
   }
 
+  async createPlaylist(
+    userId: string,
+    opts: opts.CreatePlaylistOpts,
+  ): Promise<Playlist> {
+    const data: PlaylistObj = await caller.fetch({
+      url: endpoints.CREATE_PLAYLIST(userId),
+      body: {
+        name: opts.name,
+        public: opts.public ?? true,
+        collaborative: opts.collaborative ?? false,
+        description: opts.description ?? "",
+      },
+      method: "POST",
+    });
+
+    return new Playlist(data);
+  }
+
+  async getPlaylist(playlistId: string, opts: opts.PlaylistOpts) {
+    const data: PlaylistObj = await caller.fetch({
+      url: endpoints.GET_PLAYLIST(playlistId, opts),
+    });
+    return new Playlist(data);
+  }
+
   async followPlaylist(opts: opts.FollowPlaylistOpts) {
     await caller.fetch({
       url: endpoints.FOLLOW_PLAYLIST(opts.playlistId),
@@ -566,10 +593,10 @@ export class Client {
 
   /**
    * Get information about albums, artists, playlists, tracks, shows or episodes
-   * that match a keyword string 
+   * that match a keyword string
    * @param opts Parameters passed to the function
    * @example opts = {q: "aaa", type: SearchType.ARTIST}
-   * @returns Array 
+   * @returns Array
    */
   async rawSearch(
     opts: opts.SearchOpt,
