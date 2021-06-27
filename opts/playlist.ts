@@ -31,7 +31,6 @@ export interface PlaylistOpts {
 }
 
 export interface ChangePlaylistDetailsOpts {
-  playlistId: string;
   name?: string;
   public?: boolean;
   collaborative?: boolean;

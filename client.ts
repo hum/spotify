@@ -32,6 +32,7 @@ import {
 import { caller, CallerOpt } from "./handlers/caller.ts";
 import * as opts from "./opts/opts.ts";
 import { SearchType } from "./opts/opts.ts";
+import { parseOpts } from "./utils/utils.ts";
 
 export class Client {
   constructor(opt: CallerOpt) {
@@ -589,6 +590,24 @@ export class Client {
       url: endpoints.UNFOLLOW_PLAYLIST(playlistId),
       method: "DELETE",
     });
+  }
+
+  /**
+   * @param playlistId 
+   * @param opts 
+   * @todo allow update on playlist object itself 
+   */
+  async changePlaylistDetails(playlistId: string, opts: opts.ChangePlaylistDetailsOpts) {
+    await caller.fetch({
+      url: endpoints.CHANGE_PLAYLIST_DETAILS(playlistId),
+      method: "PUT",
+      body: {
+        name: opts.name,
+        public: opts.public,
+        collaborative: opts.collaborative,
+        description: opts.description,
+      } 
+    })
   }
 
   /**

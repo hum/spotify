@@ -278,6 +278,10 @@ const UNFOLLOW_PLAYLIST = (playlistId: string) => {
   return `${API_PREFIX}/playlists/${playlistId}/followers`;
 };
 
+const CHANGE_PLAYLIST_DETAILS = (playlistId: string) => {
+  return `${API_PREFIX}/playlists/${playlistId}`;
+}
+
 export const endpoints = {
   GET_MULTIPLE_ALBUMS,
   GET_ALBUM,
@@ -342,4 +346,5 @@ export const endpoints = {
   CHECK_FOLLOWS_PLAYLIST,
   FOLLOW_PLAYLIST,
   UNFOLLOW_PLAYLIST,
+  CHANGE_PLAYLIST_DETAILS,
 };
