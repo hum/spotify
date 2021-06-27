@@ -32,7 +32,6 @@ import {
 import { caller, CallerOpt } from "./handlers/caller.ts";
 import * as opts from "./opts/opts.ts";
 import { SearchType } from "./opts/opts.ts";
-import { parseOpts } from "./utils/utils.ts";
 
 export class Client {
   constructor(opt: CallerOpt) {
