@@ -72,7 +72,7 @@ for (const track of album.tracks) {
   - [x] Get a List of a User's Playlists
   - [x] Create a Playlist
   - [x] Get a Playlist
-  - [ ] Change a Playlist's Details
+  - [x] Change a Playlist's Details
   - [ ] Get a Playlist's Items
   - [ ] Add Items to a Playlist
   - [ ] Reorder or Replace a Playlist's Items

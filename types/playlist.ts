@@ -5,6 +5,8 @@ import {
   PlaylistObj,
 } from "../structures/structs.ts";
 import { PlaylistTrack, PublicUser } from "./types.ts";
+import { endpoints } from "../endpoints/endpoints.ts";
+import { caller } from "../handlers/caller.ts";
 
 /**
  * TODO:
@@ -76,5 +78,25 @@ export class Playlist {
 
   get uri(): string {
     return this.#data.uri;
+  }
+
+  /**
+   * Update playlist's information to match the local object
+   * @field name
+   * @field public
+   * @field collaborative
+   * @field description
+   */
+  async saveChanges() {
+    await caller.fetch({
+      url: endpoints.CHANGE_PLAYLIST_DETAILS(this.id),
+      method: "PUT",
+      body: {
+        name: this.name,
+        public: this.isPublic,
+        collaborative: this.isCollaborative,
+        description: this.description,
+      },
+    });
   }
 }
