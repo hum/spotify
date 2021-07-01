@@ -1,7 +1,8 @@
 /**
  * Simplified way to get auth tokens for the purpose of development.
  */
-import { Application, encode, Router } from "./deps.ts";
+import { Application, Router } from "https://deno.land/x/oak@v6.5.0/mod.ts";
+import { encode } from "https://deno.land/std@0.93.0/encoding/base64.ts";
 
 /**
  * CLIENT ID and CLIENT SECRET can be found at
