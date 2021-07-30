@@ -592,11 +592,14 @@ export class Client {
   }
 
   /**
-   * @param playlistId 
-   * @param opts 
-   * @todo allow update on playlist object itself 
+   * @param playlistId
+   * @param opts
+   * @todo allow update on playlist object itself
    */
-  async changePlaylistDetails(playlistId: string, opts: opts.ChangePlaylistDetailsOpts) {
+  async changePlaylistDetails(
+    playlistId: string,
+    opts: opts.ChangePlaylistDetailsOpts,
+  ) {
     await caller.fetch({
       url: endpoints.CHANGE_PLAYLIST_DETAILS(playlistId),
       method: "PUT",
@@ -605,8 +608,8 @@ export class Client {
         public: opts.public,
         collaborative: opts.collaborative,
         description: opts.description,
-      } 
-    })
+      },
+    });
   }
 
   /**

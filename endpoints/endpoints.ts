@@ -280,7 +280,7 @@ const UNFOLLOW_PLAYLIST = (playlistId: string) => {
 
 const CHANGE_PLAYLIST_DETAILS = (playlistId: string) => {
   return `${API_PREFIX}/playlists/${playlistId}`;
-}
+};
 
 export const endpoints = {
   GET_MULTIPLE_ALBUMS,
