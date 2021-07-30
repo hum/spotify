@@ -282,6 +282,14 @@ const CHANGE_PLAYLIST_DETAILS = (playlistId: string) => {
   return `${API_PREFIX}/playlists/${playlistId}`;
 };
 
+const GET_USER_TOP_ARTISTS_AND_TRACKS = (
+  type: string,
+  opts?: opts.GetUserTopArtistsAndTracks,
+) => {
+  const query = `${API_PREFIX}/me/top/${type}`;
+  return format(query, parseOpts(opts));
+};
+
 export const endpoints = {
   GET_MULTIPLE_ALBUMS,
   GET_ALBUM,
@@ -308,6 +316,9 @@ export const endpoints = {
   GET_EPISODE,
 
   GET_AVAILABLE_MARKETS,
+
+  GET_USER_TOP_ARTISTS_AND_TRACKS,
+
   GET_MULTIPLE_SHOWS,
   GET_SHOW,
   GET_SHOW_EPISODES,

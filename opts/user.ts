@@ -17,3 +17,9 @@ export interface GetFollowingStateOpt {
   type: string;
   ids: string | Array<string>;
 }
+
+export interface GetUserTopArtistsAndTracks {
+  timeRange?: string;
+  limit?: number;
+  offset?: number;
+}
