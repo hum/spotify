@@ -64,8 +64,7 @@ for (const track of album.tracks) {
   - [ ] Remove User's Saved Shows
   - [ ] Check User's Saved Shows
 - [x] **Markets API**
-- [ ] **Personalization API**
-  - [ ] Get a User's Top Artists and Tracks
+- [x] **Personalization API**
 - [x] **Player API**
 - [ ] **Playlists API**
   - [x] Get a List of Current User's Playlists
