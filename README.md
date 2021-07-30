@@ -39,7 +39,7 @@ for (const track of album.tracks) {
 }
 ```
 
-## CURRENT API COVERAGE: 65%
+## CURRENT API COVERAGE: 71%
 
 - [x] **Albums API**
 - [x] **Artists API**
