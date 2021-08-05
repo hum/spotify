@@ -1,32 +1,29 @@
-# Spotify [WIP]
+# Spotify
 
 Deno wrapper for the Spotify API. **EARLY STAGE.**
 
-## Example Usage
-
----
+### Usage
 
 Import the module and initialise the `Client` class.
-
 ```ts
 import { Client } from "https://github.com/hum/spotify/raw/main/mod.ts";
 
-// Initialize the API client
 const spotify = new Client({
   accessToken: "your_token",
 });
 ```
 
 Make calls to the API
-
 ```ts
+// Get an artist
 const artist = await spotify.getArtist("joji");
 console.log(artist.name, artist.genres, artist.id);
 
-// Get all albums related to the artist
-const albums = await artist.getAlbums({
+// Get artist's albums
+const albums = await artist.getAlbums({ 
   market: "US",
 });
+
 for (const album of albums) {
   console.log(album.name, album.releaseDate);
 }
@@ -87,8 +84,6 @@ for (const track of album.tracks) {
 
 ## Develop
 
----
-
 To run tests locally all you need to do is export `"spotify_access_token"` to
 your env.
 
@@ -103,7 +98,5 @@ deno test -A --unstable
 ```
 
 ## Docs
-
----
 
 ## `🌱 TBD`
