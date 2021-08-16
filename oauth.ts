@@ -1,6 +1,3 @@
-/**
- * Simplified way to get auth tokens for the purpose of development.
- */
 import { Application, Router } from "https://deno.land/x/oak@v6.5.0/mod.ts";
 import { encode } from "https://deno.land/std@0.93.0/encoding/base64.ts";
 
@@ -11,18 +8,17 @@ import { encode } from "https://deno.land/std@0.93.0/encoding/base64.ts";
  * 1. Create your app
  * 2. Get "client ID" and "client secret" tokens
  * 3. Export them to your env as "spotify_client_id" and "spotify_client_secret"
- *
- * PS: Make sure to also add 'http://localhost:8080/callback' in your app's settings
+ * 4. Make sure to also add 'http://localhost:8080/callback' in your app's settings
  */
-const clientId = Deno.env.get("spotify_client_id") ?? "";
-const clientSecret = Deno.env.get("spotify_client_secret") ?? "";
-const redirectUri = "http://localhost:8080/callback";
+const CLIENT_ID = Deno.env.get("spotify_client_id") ?? "";
+const CLIENT_SECRET = Deno.env.get("spotify_client_secret") ?? "";
+const REDIRECT_URI = "http://localhost:8080/callback";
 
 /**
- * full list of scopes can be found at
- * https://developer.spotify.com/documentation/general/guides/scopes/
+ * full list of SCOPES can be found at
+ * https://developer.spotify.com/documentation/general/guides/SCOPES/
  */
-const scopes = [
+const SCOPES = [
   "ugc-image-upload",
   "user-read-recently-played",
   "user-top-read",
@@ -43,9 +39,9 @@ const scopes = [
 ].join(" ");
 
 const url = "https://accounts.spotify.com/authorize?response_type=code" +
-  `&client_id=${clientId}` +
-  `&scope=${encodeURIComponent(scopes)}` +
-  `&redirect_uri=${encodeURIComponent(redirectUri)}`;
+  `&client_id=${encodeURIComponent(CLIENT_ID)}` +
+  `&scope=${encodeURIComponent(SCOPES)}` +
+  `&redirect_uri=${encodeURIComponent(REDIRECT_URI)}`;
 
 const app = new Application();
 const router = new Router();
@@ -61,12 +57,12 @@ router
       ctx.response.body = `${ctx.request.body}`;
       return;
     }
-    const value = encode(`${clientId}:${clientSecret}`);
+    const value = encode(`${CLIENT_ID}:${CLIENT_SECRET}`);
     const data = await fetch(
       "https://accounts.spotify.com/api/token" +
         "?grant_type=authorization_code" +
         `&code=${encodeURIComponent(code)}` +
-        `&redirect_uri=${encodeURIComponent(redirectUri)}`,
+        `&redirect_uri=${encodeURIComponent(REDIRECT_URI)}`,
       {
         method: "POST",
         headers: {
@@ -100,12 +96,20 @@ app.addEventListener("listen", ({ secure, hostname, port }) => {
 });
 
 async function main() {
-  if (!clientId) {
+  if (!CLIENT_ID) {
     console.log("Please export 'spotify_client_id' value.");
   }
-  if (!clientSecret) {
+  if (!CLIENT_SECRET) {
     console.log("Please export 'spotify_client_secret' value.");
   }
+
+  if (!CLIENT_ID || !CLIENT_SECRET) {
+    console.log(
+      "You can find the necessary Spotify tokens at: https://developer.spotify.com/dashboard/applications",
+    );
+    return;
+  }
+
   await app.listen({ port: 8080 });
 }
 
