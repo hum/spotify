@@ -91,7 +91,12 @@ your env.
 export spotify_access_token="Bearer [token]"
 ```
 
-Then just run them with
+To get this token you can follow the OAuth flow in [oauth.ts](https://github.com/hum/spotify/blob/main/oauth.ts)
+```ini
+deno run --unstable oauth.ts
+```
+
+Once you set your tokens in ENV, you can run the tests with:
 
 ```ini
 deno test -A --unstable
