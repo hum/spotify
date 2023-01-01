@@ -23,10 +23,10 @@ export class Caller {
     const response = await fetch(opts.url, {
       method: opts.method ?? "GET",
       headers: {
-        "Authorization": this.#accessToken,
+        Authorization: this.#accessToken,
         "Content-Type": "application/json",
       },
-      body: opts.body ? JSON.stringify(opts.body) : ``,
+      body: opts.body ? JSON.stringify(opts.body) : null,
     });
     // TODO:
     // Figure out a better way later
